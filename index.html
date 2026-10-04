@@ -1,417 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gerihco | Coming Soon</title>
-  <meta name="description" content="Gerihco is coming soon. Our website will launch with services, industries, and consulting insights for institutional clients.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', Arial, sans-serif;
-      color: #1c1f24;
-      background: #ffffff;
-      line-height: 1.5;
-      width: 100%;
-    }
-    a { text-decoration: none; color: inherit; }
-    main { display: block; }
-    img, svg { max-width: 100%; }
+<!--
+  GERIHCO website — Coming Soon page.
+  Formatted to match the homepage structure and styling.
 
-    :root {
-      --ink: #0a0c0f;
-      --ink-card: #16191d;
-      --paper: #ffffff;
-      --paper-muted: #f4f5f6;
-      --gray-text: #5f5e5a;
-      --gray-text-dark: #9aa0a8;
-      --blue: #2aa7f7;
-      --blue-deep: #185fa5;
-      --blue-pale: #85b7eb;
-      --border: #e3e4e6;
-    }
+  DEPLOYMENT: GitHub Pages
+  This file is served as-is, alongside the other pages and the images/
+  folder, from the repository's Pages branch (Settings > Pages).
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerihco | Coming Soon</title>
+<meta name="description" content="Gerihco is coming soon. Our website will launch with services, industries, and consulting insights for institutional clients.">
+<link rel="canonical" href="https://gerihco.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gerihco">
+<meta property="og:url" content="https://gerihco.com/">
+<meta property="og:title" content="Gerihco | Coming Soon">
+<meta property="og:description" content="Gerihco is coming soon. Our website will launch with services, industries, and consulting insights for institutional clients.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gerihco | Coming Soon">
+<meta name="twitter:description" content="Gerihco is coming soon. Our website will launch with services, industries, and consulting insights for institutional clients.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%2238.5%209%20203%20203%22%3E%3Cpath%20d%3D%22M70%2C120%20Q140%2C29%20210%2C120%22%20stroke%3D%22%232AA7F7%22%20stroke-width%3D%226%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M85%2C120%20Q140%2C48.5%20195%2C120%22%20stroke%3D%22%23858585%22%20stroke-width%3D%223.5%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M100%2C120%20Q140%2C68%20180%2C120%22%20stroke%3D%22%23000000%22%20stroke-width%3D%221.5%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22/%3E%3Cline%20x1%3D%22140%22%20y1%3D%22120%22%20x2%3D%22140%22%20y2%3D%22175%22%20stroke%3D%22%23000000%22%20stroke-width%3D%224%22%20stroke-linecap%3D%22round%22/%3E%3Cpath%20d%3D%22M140%2C175%20Q140%2C192%20120%2C192%22%20stroke%3D%22%23000000%22%20stroke-width%3D%224%22%20fill%3D%22none%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo-link" href="index.html" aria-current="page" aria-label="Gerihco — home"><svg viewBox="40 9 560 203" width="150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M70,120 Q140,29 210,120" stroke="#2AA7F7" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M85,120 Q140,48.5 195,120" stroke="#858585" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M100,120 Q140,68 180,120" stroke="#000000" stroke-width="1.5" fill="none" stroke-linecap="round"/><line x1="140" y1="120" x2="140" y2="175" stroke="#000000" stroke-width="4" stroke-linecap="round"/><path d="M140,175 Q140,192 120,192" stroke="#000000" stroke-width="4" fill="none" stroke-linecap="round"/><text x="260" y="100" font-family="Helvetica, Arial, sans-serif" font-size="40" font-weight="700" letter-spacing="3" fill="#000000">GERIHCO</text><text x="260" y="128" font-family="Helvetica, Arial, sans-serif" font-size="13" letter-spacing="2" fill="#858585">MANAGEMENT CONSULTING</text></svg></a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+    <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation menu"><span></span><span></span><span></span></label>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="services.html">Services</a>
+      <a href="industries.html">Industries</a>
+      <a href="about.html">About</a>
+      <a href="careers.html">Careers</a>
+      <a href="insights.html">Insights</a>
+      <a href="contact.html" class="nav-cta">Contact</a>
+    </nav>
+  </div>
+</header>
 
-    .skip-link {
-      position: absolute;
-      left: -9999px;
-      top: 0;
-      background: var(--blue);
-      color: #042c53;
-      padding: 10px 16px;
-      z-index: 100;
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 0 0 4px 0;
-    }
-    .skip-link:focus { left: 0; }
-
-    a:focus-visible, button:focus-visible, input:focus-visible,
-    textarea:focus-visible, label:focus-visible, [tabindex]:focus-visible {
-      outline: 2px solid var(--blue-deep);
-      outline-offset: 2px;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      * { transition: none !important; animation: none !important; }
-    }
-
-    header.nav {
-      background: var(--paper-muted);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 18px 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .logo-link { display: inline-flex; order: 0; }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      font-size: 14px;
-      color: #33363a;
-      order: 2;
-    }
-    .nav-links a:hover { color: var(--blue-deep); }
-    .nav-links a[aria-current="page"] { color: var(--blue-deep); font-weight: 600; }
-    .nav-links a.nav-cta { color: var(--blue-deep); font-weight: 600; }
-
-    .nav-toggle-input { position: absolute; opacity: 0; pointer-events: none; }
-    .nav-toggle-label {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      order: 1;
-      border-radius: 4px;
-    }
-    .nav-toggle-label span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: #1c1f24;
-      border-radius: 1px;
-    }
-    .nav-toggle-input:focus-visible ~ .nav-toggle-label {
-      outline: 2px solid var(--blue-deep);
-      outline-offset: 2px;
-    }
-
-    .hero-shell {
-      background:
-        linear-gradient(180deg, rgba(10,12,15,0.5) 0%, rgba(10,12,15,0.82) 100%),
-        url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-      padding: 88px 0 72px;
-    }
-
-    .coming-soon-content {
-      max-width: 920px;
-      margin: 0 auto;
-      text-align: center;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 24px;
-      padding: 48px 36px 44px;
-      box-shadow: 0 20px 50px rgba(10,12,15,0.18);
-    }
-
-    .brand-mark {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: linear-gradient(135deg, rgba(42,167,247,0.18), rgba(255,255,255,0.06));
-      border: 1px solid rgba(255,255,255,0.18);
-      position: relative;
-    }
-
-    .brand-mark::before,
-    .brand-mark::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      border-radius: 999px;
-    }
-
-    .brand-mark::before {
-      width: 58px;
-      height: 58px;
-      top: 24px;
-      border: 5px solid #ffffff;
-      border-top-color: transparent;
-      border-right-color: transparent;
-      border-radius: 50%;
-      transform: translateX(-50%) rotate(-45deg);
-    }
-
-    .brand-mark::after {
-      width: 18px;
-      height: 20px;
-      bottom: 22px;
-      background: #ffffff;
-      border-radius: 4px 4px 0 0;
-      box-shadow: 0 -8px 0 0 #ffffff;
-    }
-
-    .launch-badge {
-      display: inline-block;
-      margin: 0 auto 24px;
-      padding: 10px 18px;
-      border-radius: 999px;
-      background: rgba(42,167,247,0.18);
-      border: 1px solid rgba(255,255,255,0.18);
-      color: #f5fbff;
-      font-size: 12px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    .coming-soon-content h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      line-height: 1.08;
-      margin-bottom: 18px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #ffffff;
-      font-weight: 700;
-    }
-
-    .coming-soon-content p {
-      max-width: 700px;
-      margin: 0 auto;
-      color: rgba(255,255,255,0.82);
-      font-size: 1.08rem;
-      line-height: 1.7;
-    }
-
-    .details {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 18px;
-      max-width: 760px;
-      margin: 34px auto 30px;
-    }
-
-    .detail {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.16);
-      border-radius: 12px;
-      padding: 18px 16px;
-      text-align: left;
-    }
-
-    .detail .label {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #bfe5ff;
-    }
-
-    .detail .value {
-      color: #ffffff;
-      font-size: 1.05rem;
-      line-height: 1.5;
-    }
-
-    .detail .value a {
-      color: #d8edff;
-    }
-
-    .detail .value a:hover { text-decoration: underline; }
-
-    .btn-row {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-
-    .btn-primary, .btn-secondary {
-      display: inline-block;
-      font-size: 14px;
-      font-weight: 500;
-      padding: 14px 26px;
-      border-radius: 3px;
-      border: none;
-      font-family: inherit;
-      cursor: pointer;
-      text-transform: none;
-    }
-
-    .btn-primary {
-      background: var(--blue);
-      color: #042c53;
-    }
-
-    .btn-secondary {
-      border: 1px solid rgba(255,255,255,0.4);
-      color: #ffffff;
-      background: transparent;
-    }
-
-    .btn-primary:hover { background: #4bb6fa; }
-    .btn-secondary:hover { background: rgba(255,255,255,0.08); }
-
-    .newsletter-form {
-      max-width: 560px;
-      margin: 28px auto 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      justify-content: center;
-    }
-
-    .newsletter-form input[type="email"] {
-      flex: 1 1 280px;
-      min-width: 220px;
-      padding: 11px 12px;
-      border-radius: 4px;
-      border: 1px solid rgba(255,255,255,0.22);
-      background: rgba(255,255,255,0.92);
-      color: #1c1f24;
-      font: inherit;
-    }
-
-    .newsletter-form input[type="email"]:focus {
-      outline: 2px solid rgba(42,167,247,0.8);
-      outline-offset: 2px;
-    }
-
-    footer {
-      padding: 28px 0 48px;
-      font-size: 13px;
-      color: var(--gray-text);
-    }
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px;
-      margin-bottom: 14px;
-    }
-    .footer-links a:hover { color: var(--blue-deep); }
-
-    @media (max-width: 720px) {
-      .nav-toggle-label { display: flex; }
-      .nav-links {
-        display: none;
-        order: 3;
-        flex-basis: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2px;
-        padding-top: 12px;
-      }
-      .nav-toggle-input:checked ~ .nav-links { display: flex; }
-      .nav-links a { display: block; width: 100%; padding: 12px 4px; border-top: 1px solid var(--border); }
-
-      .hero-shell { padding: 64px 0 56px; }
-      .coming-soon-content { padding: 32px 22px 28px; }
-      .details { grid-template-columns: 1fr; }
-      .newsletter-form { flex-direction: column; }
-      .newsletter-form input { width: 100%; }
-      .btn-row { flex-direction: column; }
-    }
-  </style>
-</head>
-<body>
-  <a class="skip-link" href="#main">Skip to main content</a>
-
-  <header class="nav">
-    <div class="nav-inner">
-      <a class="logo-link" href="index.html" aria-current="page" aria-label="Gerihco — home">
-        <svg viewBox="40 9 560 203" width="150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-          <path d="M70,120 Q140,29 210,120 L278,120 Q342,120 370,146 Q398,172 394,210 L304,210 Q310,140 270,120 L70,120 Z" fill="#042C53"/>
-          <path d="M150,70 L190,70 L190,180 L150,180 Z" fill="#042C53"/>
-          <path d="M220,70 L260,70 L260,180 L220,180 Z" fill="#042C53"/>
-        </svg>
-      </a>
-      <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
-      <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation menu"><span></span><span></span><span></span></label>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="services.html">Services</a>
-        <a href="industries.html">Industries</a>
-        <a href="about.html">About</a>
-        <a href="careers.html">Careers</a>
-        <a href="insights.html">Insights</a>
-        <a href="contact.html" class="nav-cta">Contact</a>
-      </nav>
+<main id="main">
+<section class="hero">
+  <div class="wrap">
+    <h1>Coming Soon</h1>
+    <p class="sub">Gerihco helps government, financial services, and manufacturing organizations turn complex challenges into measurable operational and strategic results. We are launching our website soon.</p>
+    <div class="btn-row">
+      <a class="btn-primary" href="mailto:hello@gerihco.com">Get in touch</a>
+      <a class="btn-secondary" href="contact.html">Request an update</a>
     </div>
-  </header>
-
-  <main id="main">
-    <section class="hero-shell">
-      <div class="wrap">
-        <div class="coming-soon-content">
-          <div class="brand-mark" aria-hidden="true"></div>
-          <div class="launch-badge">Launch</div>
-          <h1>Gerihco</h1>
-          <p>
-            Gerihco helps government, financial services, and manufacturing organizations turn complex challenges into measurable operational and strategic results.
-          </p>
-
-          <div class="details">
-            <div class="detail">
-              <span class="label">Launch date</span>
-              <div class="value">TBD</div>
-            </div>
-            <div class="detail">
-              <span class="label">Contact</span>
-              <div class="value"><a href="mailto:hello@gerihco.com">hello@gerihco.com</a></div>
-            </div>
-          </div>
-
-          <div class="btn-row">
-            <a class="btn-primary" href="mailto:hello@gerihco.com">Get in touch</a>
-            <a class="btn-secondary" href="contact.html">Request update</a>
-          </div>
-
-          <form class="newsletter-form" action="mailto:hello@gerihco.com" method="post" enctype="text/plain">
-            <input type="email" name="email" placeholder="Enter your email" aria-label="Email address" required>
-            <button type="submit" class="btn-primary">Join newsletter</button>
-          </form>
-        </div>
+  </div>
+</section>
+<section class="serve" id="info" aria-label="Launch information">
+  <div class="wrap">
+    <div class="serve-grid">
+      <div class="serve-card">
+        <p style="font-size: 13px; color: var(--gray-text-dark); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 8px;">Launch date</p>
+        <p style="font-size: 15px; color: #ffffff; margin: 0;">TBD</p>
       </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="wrap">
-      <nav aria-label="Footer" class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="industries.html">Industries</a>
-        <a href="about.html">About</a>
-        <a href="careers.html">Careers</a>
-        <a href="insights.html">Insights</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-      <p>© Gerihco. Management consulting for institutions that cannot afford to fail.</p>
+      <div class="serve-card">
+        <p style="font-size: 13px; color: var(--gray-text-dark); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 8px;">Contact</p>
+        <p style="font-size: 15px; color: #ffffff; margin: 0;"><a href="mailto:hello@gerihco.com" style="color: #d8edff;">hello@gerihco.com</a></p>
+      </div>
+      <div class="serve-card">
+        <p style="font-size: 13px; color: var(--gray-text-dark); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 8px;">Status</p>
+        <p style="font-size: 15px; color: #ffffff; margin: 0;">Website incoming</p>
+      </div>
     </div>
-  </footer>
-</body>
-</html>
+  </div>
+</section>
+<section class="services" id="newsletter">
+  <div class="wrap">
+    <h2>Stay in the loop</h2>
+    <p>Join our newsletter to be notified when the site launches and receive updates on our services and insights.</p>
+    <form style="max-width: 560px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: flex-start;">
+      <input type="email" name="email" placeholder="Enter your email" aria-label="Email address" style="flex: 1 1 280px; min-width: 220px; padding: 11px 12px; border: 1px solid var(--border); border-radius: 4px; font: inherit; background: #fff; color: inherit;" required>
+      <button type="submit" class="btn-primary">Join newsletter</button>
+    </form>
+  </div>
+</section>
+<section class="final-cta" id="contact">
+  <div class="wrap">
+    <h2>Have questions or want to connect?</h2>
+    <a class="btn-primary" style="background:#042C53;color:#ffffff" href="contact.html">Contact Gerihco</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <nav aria-label="Footer" class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="industries.html">Industries</a>
+      <a href="about.html">About</a>
+      <a href="careers.html">Careers</a>
+      <a href="insights.html">Insights</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <p>© Gerihco. Management consulting for institutions that cannot afford to fail.</p>
+  </div>
+</footer>
