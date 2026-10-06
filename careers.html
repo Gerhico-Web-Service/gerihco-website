@@ -32,6 +32,32 @@
   .form-success p { margin:0; font-size:14px; }
   .form-success.is-visible { display:block; }
   .form-honeypot { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
+  
+  /* Job card enhancements */
+  .job-card { position:relative; }
+  .job-card-actions { display:flex; gap:12px; align-items:center; margin-top:20px; padding-top:16px; border-top:1px solid #e5e7eb; font-size:14px; }
+  .quick-apply-btn { padding:10px 16px; background:#042C53; color:white; border:none; border-radius:4px; font-weight:600; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:background 0.2s; }
+  .quick-apply-btn:hover { background:#0a3d6f; }
+  .quick-apply-btn:active { transform:scale(0.98); }
+  .email-resume-link { color:#042C53; text-decoration:none; border-bottom:1px solid #042C53; font-weight:500; }
+  .email-resume-link:hover { color:#0a3d6f; }
+  
+  /* Related positions sidebar */
+  .job-card-wrapper { display:grid; grid-template-columns:1fr 280px; gap:32px; margin-bottom:40px; }
+  .related-positions { background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:20px; height:fit-content; position:sticky; top:20px; }
+  .related-positions h4 { margin:0 0 12px 0; font-size:15px; font-weight:600; color:#042C53; }
+  .related-positions ul { list-style:none; margin:0; padding:0; }
+  .related-positions li { margin:0 0 8px 0; }
+  .related-positions a { display:block; padding:8px 12px; color:#042C53; text-decoration:none; border-radius:4px; font-size:13px; font-weight:500; border-left:2px solid transparent; transition:all 0.2s; }
+  .related-positions a:hover { background:#e5e7eb; border-left-color:#042C53; }
+  .related-positions .badge { display:inline-block; font-size:11px; background:#e5e7eb; color:#333; padding:2px 6px; border-radius:3px; margin-left:4px; }
+  
+  @media (max-width:1024px) {
+    .job-card-wrapper { grid-template-columns:1fr; }
+    .related-positions { position:static; }
+  }
+  
+  .job-card-content { flex:1; }
 </style>
 </head>
 <body>
@@ -63,7 +89,10 @@
 <section class="careers-openings">
   <div class="wrap">
     <h2>Open positions</h2>
-    <article class="job-card" id="pam">
+
+    <!-- PAM -->
+    <div class="job-card-wrapper">
+      <article class="job-card job-card-content" id="pam" data-role="Privileged Access Management (PAM)" data-related="iga,flex-staffing">
         <h3>Privileged Access Management (PAM)</h3>
         <div class="job-tags"><span class="job-tag">Full-time</span></div>
         
@@ -125,10 +154,29 @@
             <li>Participation in incident response, emergency access scenarios, or vault maintenance may be required on occasion.</li>
           </ul>
         </div>
-        <a class="apply-link" href="#apply">Apply for this position →</a>
+
+        <div class="job-card-actions">
+          <button class="quick-apply-btn" data-role="Privileged Access Management (PAM)">Quick Apply →</button>
+          <span style="color:#999;">or</span>
+          <a href="mailto:careers@gerihco.com?subject=PAM%20Position%20Application" class="email-resume-link">Email your resume</a>
+        </div>
       </article>
 
-      <article class="job-card" id="iga">
+      <!-- Related Positions for PAM -->
+      <aside class="related-positions" aria-label="Related positions to Privileged Access Management">
+        <h4>Similar Roles</h4>
+        <ul>
+          <li><a href="#iga">Identity Governance & Administration</a> <span class="badge">IGA</span></li>
+          <li><a href="#flex-staffing">Flex Staffing</a> <span class="badge">Multi-role</span></li>
+          <li><a href="#authorization-entitlement-governance">Authorization & Entitlement Governance</a> <span class="badge">Auth</span></li>
+        </ul>
+        <p style="font-size:12px; color:#666; margin-top:12px; padding-top:12px; border-top:1px solid #e5e7eb;">Not the right fit? Explore other identity and access management roles above.</p>
+      </aside>
+    </div>
+
+    <!-- IGA -->
+    <div class="job-card-wrapper">
+      <article class="job-card job-card-content" id="iga" data-role="Identity Governance & Administration (IGA)" data-related="pam,authentication-services,flex-staffing">
         <h3>Identity Governance & Administration (IGA)</h3>
         <div class="job-tags"><span class="job-tag">Full-time</span></div>
         
@@ -190,10 +238,29 @@
             <li>Participation in access review cycles, platform upgrades, or large onboarding projects may require extended hours on occasion.</li>
           </ul>
         </div>
-        <a class="apply-link" href="#apply">Apply for this position →</a>
+
+        <div class="job-card-actions">
+          <button class="quick-apply-btn" data-role="Identity Governance & Administration (IGA)">Quick Apply →</button>
+          <span style="color:#999;">or</span>
+          <a href="mailto:careers@gerihco.com?subject=IGA%20Position%20Application" class="email-resume-link">Email your resume</a>
+        </div>
       </article>
 
-      <article class="job-card" id="authentication-services">
+      <!-- Related Positions for IGA -->
+      <aside class="related-positions" aria-label="Related positions to Identity Governance">
+        <h4>Similar Roles</h4>
+        <ul>
+          <li><a href="#authentication-services">Authentication Services</a> <span class="badge">Auth</span></li>
+          <li><a href="#authorization-entitlement-governance">Authorization & Entitlement Governance</a> <span class="badge">Authz</span></li>
+          <li><a href="#flex-staffing">Flex Staffing</a> <span class="badge">Multi-role</span></li>
+        </ul>
+        <p style="font-size:12px; color:#666; margin-top:12px; padding-top:12px; border-top:1px solid #e5e7eb;">Want more operational variety? Check out Flex Staffing to support multiple IAM teams.</p>
+      </aside>
+    </div>
+
+    <!-- Authentication Services -->
+    <div class="job-card-wrapper">
+      <article class="job-card job-card-content" id="authentication-services" data-role="Authentication Services" data-related="iga,authorization-entitlement-governance,iam-engineering">
         <h3>Authentication Services</h3>
         <div class="job-tags"><span class="job-tag">Full-time</span></div>
         
@@ -255,10 +322,29 @@
             <li>Participation in authentication deployments, emergency access scenarios, or platform upgrades may be required on occasion.</li>
           </ul>
         </div>
-        <a class="apply-link" href="#apply">Apply for this position →</a>
+
+        <div class="job-card-actions">
+          <button class="quick-apply-btn" data-role="Authentication Services">Quick Apply →</button>
+          <span style="color:#999;">or</span>
+          <a href="mailto:careers@gerihco.com?subject=Authentication%20Services%20Position%20Application" class="email-resume-link">Email your resume</a>
+        </div>
       </article>
 
-      <article class="job-card" id="authorization-entitlement-governance">
+      <!-- Related Positions for Authentication -->
+      <aside class="related-positions" aria-label="Related positions to Authentication Services">
+        <h4>Similar Roles</h4>
+        <ul>
+          <li><a href="#authorization-entitlement-governance">Authorization & Entitlement Governance</a> <span class="badge">Authz</span></li>
+          <li><a href="#iam-engineering">IAM Engineering</a> <span class="badge">Eng</span></li>
+          <li><a href="#flex-staffing">Flex Staffing</a> <span class="badge">Multi-role</span></li>
+        </ul>
+        <p style="font-size:12px; color:#666; margin-top:12px; padding-top:12px; border-top:1px solid #e5e7eb;">Ready to go deeper on platform architecture? Explore IAM Engineering.</p>
+      </aside>
+    </div>
+
+    <!-- Authorization & Entitlement Governance -->
+    <div class="job-card-wrapper">
+      <article class="job-card job-card-content" id="authorization-entitlement-governance" data-role="Authorization & Entitlement Governance" data-related="authentication-services,iam-engineering,flex-staffing">
         <h3>Authorization & Entitlement Governance</h3>
         <div class="job-tags"><span class="job-tag">Full-time</span></div>
         
@@ -320,10 +406,29 @@
             <li>Participation in access control reviews, authorization deployments, or entitlement remediation initiatives may require extended hours on occasion.</li>
           </ul>
         </div>
-        <a class="apply-link" href="#apply">Apply for this position →</a>
+
+        <div class="job-card-actions">
+          <button class="quick-apply-btn" data-role="Authorization & Entitlement Governance">Quick Apply →</button>
+          <span style="color:#999;">or</span>
+          <a href="mailto:careers@gerihco.com?subject=Authorization%20Entitlement%20Position%20Application" class="email-resume-link">Email your resume</a>
+        </div>
       </article>
 
-      <article class="job-card" id="iam-engineering">
+      <!-- Related Positions for Authorization -->
+      <aside class="related-positions" aria-label="Related positions to Authorization & Entitlement Governance">
+        <h4>Similar Roles</h4>
+        <ul>
+          <li><a href="#authentication-services">Authentication Services</a> <span class="badge">Auth</span></li>
+          <li><a href="#iam-engineering">IAM Engineering</a> <span class="badge">Eng</span></li>
+          <li><a href="#flex-staffing">Flex Staffing</a> <span class="badge">Multi-role</span></li>
+        </ul>
+        <p style="font-size:12px; color:#666; margin-top:12px; padding-top:12px; border-top:1px solid #e5e7eb;">Interested in building platforms? View IAM Engineering opportunities.</p>
+      </aside>
+    </div>
+
+    <!-- IAM Engineering -->
+    <div class="job-card-wrapper">
+      <article class="job-card job-card-content" id="iam-engineering" data-role="IAM Engineering" data-related="authentication-services,authorization-entitlement-governance,flex-staffing">
         <h3>IAM Engineering</h3>
         <div class="job-tags"><span class="job-tag">Full-time</span></div>
         
@@ -385,10 +490,29 @@
             <li>Participation in deployment windows, platform upgrades, or architecture reviews may be required on occasion.</li>
           </ul>
         </div>
-        <a class="apply-link" href="#apply">Apply for this position →</a>
+
+        <div class="job-card-actions">
+          <button class="quick-apply-btn" data-role="IAM Engineering">Quick Apply →</button>
+          <span style="color:#999;">or</span>
+          <a href="mailto:careers@gerihco.com?subject=IAM%20Engineering%20Position%20Application" class="email-resume-link">Email your resume</a>
+        </div>
       </article>
-      
-      <article class="job-card" id="flex-staffing">
+
+      <!-- Related Positions for IAM Engineering -->
+      <aside class="related-positions" aria-label="Related positions to IAM Engineering">
+        <h4>Similar Roles</h4>
+        <ul>
+          <li><a href="#authentication-services">Authentication Services</a> <span class="badge">Auth</span></li>
+          <li><a href="#authorization-entitlement-governance">Authorization & Entitlement Governance</a> <span class="badge">Authz</span></li>
+          <li><a href="#flex-staffing">Flex Staffing</a> <span class="badge">Multi-role</span></li>
+        </ul>
+        <p style="font-size:12px; color:#666; margin-top:12px; padding-top:12px; border-top:1px solid #e5e7eb;">Want broader exposure? Join our Flex Staffing team across all platforms.</p>
+      </aside>
+    </div>
+
+    <!-- Flex Staffing -->
+    <div class="job-card-wrapper">
+      <article class="job-card job-card-content" id="flex-staffing" data-role="Flex Staffing" data-related="pam,iga,authentication-services">
         <h3>Flex Staffing</h3>
         <div class="job-tags"><span class="job-tag">Full-time</span></div>
         
@@ -450,9 +574,26 @@
             <li>Participation in project deadlines, certification cycles, or platform upgrades may require schedule flexibility and occasional extended hours.</li>
           </ul>
         </div>
-        <a class="apply-link" href="#apply">Apply for this position →</a>
+
+        <div class="job-card-actions">
+          <button class="quick-apply-btn" data-role="Flex Staffing">Quick Apply →</button>
+          <span style="color:#999;">or</span>
+          <a href="mailto:careers@gerihco.com?subject=Flex%20Staffing%20Position%20Application" class="email-resume-link">Email your resume</a>
+        </div>
       </article>
+
+      <!-- Related Positions for Flex Staffing -->
+      <aside class="related-positions" aria-label="Related positions to Flex Staffing">
+        <h4>Specialized Roles</h4>
+        <ul>
+          <li><a href="#pam">Privileged Access Management</a> <span class="badge">PAM</span></li>
+          <li><a href="#iga">Identity Governance & Administration</a> <span class="badge">IGA</span></li>
+          <li><a href="#authentication-services">Authentication Services</a> <span class="badge">Auth</span></li>
+        </ul>
+        <p style="font-size:12px; color:#666; margin-top:12px; padding-top:12px; border-top:1px solid #e5e7eb;">Flex Staffing lets you explore all IAM specialties before committing to one team.</p>
+      </aside>
     </div>
+
   </div>
 </section>
 
@@ -550,6 +691,7 @@
     var success = document.getElementById('form-success');
     var btn = document.getElementById('submit-btn');
     var resume = document.getElementById('resume');
+    var positionSelect = document.getElementById('position');
 
     // Show success message after FormSubmit redirects back with ?submitted=1
     if (new URLSearchParams(window.location.search).get('submitted') === '1') {
@@ -558,13 +700,26 @@
       success.focus();
     }
 
+    // Quick Apply button: scroll to form and prefill position
+    document.querySelectorAll('.quick-apply-btn').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        var role = btn.getAttribute('data-role');
+        positionSelect.value = role;
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Focus on name field after scroll
+        setTimeout(function () { document.getElementById('name').focus(); }, 500);
+      });
+    });
+
     // Prefill position when arriving from a job card's "Apply" link
     document.querySelectorAll('.job-card .apply-link').forEach(function (link) {
       link.addEventListener('click', function () {
         var title = link.closest('.job-card').querySelector('h3').textContent.trim();
-        var select = document.getElementById('position');
-        for (var i = 0; i < select.options.length; i++) {
-          if (select.options[i].value === title) { select.selectedIndex = i; break; }
+        for (var i = 0; i < positionSelect.options.length; i++) {
+          if (positionSelect.options[i].value === title) { 
+            positionSelect.selectedIndex = i; 
+            break; 
+          }
         }
       });
     });
