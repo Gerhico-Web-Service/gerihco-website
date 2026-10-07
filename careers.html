@@ -73,11 +73,29 @@
     margin-top:12px;
   }
   
+  .career-values {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: 24px 0 26px;
+    max-width: 900px;
+  }
++  .career-values p {
++    background: rgba(255,255,255,0.06);
++    border: 1px solid rgba(255,255,255,0.12);
++    border-radius: 8px;
++    padding: 16px 18px;
++    color: #ffffff;
++    font-size: 15px;
++  }
++  .career-values strong { display:block; margin-bottom: 6px; color: #ffffff; }
+  
   @media (max-width: 768px) {
     .job-card-wrapper { display:block; }
     .related-positions { position:static; margin-top:24px; }
++    .career-values { grid-template-columns: 1fr; }
   }
-</style>
+ </style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -103,12 +121,12 @@
     <h1>Grow Your Career with Gerihco</h1>
     <p class="sub">Do meaningful work with a team that values clarity, trust, and growth.</p>
     <div class="career-values">
-      <p><strong>Stay in the know</strong><br>Know what matters and where the team is headed.</p>
-      <p><strong>Work with trust</strong><br>Move with autonomy and respect for your time.</p>
-      <p><strong>Feel valued</strong><br>Competitive pay, equitable benefits, and real recognition.</p>
-      <p><strong>Grow with purpose</strong><br>Training, mentorship, and clear paths forward.</p>
-      <p><strong>Bring your whole self</strong><br>Support for health, family, and work-life balance.</p>
-      <p><strong>Make it count</strong><br>Contribute to work that aligns with a shared mission.</p>
+      <p><strong>Stay in the know</strong>Know what matters and where the team is headed.</p>
+      <p><strong>Work with trust</strong>Move with autonomy and respect for your time.</p>
+      <p><strong>Feel valued</strong>Competitive pay, equitable benefits, and real recognition.</p>
+      <p><strong>Grow with purpose</strong>Training, mentorship, and clear paths forward.</p>
+      <p><strong>Bring your whole self</strong>Support for health, family, and work-life balance.</p>
+      <p><strong>Make it count</strong>Contribute to work that aligns with a shared mission.</p>
     </div>
     <p class="sub">Bring your skills. Be heard. Make an impact at Gerihco.</p>
   </div>
