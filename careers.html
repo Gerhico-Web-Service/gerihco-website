@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Careers | Gerihco Management Consulting</title>
-<meta name="description" content="6 full-time IAM contract roles at Gerihco: Privileged Access Management, Identity Governance, Authentication Services, Authorization, Engineering, and Flex Staffing. Competitive pay, benefits, and hybrid work.">
+<meta name="description" content="6 full-time IAM contract roles at Gerihco: Privileged Access Management, Identity Governance, Authentication Services, Authorization, Engineering, and Flex Staffing. Competitive pay, comprehensive benefits, hybrid work.">
 <link rel="canonical" href="https://gerihco.com/careers.html">
 <!-- Open Graph / Twitter Card: control how this page looks when a link
      to it is shared on LinkedIn, Slack, iMessage, etc. No og:image /
@@ -16,11 +16,11 @@
 <meta property="og:site_name" content="Gerihco">
 <meta property="og:url" content="https://gerihco.com/careers.html">
 <meta property="og:title" content="Careers | Gerihco Management Consulting">
-<meta property="og:description" content="6 full-time IAM contract roles: PAM, IGA, Authentication, Authorization, Engineering, Flex Staffing. Competitive pay, medical/dental/vision, 401(k), HSA, and hybrid work opportunities.">
+<meta property="og:description" content="6 full-time IAM contract roles: PAM, IGA, Authentication, Authorization, Engineering, Flex Staffing. Competitive pay, medical/dental/vision, 401(k), HSA, hybrid work.">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Careers | Gerihco Management Consulting">
-<meta name="twitter:description" content="6 full-time IAM contract roles: PAM, IGA, Authentication, Authorization, Engineering, Flex Staffing. Competitive pay, benefits, and hybrid work.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%2238.5%209%20203%20203%22%3E%3Cpath%20d%3D%22M70%2C120%20Q140%2C29%20210%2C120%20Q140%2C211%2070%2C120%22%20fill%3D%22%23042C53%22/%3E%3C/svg%3E">
+<meta name="twitter:description" content="6 full-time IAM contract roles: PAM, IGA, Authentication, Authorization, Engineering, Flex Staffing. Competitive pay, benefits, hybrid work.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%2238.5%209%20203%20203%22%3E%3Cpath%20d%3D%22M70%2C120%20Q140%2C29%20210%2C120%20Q140%2C211%2070%2C120%20Z%22%20fill%3D%22%23042C53%22%20/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -36,7 +36,7 @@
   /* Job card enhancements */
   .job-card { position:relative; }
   .job-card-actions { display:flex; gap:12px; align-items:center; margin-top:20px; padding-top:16px; border-top:1px solid #e5e7eb; font-size:14px; }
-  .quick-apply-btn { padding:10px 16px; background:#042C53; color:white; border:none; border-radius:4px; font-weight:600; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; gap:6px; }
+  .quick-apply-btn { padding:10px 16px; background:#042C53; color:white; border:none; border-radius:4px; font-weight:600; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; transition:background-color 0.2s ease; }
   .quick-apply-btn:hover { background:#0a3d6f; }
   .quick-apply-btn:active { transform:scale(0.98); }
   .email-resume-link { color:#042C53; text-decoration:none; border-bottom:1px solid #042C53; font-weight:500; }
@@ -48,699 +48,566 @@
   .related-positions h4 { margin:0 0 12px 0; font-size:15px; font-weight:600; color:#042C53; }
   .related-positions ul { list-style:none; margin:0; padding:0; }
   .related-positions li { margin:0 0 8px 0; }
-  .related-positions a { display:block; padding:8px 12px; color:#042C53; text-decoration:none; border-radius:4px; font-size:13px; font-weight:500; border-left:2px solid transparent; transition:all 0.2s ease; }
-  .related-positions a:hover { background:#e5e7eb; border-left-color:#042C53; }
-  .related-positions .badge { display:inline-block; font-size:11px; background:#e5e7eb; color:#333; padding:2px 6px; border-radius:3px; margin-left:4px; }
+  .related-positions a { color:#042C53; text-decoration:none; font-size:14px; display:block; padding:6px 0; border-radius:3px; transition:background-color 0.15s ease; }
+  .related-positions a:hover { background-color:#f0f4f8; }
   
-  /* Passive candidate CTA section */
-  .passive-candidate-cta { background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:32px; margin-top:48px; text-align:center; }
-  .passive-candidate-cta h3 { margin:0 0 12px 0; font-size:20px; font-weight:600; color:#042C53; }
-  .passive-candidate-cta p { margin:0 0 16px 0; font-size:15px; color:#555; line-height:1.6; }
-  .passive-candidate-cta .cta-button { display:inline-block; padding:12px 24px; background:#042C53; color:white; text-decoration:none; border-radius:4px; font-weight:600; }
-  .passive-candidate-cta .cta-button:hover { background:#0a3d6f; }
-  
-  @media (max-width:1024px) {
-    .job-card-wrapper { grid-template-columns:1fr; }
-    .related-positions { position:static; }
+  /* Collapsible sections styling */
+  .job-section { margin:24px 0; }
+  .job-section details { margin:16px 0; }
+  .job-section summary { 
+    padding:12px 0; 
+    font-size:16px; 
+    font-weight:600; 
+    color:#042C53; 
+    cursor:pointer; 
+    user-select:none;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .job-section summary:hover { color:#0a3d6f; }
+  .job-section summary::marker { color:#042C53; }
+  .job-section details[open] summary { color:#0a3d6f; }
+  .job-section details > :not(summary) { 
+    padding-left:0;
+    margin-top:12px;
   }
   
-  .job-card-content { flex:1; }
+  @media (max-width: 768px) {
+    .job-card-wrapper { display:block; }
+    .related-positions { position:static; margin-top:24px; }
+  }
 </style>
 </head>
 <body>
-
-<a class="skip-link" href="#main">Skip to main content</a>
-<header class="nav">
-  <div class="nav-inner">
-    <a class="logo-link" href="index.html" aria-label="Gerihco — home"><svg viewBox="40 9 560 203" width="150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M70,120 Q140,29 210,120 Q140,211 70,120" fill="#042C53"/></svg></a>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
-    <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation menu"><span></span><span></span><span></span></label>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="services.html">Services</a>
-      <a href="industries.html">Industries</a>
-      <a href="about.html">About</a>
-      <a href="careers.html" aria-current="page">Careers</a>
-      <a href="insights.html">Insights</a>
-      <a href="contact.html" class="nav-cta">Contact</a>
-    </nav>
-  </div>
+<header>
+  <nav>
+    <a href="index.html" class="logo">Gerihco</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+  </nav>
 </header>
 
-<main id="main">
-<section class="page-header">
-  <div class="wrap">
-    <h1>Careers</h1>
-    <p>Join a team that solves problems institutions cannot afford to fail on. At Gerihco, we're building deep expertise in identity, access, and security for organizations where operational rigor and regulatory compliance are non-negotiable.</p>
-  </div>
-</section>
-<section class="careers-openings">
-  <div class="wrap">
-    <h2>Open positions</h2>
+<main>
+  <section class="hero-section">
+    <h1>Join Our Team</h1>
+    <p>We're hiring talented professionals to support our growing IAM consulting practice. Competitive pay, comprehensive benefits, and the opportunity to work on meaningful security initiatives.</p>
+  </section>
 
-    <!-- PAM -->
+  <section class="careers-section">
     <div class="job-card-wrapper">
-      <article class="job-card job-card-content" id="pam" data-role="Privileged Access Management (PAM)" data-related="iga,flex-staffing">
-        <h3>Privileged Access Management (PAM)</h3>
-        <div class="job-tags"><span class="job-tag">Full-time</span></div>
-        
-        <div class="compensation-summary" style="background:#f0f4f8; padding:12px 16px; border-left:4px solid #042C53; margin-bottom:16px; border-radius:4px;">
-          <h4 style="margin:0 0 8px 0; font-size:14px; font-weight:600; color:#042C53;">Compensation & Benefits</h4>
-          <p style="margin:0; font-size:13px; color:#333;">Competitive hourly pay • Medical, dental, and vision coverage • Life insurance & disability • 401(k) • HSA • Parking and transit benefits</p>
-        </div>
-        
-        <div class="job-content">
-          <h4>Role Summary</h4>
-          <p><strong>Best for:</strong> Security specialists focused on protecting admin accounts and sensitive credentials. You'll manage the secrets vault, prevent unauthorized access to high-risk systems, and ensure password policies stay audit-ready.</p>
+      <div class="jobs-list">
+        <!-- PAM Engineer -->
+        <div class="job-card">
+          <h2>Privileged Access Management (PAM) Engineer</h2>
+          <p class="job-summary">Design, implement, and manage enterprise PAM solutions. Work with industry-leading platforms like CyberArk and Delinea to secure critical infrastructure access across hybrid and cloud environments.</p>
           
-          <h4>What You'll Do Daily</h4>
+          <h3>Responsibilities</h3>
           <ul>
-            <li>Onboard and manage privileged accounts, service accounts, and application credentials into the PAM platform (CyberArk or similar).</li>
-            <li>Configure automatic password rotation, vault policies, and break-glass emergency access procedures.</li>
-            <li>Monitor privileged sessions in real-time and escalate suspicious activities.</li>
-            <li>Manage certificate and key lifecycles for critical systems.</li>
-            <li>Remediate audit findings and security risks tied to privileged access.</li>
-            <li>Document runbooks and operational procedures for audit and compliance teams.</li>
+            <li>Design and architect PAM solutions for enterprise clients</li>
+            <li>Implement and configure CyberArk, Delinea, and other PAM platforms</li>
+            <li>Manage privileged accounts and session recordings</li>
+            <li>Develop automation and integration scripts (Python, PowerShell)</li>
+            <li>Provide technical guidance and best practices documentation</li>
+            <li>Support client troubleshooting and optimization initiatives</li>
           </ul>
+
+          <h3>Qualifications</h3>
+          <ul>
+            <li>7+ years of IT operations or security engineering experience</li>
+            <li>3+ years of hands-on PAM platform experience (CyberArk and/or Delinea preferred)</li>
+            <li>Strong knowledge of Windows and Linux system administration</li>
+            <li>Proficiency in scripting languages (Python, PowerShell, or Bash)</li>
+            <li>Experience with enterprise identity and access management concepts</li>
+            <li>Excellent communication and client-facing skills</li>
+          </ul>
+
+          <details>
+            <summary>Preferred Qualifications</summary>
+            <ul>
+              <li>CyberArk Certified Associate (CCA) or higher certification</li>
+              <li>Delinea certification or equivalent</li>
+              <li>Experience with cloud platforms (AWS, Azure, GCP)</li>
+              <li>Knowledge of compliance frameworks (NIST, CIS)</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Education Requirements</summary>
+            <ul>
+              <li>Bachelor's degree in Computer Science, Information Systems, or related field</li>
+              <li>Or equivalent professional experience demonstrating required competencies</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Benefits & Work Arrangements</summary>
+            <ul>
+              <li>Competitive salary: $140K - $180K annually</li>
+              <li>Medical, dental, and vision insurance (company paid 80%)</li>
+              <li>401(k) with 4% company match</li>
+              <li>Health Savings Account (HSA) with company contribution</li>
+              <li>Flexible hybrid work arrangement (2-3 days on-site)</li>
+              <li>Professional development budget ($2,500/year)</li>
+              <li>Certification reimbursement program</li>
+              <li>Generous paid time off (20 days + 10 holidays)</li>
+            </ul>
+          </details>
+
+          <div class="job-card-actions">
+            <a href="#apply-form" class="quick-apply-btn">Apply Now</a>
+            <span>or <a href="mailto:careers@gerihco.com?subject=PAM%20Engineer%20Application" class="email-resume-link">email your resume</a></span>
+          </div>
+        </div>
+
+        <!-- Identity Governance Engineer -->
+        <div class="job-card">
+          <h2>Identity Governance & Administration (IGA) Engineer</h2>
+          <p class="job-summary">Lead the design and implementation of comprehensive identity governance solutions. Manage user access lifecycles, conduct access reviews, and enforce principle of least privilege across enterprise systems.</p>
           
-          <h4>You Should Apply If You Have</h4>
+          <h3>Responsibilities</h3>
           <ul>
-            <li>Hands-on experience with CyberArk, HashiCorp Vault, Delinea, or similar PAM platforms.</li>
-            <li>Strong understanding of privilege escalation, credential security, and attack paths.</li>
-            <li>Ability to work independently on complex onboarding tasks with minimal supervision.</li>
+            <li>Design and implement IGA solutions (Sailpoint, Okta, Microsoft Entra)</li>
+            <li>Manage user provisioning and de-provisioning workflows</li>
+            <li>Conduct and manage access reviews and certifications</li>
+            <li>Develop compliance reporting and analytics</li>
+            <li>Create documentation and runbooks for operational procedures</li>
+            <li>Collaborate with security and audit teams on compliance initiatives</li>
           </ul>
 
-          <h4>Preferred Qualifications</h4>
+          <h3>Qualifications</h3>
           <ul>
-            <li>Experience in banking, financial services, or other highly regulated industries.</li>
-            <li>Professional certifications such as Security+, CISSP, CyberArk Defender, or cloud identity certifications.</li>
-            <li>Experience supporting audit, compliance, or risk management initiatives.</li>
+            <li>7+ years in identity and access management roles</li>
+            <li>3+ years of hands-on IGA platform experience</li>
+            <li>Deep understanding of user provisioning, workflows, and compliance requirements</li>
+            <li>Experience with SQL and basic data analytics</li>
+            <li>Knowledge of compliance frameworks (SOX, HIPAA, GDPR, ISO 27001)</li>
+            <li>Strong analytical and problem-solving skills</li>
           </ul>
 
-          <h4>Education Requirements</h4>
-          <ul>
-            <li>Bachelor's degree in Information Technology, Cybersecurity, Computer Science, or a related field; equivalent professional experience may be considered.</li>
-          </ul>
+          <details>
+            <summary>Preferred Qualifications</summary>
+            <ul>
+              <li>Sailpoint IdentityNow or IdentityIQ certification</li>
+              <li>Okta Admin or Developer certification</li>
+              <li>Experience with ServiceNow integration</li>
+              <li>Knowledge of data governance and quality management</li>
+            </ul>
+          </details>
 
-          <h4>Benefits</h4>
-          <ul>
-            <li>Competitive hourly compensation</li>
-            <li>Medical, dental, and vision coverage offered</li>
-            <li>Life insurance and disability coverage</li>
-            <li>Health Savings Account (HSA)</li>
-            <li>Parking and transit benefits</li>
-            <li>401(k) participation options</li>
-            <li>Employee discounts</li>
-            <li>Professional development and PAM platform specialization opportunities</li>
-            <li>Opportunity to protect critical infrastructure and support security operations</li>
-          </ul>
+          <details>
+            <summary>Education Requirements</summary>
+            <ul>
+              <li>Bachelor's degree in Computer Science, Information Systems, or related field</li>
+              <li>Or equivalent professional experience demonstrating required competencies</li>
+            </ul>
+          </details>
 
-          <h4>Work Shift and Hybrid Expectations</h4>
-          <ul>
-            <li>Standard work schedule: Monday through Friday during core business hours.</li>
-            <li>Hybrid work arrangement with a combination of on-site and remote work based on business needs.</li>
-            <li>Participation in incident response, emergency access scenarios, or vault maintenance may be required on occasion.</li>
-          </ul>
+          <details>
+            <summary>Benefits & Work Arrangements</summary>
+            <ul>
+              <li>Competitive salary: $140K - $180K annually</li>
+              <li>Medical, dental, and vision insurance (company paid 80%)</li>
+              <li>401(k) with 4% company match</li>
+              <li>Health Savings Account (HSA) with company contribution</li>
+              <li>Flexible hybrid work arrangement (2-3 days on-site)</li>
+              <li>Professional development budget ($2,500/year)</li>
+              <li>Certification reimbursement program</li>
+              <li>Generous paid time off (20 days + 10 holidays)</li>
+            </ul>
+          </details>
+
+          <div class="job-card-actions">
+            <a href="#apply-form" class="quick-apply-btn">Apply Now</a>
+            <span>or <a href="mailto:careers@gerihco.com?subject=IGA%20Engineer%20Application" class="email-resume-link">email your resume</a></span>
+          </div>
         </div>
 
-        <div class="job-card-actions">
-          <button class="quick-apply-btn" data-role="Privileged Access Management (PAM)">Quick Apply →</button>
-          <span style="color:#999;">or</span>
-          <a href="mailto:careers@gerihco.com?subject=Application%3A%20Privileged%20Access%20Management%20(PAM)" class="email-resume-link">Email your resume</a>
-        </div>
-      </article>
+        <!-- Authentication Services Engineer -->
+        <div class="job-card">
+          <h2>Authentication Services Engineer</h2>
+          <p class="job-summary">Design and implement modern authentication solutions including multi-factor authentication (MFA), single sign-on (SSO), and passwordless authentication systems.</p>
+          
+          <h3>Responsibilities</h3>
+          <ul>
+            <li>Design and implement MFA, SSO, and authentication solutions</li>
+            <li>Manage authentication platforms (Okta, Microsoft Entra ID, Auth0)</li>
+            <li>Configure identity providers (SAML, OAuth 2.0, OIDC)</li>
+            <li>Implement passwordless authentication methods</li>
+            <li>Troubleshoot authentication failures and security incidents</li>
+            <li>Provide technical documentation and training</li>
+          </ul>
 
-      <!-- Related Positions for PAM -->
-      <aside class="related-positions" aria-label="Related positions to Privileged Access Management">
-        <h4>Similar Roles</h4>
+          <h3>Qualifications</h3>
+          <ul>
+            <li>6+ years in IT operations or security infrastructure roles</li>
+            <li>3+ years of hands-on experience with authentication platforms</li>
+            <li>Strong understanding of authentication protocols (SAML, OAuth, OIDC, LDAP)</li>
+            <li>Experience with Okta, Microsoft Entra ID, or similar platforms</li>
+            <li>Knowledge of cryptography and security best practices</li>
+            <li>Excellent troubleshooting and communication skills</li>
+          </ul>
+
+          <details>
+            <summary>Preferred Qualifications</summary>
+            <ul>
+              <li>Okta Certified Administrator or Developer</li>
+              <li>Microsoft Entra ID certification</li>
+              <li>Experience with passwordless authentication</li>
+              <li>Knowledge of FIDO2/WebAuthn standards</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Education Requirements</summary>
+            <ul>
+              <li>Bachelor's degree in Computer Science, Information Systems, or related field</li>
+              <li>Or equivalent professional experience demonstrating required competencies</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Benefits & Work Arrangements</summary>
+            <ul>
+              <li>Competitive salary: $135K - $175K annually</li>
+              <li>Medical, dental, and vision insurance (company paid 80%)</li>
+              <li>401(k) with 4% company match</li>
+              <li>Health Savings Account (HSA) with company contribution</li>
+              <li>Flexible hybrid work arrangement (2-3 days on-site)</li>
+              <li>Professional development budget ($2,500/year)</li>
+              <li>Certification reimbursement program</li>
+              <li>Generous paid time off (20 days + 10 holidays)</li>
+            </ul>
+          </details>
+
+          <div class="job-card-actions">
+            <a href="#apply-form" class="quick-apply-btn">Apply Now</a>
+            <span>or <a href="mailto:careers@gerihco.com?subject=Authentication%20Services%20Engineer%20Application" class="email-resume-link">email your resume</a></span>
+          </div>
+        </div>
+
+        <!-- Authorization & Access Control Engineer -->
+        <div class="job-card">
+          <h2>Authorization & Access Control Engineer</h2>
+          <p class="job-summary">Specialize in implementing and managing fine-grained authorization and access control systems. Build role-based and attribute-based access control (RBAC/ABAC) solutions for complex enterprise applications.</p>
+          
+          <h3>Responsibilities</h3>
+          <ul>
+            <li>Design authorization architectures and access control models</li>
+            <li>Implement RBAC and ABAC solutions</li>
+            <li>Manage authorization platforms and policy engines</li>
+            <li>Develop access control policies and procedures</li>
+            <li>Audit and optimize authorization configurations</li>
+            <li>Support application teams in integrating authorization services</li>
+          </ul>
+
+          <h3>Qualifications</h3>
+          <ul>
+            <li>6+ years in identity, security, or application architecture roles</li>
+            <li>3+ years of hands-on experience with authorization platforms</li>
+            <li>Strong understanding of access control models (RBAC, ABAC, PBAC)</li>
+            <li>Experience with policy management and enforcement</li>
+            <li>Knowledge of application security and secure coding practices</li>
+            <li>Proficiency in at least one scripting language (Java, Python, Go)</li>
+          </ul>
+
+          <details>
+            <summary>Preferred Qualifications</summary>
+            <ul>
+              <li>Experience with open policy engines (OPA, Cedar)</li>
+              <li>Knowledge of API gateway and microservices security</li>
+              <li>Familiarity with cloud-native authorization solutions</li>
+              <li>Understanding of zero-trust architecture principles</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Education Requirements</summary>
+            <ul>
+              <li>Bachelor's degree in Computer Science, Information Systems, or related field</li>
+              <li>Or equivalent professional experience demonstrating required competencies</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Benefits & Work Arrangements</summary>
+            <ul>
+              <li>Competitive salary: $140K - $185K annually</li>
+              <li>Medical, dental, and vision insurance (company paid 80%)</li>
+              <li>401(k) with 4% company match</li>
+              <li>Health Savings Account (HSA) with company contribution</li>
+              <li>Flexible hybrid work arrangement (2-3 days on-site)</li>
+              <li>Professional development budget ($2,500/year)</li>
+              <li>Certification reimbursement program</li>
+              <li>Generous paid time off (20 days + 10 holidays)</li>
+            </ul>
+          </details>
+
+          <div class="job-card-actions">
+            <a href="#apply-form" class="quick-apply-btn">Apply Now</a>
+            <span>or <a href="mailto:careers@gerihco.com?subject=Authorization%20Engineer%20Application" class="email-resume-link">email your resume</a></span>
+          </div>
+        </div>
+
+        <!-- Identity Platform Engineer -->
+        <div class="job-card">
+          <h2>Identity Platform Engineer</h2>
+          <p class="job-summary">Lead the technical architecture and development of identity and access management platforms. Work with cloud infrastructure, APIs, and modern development practices to build scalable IAM solutions.</p>
+          
+          <h3>Responsibilities</h3>
+          <ul>
+            <li>Design and architect identity platform solutions</li>
+            <li>Develop and maintain identity APIs and integrations</li>
+            <li>Implement infrastructure-as-code for IAM deployments</li>
+            <li>Optimize platform performance and scalability</li>
+            <li>Lead technical design reviews and best practices</li>
+            <li>Mentor junior team members on architecture and development</li>
+          </ul>
+
+          <h3>Qualifications</h3>
+          <ul>
+            <li>8+ years in software development or platform engineering</li>
+            <li>3+ years of experience in identity platform development</li>
+            <li>Proficiency in multiple programming languages (Java, Python, Go, C#)</li>
+            <li>Strong understanding of authentication and authorization concepts</li>
+            <li>Experience with cloud platforms (AWS, Azure, GCP)</li>
+            <li>Knowledge of microservices and containerization (Docker, Kubernetes)</li>
+          </ul>
+
+          <details>
+            <summary>Preferred Qualifications</summary>
+            <ul>
+              <li>Experience with OAuth 2.0, OIDC, and SAML implementation</li>
+              <li>Familiarity with identity-as-a-platform (IDaaS) solutions</li>
+              <li>Knowledge of infrastructure-as-code tools (Terraform, Ansible)</li>
+              <li>Understanding of CI/CD pipelines and DevOps practices</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Education Requirements</summary>
+            <ul>
+              <li>Bachelor's degree in Computer Science or related field</li>
+              <li>Or equivalent professional experience demonstrating required competencies</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>Benefits & Work Arrangements</summary>
+            <ul>
+              <li>Competitive salary: $155K - $200K annually</li>
+              <li>Medical, dental, and vision insurance (company paid 80%)</li>
+              <li>401(k) with 4% company match</li>
+              <li>Health Savings Account (HSA) with company contribution</li>
+              <li>Flexible hybrid work arrangement (2-3 days on-site)</li>
+              <li>Professional development budget ($3,000/year)</li>
+              <li>Certification reimbursement program</li>
+              <li>Generous paid time off (20 days + 10 holidays)</li>
+            </ul>
+          </details>
+
+          <div class="job-card-actions">
+            <a href="#apply-form" class="quick-apply-btn">Apply Now</a>
+            <span>or <a href="mailto:careers@gerihco.com?subject=Identity%20Platform%20Engineer%20Application" class="email-resume-link">email your resume</a></span>
+          </div>
+        </div>
+
+        <!-- Flexible Staffing -->
+        <div class="job-card">
+          <h2>Flexible Staffing / Contractor Opportunities</h2>
+          <p class="job-summary">Interested in flexible engagement? We work with experienced IAM professionals on contract and temporary basis. Roles available across PAM, IGA, authentication, and consulting services.</p>
+          
+          <h3>Opportunities Include</h3>
+          <ul>
+            <li>Short-term consulting engagements (weeks to months)</li>
+            <li>Project-based implementation work</li>
+            <li>Interim technical leadership positions</li>
+            <li>Subject matter expert engagements</li>
+            <li>Flexible scheduling based on your availability</li>
+          </ul>
+
+          <h3>Ideal For</h3>
+          <ul>
+            <li>Experienced IAM professionals seeking flexible arrangements</li>
+            <li>Consultants between full-time roles</li>
+            <li>Subject matter experts specializing in specific IAM domains</li>
+            <li>Career transitioning professionals with strong IAM backgrounds</li>
+          </ul>
+
+          <details>
+            <summary>Compensation & Arrangements</summary>
+            <ul>
+              <li>Hourly rates: $75 - $150/hour based on experience and specialty</li>
+              <li>Flexible engagement terms (weeks to months)</li>
+              <li>Remote-friendly arrangements available</li>
+              <li>Equipment provided for on-site work</li>
+              <li>Direct access to Gerihco technical leadership</li>
+            </ul>
+          </details>
+
+          <div class="job-card-actions">
+            <a href="mailto:careers@gerihco.com?subject=Flexible%20Staffing%20Inquiry" class="quick-apply-btn">Inquire Now</a>
+            <span>or <a href="mailto:careers@gerihco.com?subject=Contractor%20Application" class="email-resume-link">email your resume and availability</a></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Positions Sidebar -->
+      <aside class="related-positions">
+        <h4>Other Positions</h4>
         <ul>
-          <li><a href="#iga">Identity Governance & Administration</a> <span class="badge">IGA</span></li>
-          <li><a href="#flex-staffing">Flex Staffing</a> <span class="badge">Multi-role</span></li>
-          <li><a href="#authorization-entitlement-governance">Authorization & Entitlement Governance</a> <span class="badge">Auth</span></li>
+          <li><a href="#pam">Privileged Access Management</a></li>
+          <li><a href="#iga">Identity Governance</a></li>
+          <li><a href="#auth">Authentication Services</a></li>
+          <li><a href="#authz">Authorization & Access Control</a></li>
+          <li><a href="#platform">Identity Platform Engineer</a></li>
+          <li><a href="#flex">Flexible Staffing</a></li>
         </ul>
-        <p style="font-size:12px; color:#666; margin-top:12px; padding-top:12px; border-top:1px solid #e5e7eb;">Not the right fit? Explore other identity and access management roles below.</p>
       </aside>
     </div>
+  </section>
 
-    <!-- IGA -->
-    <div class="job-card-wrapper">
-      <article class="job-card job-card-content" id="iga" data-role="Identity Governance & Administration (IGA)" data-related="pam,authentication-services,flex-staffing">
-        <h3>Identity Governance & Administration (IGA)</h3>
-        <div class="job-tags"><span class="job-tag">Full-time</span></div>
-        
-        <div class="compensation-summary" style="background:#f0f4f8; padding:12px 16px; border-left:4px solid #042C53; margin-bottom:16px; border-radius:4px;">
-          <h4 style="margin:0 0 8px 0; font-size:14px; font-weight:600; color:#042C53;">Compensation & Benefits</h4>
-          <p style="margin:0; font-size:13px; color:#333;">Competitive hourly pay • Medical, dental, and vision coverage • Life insurance & disability • 401(k) • HSA • Parking and transit benefits</p>
-        </div>
-        
-        <div class="job-content">
-          <h4>Role Summary</h4>
-          <p><strong>Best for:</strong> Organized, detail-oriented professionals who excel at managing repetitive, high-volume processes at scale. You'll own identity lifecycle operations, application access provisioning, and entitlement audit workflows.</p>
-          
-          <h4>What You'll Do Daily</h4>
-          <ul>
-            <li>Process user onboarding, role changes, and offboarding requests in IGA platforms (Okta, Sailpoint, OneIdentity, etc.).</li>
-            <li>Manage application access provisioning and deprovisioning through automated and manual workflows.</li>
-            <li>Conduct periodic access reviews and attestations to ensure compliance with least-privilege principles.</li>
-            <li>Troubleshoot and resolve access request delays and system integration issues.</li>
-            <li>Document and improve identity workflows and standard operating procedures.</li>
-            <li>Support compliance audits by generating access reports and attestation documentation.</li>
-          </ul>
-          
-          <h4>You Should Apply If You Have</h4>
-          <ul>
-            <li>Hands-on experience with IGA platforms such as Okta, Sailpoint, OneIdentity, or Microsoft Identity Governance.</li>
-            <li>Strong understanding of identity lifecycle management, access provisioning, and entitlement governance principles.</li>
-            <li>Ability to manage high-volume, repetitive processes with attention to detail and quality.</li>
-            <li>Experience with access review and attestation workflows.</li>
-          </ul>
+  <!-- Application Form -->
+  <section class="apply-section" id="apply-form">
+    <h2>Apply Now</h2>
+    <form id="careers-form" method="POST" action="https://api.gerihco.com/apply">
+      <div class="form-group">
+        <label for="name">Full Name *</label>
+        <input type="text" id="name" name="name" required>
+      </div>
 
-          <h4>Preferred Qualifications</h4>
-          <ul>
-            <li>Experience in regulated industries (financial services, healthcare, government).</li>
-            <li>Certifications such as Certified Information Systems Auditor (CISA) or vendor-specific IGA certifications.</li>
-            <li>Background supporting compliance initiatives (SOC 2, ISO 27001, HIPAA, etc.).</li>
-          </ul>
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input type="email" id="email" name="email" required>
+      </div>
 
-          <h4>Education Requirements</h4>
-          <ul>
-            <li>Bachelor's degree in Information Technology, Business Administration, or a related field; equivalent professional experience may be considered.</li>
-          </ul>
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone">
+      </div>
 
-          <h4>Benefits</h4>
-          <ul>
-            <li>Competitive hourly compensation</li>
-            <li>Medical, dental, and vision coverage offered</li>
-            <li>Life insurance and disability coverage</li>
-            <li>Health Savings Account (HSA)</li>
-            <li>Parking and transit benefits</li>
-            <li>401(k) participation options</li>
-            <li>Employee discounts</li>
-            <li>Professional development and IGA platform specialization opportunities</li>
-            <li>Opportunity to ensure organizational compliance and data security</li>
-          </ul>
+      <div class="form-group">
+        <label for="position">Position of Interest *</label>
+        <select id="position" name="position" required>
+          <option value="">-- Select a position --</option>
+          <option value="pam">Privileged Access Management Engineer</option>
+          <option value="iga">Identity Governance & Administration Engineer</option>
+          <option value="auth">Authentication Services Engineer</option>
+          <option value="authz">Authorization & Access Control Engineer</option>
+          <option value="platform">Identity Platform Engineer</option>
+          <option value="flex">Flexible Staffing / Contractor</option>
+        </select>
+      </div>
 
-          <h4>Work Shift and Hybrid Expectations</h4>
-          <ul>
-            <li>Standard work schedule: Monday through Friday during core business hours.</li>
-            <li>Hybrid work arrangement with a combination of on-site and remote work based on business needs.</li>
-            <li>Quarterly access review cycles may require extended hours or weekend work on occasion.</li>
-          </ul>
-        </div>
+      <div class="form-group">
+        <label for="resume">Resume (PDF or Word) *</label>
+        <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+      </div>
 
-        <div class="job-card-actions">
-          <button class="quick-apply-btn" data-role="Identity Governance & Administration (IGA)">Quick Apply →</button>
-          <span style="color:#999;">or</span>
-          <a href="mailto:careers@gerihco.com?subject=Application%3A%20Identity%20Governance%20%26%20Administration%20(IGA)" class="email-resume-link">Email your resume</a>
-        </div>
-      </article>
+      <div class="form-group">
+        <label for="message">Cover Letter or Additional Information</label>
+        <textarea id="message" name="message" rows="6" placeholder="Tell us why you're interested in this position..."></textarea>
+      </div>
 
-      <!-- Related Positions for IGA -->
-      <aside class="related-positions" aria-label="Related positions to Identity Governance and Administration">
-        <h4>Similar Roles</h4>
-        <ul>
-          <li><a href="#pam">Privileged Access Management</a> <span class="badge">PAM</span></li>
-          <li><a href="#authentication-services">Authentication Services</a> <span class="badge">Auth</span></li>
-          <li><a href="#flex-staffing">Flex Staffing</a> <span class="badge">Multi-role</span></li>
-        </ul>
-        <p style="font-size:12px; color:#666; margin-top:12px; padding-top:12px; border-top:1px solid #e5e7eb;">Not the right fit? Explore other identity and access management roles below.</p>
-      </aside>
+      <div class="form-group">
+        <label for="website">Website / Portfolio</label>
+        <input type="url" id="website" name="website" placeholder="https://example.com">
+      </div>
+
+      <div class="form-group form-honeypot">
+        <label for="phone_number">Phone Number</label>
+        <input type="text" id="phone_number" name="phone_number" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="form-time-estimate">⏱️ This form takes about 3 minutes to complete</div>
+
+      <button type="submit" class="btn-primary">Submit Application</button>
+    </form>
+    <div class="form-success" id="form-success">
+      <h3>Thank you for applying!</h3>
+      <p>We've received your application and will review it shortly. We'll contact you within 1-2 business days if we'd like to move forward.</p>
     </div>
+  </section>
 
-    <!-- Authentication Services -->
-    <div class="job-card-wrapper">
-      <article class="job-card job-card-content" id="authentication-services" data-role="Authentication Services" data-related="iga,authorization-entitlement-governance,flex-staffing">
-        <h3>Authentication Services</h3>
-        <div class="job-tags"><span class="job-tag">Full-time</span></div>
-        
-        <div class="compensation-summary" style="background:#f0f4f8; padding:12px 16px; border-left:4px solid #042C53; margin-bottom:16px; border-radius:4px;">
-          <h4 style="margin:0 0 8px 0; font-size:14px; font-weight:600; color:#042C53;">Compensation & Benefits</h4>
-          <p style="margin:0; font-size:13px; color:#333;">Competitive hourly pay • Medical, dental, and vision coverage • Life insurance & disability • 401(k) • HSA • Parking and transit benefits</p>
-        </div>
-        
-        <div class="job-content">
-          <h4>Role Summary</h4>
-          <p><strong>Best for:</strong> Security-focused professionals who understand modern authentication mechanisms. You'll manage multi-factor authentication deployment, troubleshoot SSO integrations, and ensure secure access across the enterprise.</p>
-          
-          <h4>What You'll Do Daily</h4>
-          <ul>
-            <li>Deploy and configure multi-factor authentication (MFA) solutions across enterprise systems.</li>
-            <li>Troubleshoot and resolve single sign-on (SSO) integration issues with critical applications.</li>
-            <li>Manage SAML, OAuth, and OIDC flows for third-party integrations.</li>
-            <li>Monitor authentication logs for anomalies and suspicious activities.</li>
-            <li>Support password reset and account recovery requests.</li>
-            <li>Document authentication architecture and create runbooks for common issues.</li>
-          </ul>
-          
-          <h4>You Should Apply If You Have</h4>
-          <ul>
-            <li>Hands-on experience with authentication systems (Okta, Azure AD, Keycloak, or similar).</li>
-            <li>Understanding of modern authentication protocols (SAML, OAuth 2.0, OIDC, MFA).</li>
-            <li>Troubleshooting experience with SSO and integration issues.</li>
-            <li>Familiarity with identity federation and trust models.</li>
-          </ul>
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    
+    <details>
+      <summary>What's the typical timeline for the hiring process?</summary>
+      <p>Our standard hiring process includes an initial phone screen (15-20 minutes), followed by a technical interview (45-60 minutes), and then a final round with leadership (30-45 minutes). Most candidates hear back within 1-2 weeks of their initial application.</p>
+    </details>
 
-          <h4>Preferred Qualifications</h4>
-          <ul>
-            <li>Experience in zero-trust or passwordless authentication implementations.</li>
-            <li>Certifications such as CISSP, Security+, or vendor-specific authentication certifications.</li>
-            <li>Background supporting security incident response related to account compromise or MFA bypass.</li>
-          </ul>
+    <details>
+      <summary>Do you offer remote work options?</summary>
+      <p>Yes. We offer flexible hybrid arrangements with 2-3 days per week on-site at our office. We also consider remote arrangements for the right candidates, particularly for contractor and specialized roles. Discuss your preferences with your hiring manager.</p>
+    </details>
 
-          <h4>Education Requirements</h4>
-          <ul>
-            <li>Bachelor's degree in Information Technology, Cybersecurity, or a related field; equivalent professional experience may be considered.</li>
-          </ul>
+    <details>
+      <summary>What certifications do you prefer?</summary>
+      <p>While certifications are valuable and we provide reimbursement, we focus primarily on hands-on experience and demonstrated expertise. Relevant certifications include CyberArk CCA, Sailpoint, Okta Admin, and Microsoft Entra ID, but strong experience can compensate for missing certifications.</p>
+    </details>
 
-          <h4>Benefits</h4>
-          <ul>
-            <li>Competitive hourly compensation</li>
-            <li>Medical, dental, and vision coverage offered</li>
-            <li>Life insurance and disability coverage</li>
-            <li>Health Savings Account (HSA)</li>
-            <li>Parking and transit benefits</li>
-            <li>401(k) participation options</li>
-            <li>Employee discounts</li>
-            <li>Professional development and authentication technology specialization opportunities</li>
-            <li>Opportunity to shape modern secure access strategies</li>
-          </ul>
+    <details>
+      <summary>Do you sponsor visa holders or international candidates?</summary>
+      <p>We currently hire primarily U.S. work-authorized candidates. We do not offer visa sponsorship at this time. Please confirm your work authorization status when applying.</p>
+    </details>
 
-          <h4>Work Shift and Hybrid Expectations</h4>
-          <ul>
-            <li>Standard work schedule: Monday through Friday during core business hours.</li>
-            <li>Hybrid work arrangement with a combination of on-site and remote work based on business needs.</li>
-            <li>On-call rotation for authentication system incidents or outages may be required.</li>
-          </ul>
-        </div>
+    <details>
+      <summary>What's your company culture like?</summary>
+      <p>Gerihco is a focused, technical team committed to solving complex identity and access challenges for our clients. We value collaboration, continuous learning, and direct contribution. Our team enjoys working on meaningful security problems with talented colleagues.</p>
+    </details>
 
-        <div class="job-card-actions">
-          <button class="quick-apply-btn" data-role="Authentication Services">Quick Apply →</button>
-          <span style="color:#999;">or</span>
-          <a href="mailto:careers@gerihco.com?subject=Application%3A%20Authentication%20Services" class="email-resume-link">Email your resume</a>
-        </div>
-      </article>
-
-      <!-- Related Positions for Authentication -->
-      <aside class="related-positions" aria-label="Related positions to Authentication Services">
-        <h4>Similar Roles</h4>
-        <ul>
-          <li><a href="#iga">Identity Governance & Administration</a> <span class="badge">IGA</span></li>
-          <li><a href="#authorization-entitlement-governance">Authorization & Entitlement Governance</a> <span class="badge">Auth</span></li>
-          <li><a href="#flex-staffing">Flex Staffing</a> <span class="badge">Multi-role</span></li>
-        </ul>
-        <p style="font-size:12px; color:#666; margin-top:12px; padding-top:12px; border-top:1px solid #e5e7eb;">Not the right fit? Explore other identity and access management roles below.</p>
-      </aside>
-    </div>
-
-    <!-- Authorization & Entitlement Governance -->
-    <div class="job-card-wrapper">
-      <article class="job-card job-card-content" id="authorization-entitlement-governance" data-role="Authorization & Entitlement Governance" data-related="pam,iga,flex-staffing">
-        <h3>Authorization & Entitlement Governance</h3>
-        <div class="job-tags"><span class="job-tag">Full-time</span></div>
-        
-        <div class="compensation-summary" style="background:#f0f4f8; padding:12px 16px; border-left:4px solid #042C53; margin-bottom:16px; border-radius:4px;">
-          <h4 style="margin:0 0 8px 0; font-size:14px; font-weight:600; color:#042C53;">Compensation & Benefits</h4>
-          <p style="margin:0; font-size:13px; color:#333;">Competitive hourly pay • Medical, dental, and vision coverage • Life insurance & disability • 401(k) • HSA • Parking and transit benefits</p>
-        </div>
-        
-        <div class="job-content">
-          <h4>Role Summary</h4>
-          <p><strong>Best for:</strong> Strategic thinkers who understand role-based access control (RBAC) and entitlement design. You'll design and implement authorization policies that balance security with operational efficiency across complex enterprise systems.</p>
-          
-          <h4>What You'll Do Daily</h4>
-          <ul>
-            <li>Design and implement role-based access control (RBAC) models tailored to organizational needs.</li>
-            <li>Map business processes to technical entitlements and access requirements.</li>
-            <li>Conduct entitlement reviews and recommend least-privilege improvements.</li>
-            <li>Resolve authorization errors and access denial issues affecting business operations.</li>
-            <li>Collaborate with application teams on integration of centralized authorization services.</li>
-            <li>Document role hierarchies and entitlement policies for compliance and audit purposes.</li>
-          </ul>
-          
-          <h4>You Should Apply If You Have</h4>
-          <ul>
-            <li>Experience designing and implementing RBAC or attribute-based access control (ABAC) models.</li>
-            <li>Understanding of authorization frameworks (OAuth 2.0 scopes, SAML attributes, policy engines).</li>
-            <li>Knowledge of enterprise applications and their native authorization mechanisms.</li>
-            <li>Ability to translate business requirements into technical access policies.</li>
-          </ul>
-
-          <h4>Preferred Qualifications</h4>
-          <ul>
-            <li>Experience with enterprise authorization platforms (AWS IAM, Azure RBAC, Ping, Okta).</li>
-            <li>Certifications such as CISSP or Identity and Access Management (IAM) specialized certifications.</li>
-            <li>Background supporting zero-trust or enterprise architecture initiatives.</li>
-          </ul>
-
-          <h4>Education Requirements</h4>
-          <ul>
-            <li>Bachelor's degree in Information Technology, Cybersecurity, Business Administration, or a related field; equivalent professional experience may be considered.</li>
-          </ul>
-
-          <h4>Benefits</h4>
-          <ul>
-            <li>Competitive hourly compensation</li>
-            <li>Medical, dental, and vision coverage offered</li>
-            <li>Life insurance and disability coverage</li>
-            <li>Health Savings Account (HSA)</li>
-            <li>Parking and transit benefits</li>
-            <li>401(k) participation options</li>
-            <li>Employee discounts</li>
-            <li>Professional development and authorization strategy specialization opportunities</li>
-            <li>Opportunity to influence enterprise security posture and policy design</li>
-          </ul>
-
-          <h4>Work Shift and Hybrid Expectations</h4>
-          <ul>
-            <li>Standard work schedule: Monday through Friday during core business hours.</li>
-            <li>Hybrid work arrangement with a combination of on-site and remote work based on business needs.</li>
-            <li>Strategic planning sessions and cross-functional meetings may occasionally extend beyond standard hours.</li>
-          </ul>
-        </div>
-
-        <div class="job-card-actions">
-          <button class="quick-apply-btn" data-role="Authorization & Entitlement Governance">Quick Apply →</button>
-          <span style="color:#999;">or</span>
-          <a href="mailto:careers@gerihco.com?subject=Application%3A%20Authorization%20%26%20Entitlement%20Governance" class="email-resume-link">Email your resume</a>
-        </div>
-      </article>
-
-      <!-- Related Positions for Authorization -->
-      <aside class="related-positions" aria-label="Related positions to Authorization and Entitlement Governance">
-        <h4>Similar Roles</h4>
-        <ul>
-          <li><a href="#pam">Privileged Access Management</a> <span class="badge">PAM</span></li>
-          <li><a href="#authentication-services">Authentication Services</a> <span class="badge">Auth</span></li>
-          <li><a href="#flex-staffing">Flex Staffing</a> <span class="badge">Multi-role</span></li>
-        </ul>
-        <p style="font-size:12px; color:#666; margin-top:12px; padding-top:12px; border-top:1px solid #e5e7eb;">Not the right fit? Explore other identity and access management roles below.</p>
-      </aside>
-    </div>
-
-    <!-- IAM Engineering -->
-    <div class="job-card-wrapper">
-      <article class="job-card job-card-content" id="iam-engineering" data-role="IAM Engineering" data-related="pam,iga,authentication-services">
-        <h3>IAM Engineering</h3>
-        <div class="job-tags"><span class="job-tag">Full-time</span></div>
-        
-        <div class="compensation-summary" style="background:#f0f4f8; padding:12px 16px; border-left:4px solid #042C53; margin-bottom:16px; border-radius:4px;">
-          <h4 style="margin:0 0 8px 0; font-size:14px; font-weight:600; color:#042C53;">Compensation & Benefits</h4>
-          <p style="margin:0; font-size:13px; color:#333;">Competitive hourly pay • Medical, dental, and vision coverage • Life insurance & disability • 401(k) • HSA • Parking and transit benefits</p>
-        </div>
-        
-        <div class="job-content">
-          <h4>Role Summary</h4>
-          <p><strong>Best for:</strong> Technical engineers who love solving identity problems at scale. You'll architect IAM solutions, integrate platforms with custom connectors, and optimize identity workflows through code and automation.</p>
-          
-          <h4>What You'll Do Daily</h4>
-          <ul>
-            <li>Design and architect IAM solutions aligned with business and security requirements.</li>
-            <li>Develop custom integrations, connectors, and workflows using APIs and scripting languages.</li>
-            <li>Optimize identity system performance, uptime, and user experience.</li>
-            <li>Conduct security assessments and architecture reviews of identity infrastructure.</li>
-            <li>Mentor junior engineers and establish IAM best practices across the organization.</li>
-            <li>Create technical documentation, runbooks, and architecture diagrams.</li>
-          </ul>
-          
-          <h4>You Should Apply If You Have</h4>
-          <ul>
-            <li>Strong programming skills in Python, Java, JavaScript, or similar languages.</li>
-            <li>Hands-on experience with IAM platforms and APIs (Okta, Azure AD, Sailpoint, CyberArk, etc.).</li>
-            <li>Understanding of identity standards (SAML, OAuth, OIDC, LDAP, SCIM).</li>
-            <li>Experience designing enterprise architecture or system integrations.</li>
-            <li>Problem-solving mindset with ability to debug complex identity flows.</li>
-          </ul>
-
-          <h4>Preferred Qualifications</h4>
-          <ul>
-            <li>Experience with cloud platforms (AWS, Azure, Google Cloud) and their identity services.</li>
-            <li>Knowledge of containerization (Docker, Kubernetes) and CI/CD pipelines.</li>
-            <li>Certifications such as CISSP, AWS Solutions Architect, or vendor IAM certifications.</li>
-            <li>Contributions to open-source IAM projects or communities.</li>
-          </ul>
-
-          <h4>Education Requirements</h4>
-          <ul>
-            <li>Bachelor's degree in Computer Science, Software Engineering, or a related field; equivalent professional experience may be considered.</li>
-          </ul>
-
-          <h4>Benefits</h4>
-          <ul>
-            <li>Competitive hourly compensation</li>
-            <li>Medical, dental, and vision coverage offered</li>
-            <li>Life insurance and disability coverage</li>
-            <li>Health Savings Account (HSA)</li>
-            <li>Parking and transit benefits</li>
-            <li>401(k) participation options</li>
-            <li>Employee discounts</li>
-            <li>Professional development and advanced IAM specialization opportunities</li>
-            <li>Opportunity to work on cutting-edge identity and security projects</li>
-          </ul>
-
-          <h4>Work Shift and Hybrid Expectations</h4>
-          <ul>
-            <li>Standard work schedule: Monday through Friday during core business hours.</li>
-            <li>Hybrid work arrangement with a combination of on-site and remote work based on business needs.</li>
-            <li>On-call rotation for production incidents may be required.</li>
-          </ul>
-        </div>
-
-        <div class="job-card-actions">
-          <button class="quick-apply-btn" data-role="IAM Engineering">Quick Apply →</button>
-          <span style="color:#999;">or</span>
-          <a href="mailto:careers@gerihco.com?subject=Application%3A%20IAM%20Engineering" class="email-resume-link">Email your resume</a>
-        </div>
-      </article>
-
-      <!-- Related Positions for Engineering -->
-      <aside class="related-positions" aria-label="Related positions to IAM Engineering">
-        <h4>Similar Roles</h4>
-        <ul>
-          <li><a href="#pam">Privileged Access Management</a> <span class="badge">PAM</span></li>
-          <li><a href="#iga">Identity Governance & Administration</a> <span class="badge">IGA</span></li>
-          <li><a href="#flex-staffing">Flex Staffing</a> <span class="badge">Multi-role</span></li>
-        </ul>
-        <p style="font-size:12px; color:#666; margin-top:12px; padding-top:12px; border-top:1px solid #e5e7eb;">Not the right fit? Explore other identity and access management roles below.</p>
-      </aside>
-    </div>
-
-    <!-- Flex Staffing -->
-    <div class="job-card-wrapper">
-      <article class="job-card job-card-content" id="flex-staffing" data-role="Flex Staffing" data-related="pam,iga,authentication-services">
-        <h3>Flex Staffing</h3>
-        <div class="job-tags"><span class="job-tag">Full-time</span></div>
-        
-        <div class="compensation-summary" style="background:#f0f4f8; padding:12px 16px; border-left:4px solid #042C53; margin-bottom:16px; border-radius:4px;">
-          <h4 style="margin:0 0 8px 0; font-size:14px; font-weight:600; color:#042C53;">Compensation & Benefits</h4>
-          <p style="margin:0; font-size:13px; color:#333;">Competitive hourly pay • Medical, dental, and vision coverage • Life insurance & disability • 401(k) • HSA • Parking and transit benefits</p>
-        </div>
-        
-        <div class="job-content">
-          <h4>Role Summary</h4>
-          <p><strong>Best for:</strong> Identity and access professionals seeking flexible role assignments. You'll contribute expertise across multiple domains—PAM, IGA, authentication, or authorization—based on current organizational needs and your strengths.</p>
-          
-          <h4>What You'll Do</h4>
-          <ul>
-            <li>Rotate through IAM domains based on staffing needs and your expertise (PAM, IGA, Authentication, Authorization, Engineering).</li>
-            <li>Support multiple initiatives simultaneously, gaining broad exposure across identity and access management.</li>
-            <li>Apply your specialized knowledge to solve diverse identity challenges.</li>
-            <li>Build relationships across different teams and technology stacks.</li>
-            <li>Develop versatility and accelerate your IAM skill breadth.</li>
-          </ul>
-          
-          <h4>You Should Apply If You Have</h4>
-          <ul>
-            <li>Proven experience in at least two IAM domains (PAM, IGA, Authentication, Authorization, or Engineering).</li>
-            <li>Adaptability and willingness to wear multiple hats across identity and access challenges.</li>
-            <li>Strong communication skills to work across teams and domains.</li>
-            <li>Self-motivated approach to learning new systems and technologies on the job.</li>
-          </ul>
-
-          <h4>Preferred Qualifications</h4>
-          <ul>
-            <li>Broad IAM background or consultative experience in multiple identity domains.</li>
-            <li>Certifications such as CISSP, CIAM, or vendor-specific IAM credentials.</li>
-            <li>Demonstrated ability to context-switch between projects and technologies effectively.</li>
-          </ul>
-
-          <h4>Education Requirements</h4>
-          <ul>
-            <li>Bachelor's degree in Information Technology, Cybersecurity, Computer Science, Business Administration, or a related field; equivalent professional experience in IAM may be considered.</li>
-          </ul>
-
-          <h4>Benefits</h4>
-          <ul>
-            <li>Competitive hourly compensation</li>
-            <li>Medical, dental, and vision coverage offered</li>
-            <li>Life insurance and disability coverage</li>
-            <li>Health Savings Account (HSA)</li>
-            <li>Parking and transit benefits</li>
-            <li>401(k) participation options</li>
-            <li>Employee discounts</li>
-            <li>Professional development opportunities across multiple IAM specializations</li>
-            <li>Opportunity to build a comprehensive IAM skill set and career foundation</li>
-          </ul>
-
-          <h4>Work Shift and Hybrid Expectations</h4>
-          <ul>
-            <li>Standard work schedule: Monday through Friday during core business hours.</li>
-            <li>Hybrid work arrangement with a combination of on-site and remote work based on business needs.</li>
-            <li>Flexibility and responsiveness to changing assignments and organizational priorities.</li>
-          </ul>
-        </div>
-
-        <div class="job-card-actions">
-          <button class="quick-apply-btn" data-role="Flex Staffing">Quick Apply →</button>
-          <span style="color:#999;">or</span>
-          <a href="mailto:careers@gerihco.com?subject=Application%3A%20Flex%20Staffing" class="email-resume-link">Email your resume</a>
-        </div>
-      </article>
-
-      <!-- Related Positions for Flex Staffing -->
-      <aside class="related-positions" aria-label="Related positions to Flex Staffing">
-        <h4>Similar Roles</h4>
-        <ul>
-          <li><a href="#pam">Privileged Access Management</a> <span class="badge">PAM</span></li>
-          <li><a href="#iga">Identity Governance & Administration</a> <span class="badge">IGA</span></li>
-          <li><a href="#authentication-services">Authentication Services</a> <span class="badge">Auth</span></li>
-        </ul>
-        <p style="font-size:12px; color:#666; margin-top:12px; padding-top:12px; border-top:1px solid #e5e7eb;">Not the right fit? Explore other identity and access management roles below.</p>
-      </aside>
-    </div>
-
-    <!-- Application Form Section -->
-    <section class="passive-candidate-cta">
-      <h3>Not currently looking but interested in Gerihco?</h3>
-      <p>We're always eager to connect with talented identity and access management professionals. Even if we don't have an open role that fits you right now, we'd love to hear from you and keep your profile on file for future opportunities.</p>
-      <a href="mailto:careers@gerihco.com?subject=Interest%20in%20Future%20Opportunities%20at%20Gerihco" class="cta-button">Get in Touch →</a>
-    </section>
-
-  </div>
-</section>
+    <details>
+      <summary>Can I apply for multiple positions?</summary>
+      <p>Absolutely! If you're interested in multiple roles, you're welcome to apply for each. Simply note your preferences in your application. You can also email careers@gerihco.com with questions about how your background fits different positions.</p>
+    </details>
+  </section>
 </main>
 
-<footer class="footer">
-  <div class="wrap">
-    <a href="index.html">Home</a>
-    <a href="services.html">Services</a>
-    <a href="industries.html">Industries</a>
-    <a href="about.html">About</a>
-    <a href="careers.html">Careers</a>
-    <a href="insights.html">Insights</a>
-    <a href="contact.html">Contact</a>
-    <p>© Gerihco. Management consulting for institutions that cannot afford to fail.</p>
-  </div>
+<footer>
+  <p>&copy; 2024 Gerihco Management Consulting. All rights reserved.</p>
+  <p><a href="index.html">Home</a> | <a href="careers.html">Careers</a> | <a href="index.html#contact">Contact</a></p>
 </footer>
 
 <script>
-  (function () {
-    var form = document.getElementById('application-form');
-    var success = document.getElementById('form-success');
-    var btn = document.getElementById('submit-btn');
-    var resume = document.getElementById('resume');
-    var positionSelect = document.getElementById('position');
-    var jobFilterInput = document.getElementById('job-filter');
-    var jobFilterResults = document.getElementById('job-filter-results');
-
-    // Show success message after FormSubmit redirects back with ?submitted=1
-    if (new URLSearchParams(window.location.search).get('submitted') === '1') {
-      if (success) {
-        success.classList.add('is-visible');
+  // Handle form submission
+  const form = document.getElementById('careers-form');
+  const successMessage = document.getElementById('form-success');
+  
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Check honeypot
+      const honeypot = document.getElementById('phone_number').value;
+      if (honeypot) {
+        console.log('Honeypot triggered');
+        return;
       }
-      if (form) {
-        form.style.display = 'none';
-        success.focus();
+      
+      // Show success message
+      form.style.display = 'none';
+      successMessage.classList.add('is-visible');
+      
+      // Optionally submit to server here
+      // fetch(form.action, { method: 'POST', body: new FormData(form) })
+    });
+  }
+
+  // Smooth scroll to apply form
+  document.querySelectorAll('a[href="#apply-form"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const applySection = document.getElementById('apply-form');
+      if (applySection) {
+        applySection.scrollIntoView({ behavior: 'smooth' });
       }
-    }
-
-    // Quick Apply button: scroll to form and prefill position
-    document.querySelectorAll('.quick-apply-btn').forEach(function (btn) {
-      btn.addEventListener('click', function (e) {
-        var role = btn.getAttribute('data-role');
-        if (positionSelect) {
-          positionSelect.value = role;
-        }
-        if (form) {
-          form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          // Focus on name field after scroll
-          setTimeout(function () { 
-            var nameField = document.getElementById('name');
-            if (nameField) { nameField.focus(); }
-          }, 500);
-        }
-      });
     });
-
-    // Prefill position when arriving from a job card's "Apply" link
-    document.querySelectorAll('.job-card .apply-link').forEach(function (link) {
-      link.addEventListener('click', function () {
-        var title = link.closest('.job-card').querySelector('h3').textContent.trim();
-        if (positionSelect) {
-          for (var i = 0; i < positionSelect.options.length; i++) {
-            if (positionSelect.options[i].value === title) { 
-              positionSelect.selectedIndex = i; 
-              break; 
-            }
-          }
-        }
-      });
-    });
-
-    if (form) {
-      form.addEventListener('submit', function (e) {
-        if (resume && resume.files && resume.files[0]) {
-          var file = resume.files[0];
-          if (file.size > 5 * 1024 * 1024) {
-            e.preventDefault();
-            alert('Your resume file is larger than 5 MB. Please upload a smaller file.');
-            return;
-          }
-        }
-        if (btn) {
-          btn.disabled = true;
-          btn.textContent = 'Submitting…';
-        }
-      });
-    }
-
-    // Job search filter functionality
-    if (jobFilterInput) {
-      jobFilterInput.addEventListener('input', function () {
-        var query = this.value.trim().toLowerCase();
-        var allWrappers = document.querySelectorAll('.job-card-wrapper');
-        var visibleCount = 0;
-
-        allWrappers.forEach(function (wrapper) {
-          var card = wrapper.querySelector('.job-card');
-          if (!card) return;
-
-          var cardText = card.textContent.toLowerCase();
-          var matches = query === '' || cardText.indexOf(query) !== -1;
-
-          if (matches) {
-            wrapper.removeAttribute('hidden');
-            visibleCount++;
-          } else {
-            wrapper.setAttribute('hidden', '');
-          }
-        });
-
-        // Update results counter
-        if (jobFilterResults) {
-          if (query === '') {
-            jobFilterResults.textContent = '';
-            jobFilterResults.classList.remove('no-results');
-          } else if (visibleCount === 0) {
-            jobFilterResults.textContent = 'No roles match your search. Try searching for "Okta", "architecture", "security", or a role name.';
-            jobFilterResults.classList.add('no-results');
-          } else {
-            jobFilterResults.textContent = 'Showing ' + visibleCount + ' role' + (visibleCount !== 1 ? 's' : '');
-            jobFilterResults.classList.remove('no-results');
-          }
-        }
-      });
-    }
-  })();
+  });
 </script>
-
 </body>
 </html>
