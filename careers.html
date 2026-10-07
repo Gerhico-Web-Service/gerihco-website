@@ -59,6 +59,17 @@
   .passive-candidate-cta .cta-button { display:inline-block; padding:12px 24px; background:#042C53; color:white; text-decoration:none; border-radius:4px; font-weight:600; }
   .passive-candidate-cta .cta-button:hover { background:#0a3d6f; }
   
+  /* Job search filter */
+  .job-filter-container { margin-bottom:32px; }
+  .job-filter-wrapper { display:flex; flex-direction:column; gap:8px; }
+  .job-filter-label { font-size:14px; font-weight:600; color:#042C53; }
+  #job-filter { width:100%; padding:12px 16px; font-size:14px; border:1px solid #d1d5db; border-radius:6px; font-family:inherit; transition:border-color 0.2s; }
+  #job-filter:focus { outline:none; border-color:#042C53; box-shadow:0 0 0 3px rgba(4, 44, 83, 0.1); }
+  .job-filter-results { font-size:13px; color:#666; margin-top:4px; }
+  .job-filter-results.no-results { color:#d97706; font-weight:500; }
+  
+  .job-card-wrapper[hidden] { display:none; }
+  
   @media (max-width:1024px) {
     .job-card-wrapper { grid-template-columns:1fr; }
     .related-positions { position:static; }
@@ -96,6 +107,15 @@
 <section class="careers-openings">
   <div class="wrap">
     <h2>Open positions</h2>
+
+    <!-- Job Search Filter -->
+    <div class="job-filter-container">
+      <div class="job-filter-wrapper">
+        <label for="job-filter" class="job-filter-label">Search roles</label>
+        <input type="text" id="job-filter" placeholder="e.g., PAM, Okta, architecture, security">
+        <div class="job-filter-results" id="job-filter-results" aria-live="polite" aria-atomic="true"></div>
+      </div>
+    </div>
 
     <!-- PAM -->
     <div class="job-card-wrapper">
@@ -706,6 +726,8 @@
     var btn = document.getElementById('submit-btn');
     var resume = document.getElementById('resume');
     var positionSelect = document.getElementById('position');
+    var jobFilterInput = document.getElementById('job-filter');
+    var jobFilterResults = document.getElementById('job-filter-results');
 
     // Show success message after FormSubmit redirects back with ?submitted=1
     if (new URLSearchParams(window.location.search).get('submitted') === '1') {
@@ -747,6 +769,40 @@
       }
       btn.disabled = true;
       btn.textContent = 'Submitting…';
+    });
+
+    // Job search filter functionality
+    jobFilterInput.addEventListener('input', function () {
+      var query = this.value.trim().toLowerCase();
+      var allWrappers = document.querySelectorAll('.job-card-wrapper');
+      var visibleCount = 0;
+
+      allWrappers.forEach(function (wrapper) {
+        var card = wrapper.querySelector('.job-card');
+        if (!card) return;
+
+        var cardText = card.textContent.toLowerCase();
+        var matches = query === '' || cardText.indexOf(query) !== -1;
+
+        if (matches) {
+          wrapper.removeAttribute('hidden');
+          visibleCount++;
+        } else {
+          wrapper.setAttribute('hidden', '');
+        }
+      });
+
+      // Update results counter
+      if (query === '') {
+        jobFilterResults.textContent = '';
+        jobFilterResults.classList.remove('no-results');
+      } else if (visibleCount === 0) {
+        jobFilterResults.textContent = 'No roles match your search. Try searching for "Okta", "architecture", "security", or a role name.';
+        jobFilterResults.classList.add('no-results');
+      } else {
+        jobFilterResults.textContent = 'Showing ' + visibleCount + ' role' + (visibleCount !== 1 ? 's' : '');
+        jobFilterResults.classList.remove('no-results');
+      }
     });
   })();
 </script>
