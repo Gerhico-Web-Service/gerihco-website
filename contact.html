@@ -37,22 +37,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-  .contact-brand {
-    margin-bottom: 24px;
-    padding: 20px;
-    border: 1px solid #e5e7eb;
-    border-radius: 14px;
-    background: #ffffff;
+  .contact-page-logo {
+    margin: 18px 0 0;
     display: flex;
     justify-content: center;
-    align-items: center;
   }
-  .contact-brand .logo-link {
+  .contact-page-logo .logo-link {
     color: #042C53;
     display: inline-flex;
   }
-  .contact-brand svg {
-    width: min(100%, 240px);
+  .contact-page-logo svg {
+    width: min(100%, 320px);
     height: auto;
   }
 </style>
@@ -79,14 +74,14 @@
   <div class="wrap">
     <h1>Contact Gerihco</h1>
     <p>Ready to talk through a complex problem?</p>
+    <div class="contact-page-logo">
+      <a class="logo-link" href="index.html" aria-label="Gerihco — home"><svg viewBox="40 9 560 203" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M70 120 Q140 29 200 120 Q140 211 70 120Z" fill="currentColor"></path><text x="235" y="138" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="600" fill="currentColor">GERIHCO</text></svg></a>
+    </div>
   </div>
 </section>
 <section class="contact-main">
   <div class="wrap contact-layout">
     <form class="contact-form" aria-label="Contact form">
-      <div class="contact-brand">
-        <a class="logo-link" href="index.html" aria-label="Gerihco — home"><svg viewBox="40 9 560 203" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><path d="M70 120 Q140 29 200 120 Q140 211 70 120Z" fill="currentColor"></path><text x="235" y="138" font-family="Inter, Arial, sans-serif" font-size="72" font-weight="600" fill="currentColor">GERIHCO</text></svg></a>
-      </div>
       <div class="field">
         <label for="name">Name</label>
         <input type="text" id="name" name="name" autocomplete="name" required>
