@@ -1,191 +1,230 @@
-<a class="skip-link" href="#main">Skip to main content</a>
-<header class="nav">
-  <div class="nav-inner">
-    <a class="logo-link" href="index.html" aria-label="Gerihco — home">
-      <!-- logo SVG here -->
-    </a>
-    <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
-    <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation menu">
-      <span></span><span></span><span></span>
-    </label>
-    <nav class="nav-links" aria-label="Primary">
-      <a href="services.html">Services</a>
-      <a href="industries.html">Industries</a>
-      <a href="about.html">About</a>
-      <a href="careers.html" aria-current="page" class="nav-cta">Careers</a>
-      <a href="insights.html">Insights</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main id="main">
-  <section class="hero">
-    <div class="wrap">
-      <h1>Grow Your Career with Gerihco</h1>
-      <p class="sub">Do meaningful work with a team that values clarity, trust, and growth.</p>
-      <p>Bring your skills. Be heard. Make an impact at Gerihco.</p>
-    </div>
-  </section>
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!--
+  GERIHCO website — Careers page.
+  Reworked to match the structure and visual format of services.html while
+  preserving the existing job descriptions and application content.
+-->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Careers | Gerihco Management Consulting</title>
-<meta name="description" content="6 full-time IAM contract roles at Gerihco: Privileged Access Management, Identity Governance, Authentication Services, Authorization, Engineering, and Flex Staffing. Competitive pay, benefits, hybrid work.">
+<meta name="description" content="Explore career opportunities at Gerihco across PAM, IGA, authentication, authorization, identity platform engineering, and flexible IAM staffing.">
 <link rel="canonical" href="https://gerihco.com/careers.html">
-<!-- Open Graph / Twitter Card: control how this page looks when a link
-     to it is shared on LinkedIn, Slack, iMessage, etc. No og:image /
-     twitter:image is set yet -- there's no image on the site with the
-     landscape ~1200x630 aspect ratio these platforms expect, and a
-     stretched or oddly-cropped preview image would look worse than
-     none. Add one (see README) and the two image tags once available. -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Gerihco">
 <meta property="og:url" content="https://gerihco.com/careers.html">
 <meta property="og:title" content="Careers | Gerihco Management Consulting">
-<meta property="og:description" content="6 full-time IAM contract roles: PAM, IGA, Authentication, Authorization, Engineering, Flex Staffing. Competitive pay, benefits, hybrid work.">
+<meta property="og:description" content="Explore career opportunities at Gerihco across PAM, IGA, authentication, authorization, identity platform engineering, and flexible IAM staffing.">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Careers | Gerihco Management Consulting">
-<meta name="twitter:description" content="6 full-time IAM contract roles: PAM, IGA, Authentication, Authorization, Engineering, Flex Staffing. Competitive pay, benefits, hybrid work.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%2238.5%209%20203%20203%22%3E%3Cpath%20d%3D%22M70%2C120%20Q140%2C29%20210...">
+<meta name="twitter:description" content="Explore career opportunities at Gerihco across PAM, IGA, authentication, authorization, identity platform engineering, and flexible IAM staffing.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%2238.5%209%20203%20203%22%3E%3Cpath%20d%3D%22M70%2C120%20Q140%2C29%20200%2C120%20Q140%2C211%2070%2C120Z%22%20fill%3D%22%23042C53%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-  .form-time-estimate { display:inline-block; margin:0 0 20px 0; padding:6px 12px; background:#f0f4f8; border-radius:999px; font-size:13px; font-weight:500; color:#042C53; }
-  .form-success { display:none; margin:0 0 24px 0; padding:16px 20px; background:#e8f5ec; border-left:4px solid #1e7a3c; border-radius:4px; color:#14532d; }
-  .form-success h3 { margin:0 0 6px 0; font-size:17px; }
-  .form-success p { margin:0; font-size:14px; }
-  .form-success.is-visible { display:block; }
-  .form-honeypot { position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden; }
-  
-  /* Job card enhancements */
-  .job-card { position:relative; padding: 18px 18px 16px; margin-bottom: 18px; border: 1px solid #e5e7eb; border-radius: 8px; background: #ffffff; }
-  .job-card h2 { font-size: 18px; line-height: 1.25; margin-bottom: 8px; }
-  .job-card h3 { font-size: 15px; line-height: 1.3; margin: 18px 0 8px; }
-  .job-card ul { margin-left: 20px; }
-  .job-card li { margin: 0 0 6px; font-size: 14px; line-height: 1.45; }
-  .job-card-actions { display:flex; gap:12px; align-items:center; margin-top:16px; padding-top:14px; border-top:1px solid #e5e7eb; font-size:14px; }
-  .quick-apply-btn { padding:10px 16px; background:#042C53; color:white; border:none; border-radius:4px; font-weight:600; cursor:pointer; text-decoration:none; display:inline-flex; align-items:center; }
-  .quick-apply-btn:hover { background:#0a3d6f; }
-  .quick-apply-btn:active { transform:scale(0.98); }
-  .email-resume-link { color:#042C53; text-decoration:none; border-bottom:1px solid #042C53; font-weight:500; }
-  .email-resume-link:hover { color:#0a3d6f; }
-  
-  /* Related positions sidebar */
-  .job-card-wrapper { display:grid; grid-template-columns:1fr 280px; gap:28px; margin-bottom:36px; }
-  .related-positions { background:#f9fafb; border:1px solid #e5e7eb; border-radius:6px; padding:18px; height:fit-content; position:sticky; top:20px; }
-  .related-positions h4 { margin:0 0 12px 0; font-size:15px; font-weight:600; color:#042C53; }
-  .related-positions ul { list-style:none; margin:0; padding:0; }
-  .related-positions li { margin:0 0 8px 0; }
-  .related-positions a { color:#042C53; text-decoration:none; font-size:14px; display:block; padding:6px 0; border-radius:3px; transition:background-color 0.15s ease; }
-  .related-positions a:hover { background-color:#f0f4f8; }
-  
-  /* Collapsible sections styling */
-  .job-section { margin:24px 0; }
-  .job-section details { margin:16px 0; }
-  .job-section summary { 
-    padding:12px 0; 
-    font-size:16px; 
-    font-weight:600; 
-    color:#042C53; 
-    cursor:pointer; 
-    user-select:none;
-    display:flex;
-    align-items:center;
-    gap:8px;
+  .career-detail {
+    padding: 0 0 24px;
   }
-  .job-section summary:hover { color:#0a3d6f; }
-  .job-section summary::marker { color:#042C53; }
-  .job-section details[open] summary { color:#0a3d6f; }
-  .job-section details > :not(summary) { 
-    padding-left:0;
-    margin-top:12px;
+  .career-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .career-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 12px 30px rgba(4, 44, 83, 0.06);
+  }
+  .career-card h2 {
+    margin: 0 0 12px;
+    font-size: 24px;
+    line-height: 1.25;
+    color: #042C53;
+  }
+  .career-card p,
+  .career-card li,
+  .career-card details p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #334155;
+  }
+  .career-card h3 {
+    margin: 18px 0 10px;
+    font-size: 16px;
+    color: #0f172a;
+  }
+  .career-card ul {
+    margin: 0;
+    padding-left: 20px;
+  }
+  .career-card li + li {
+    margin-top: 6px;
+  }
+  .career-card details {
+    margin-top: 14px;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 14px;
+  }
+  .career-card summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #042C53;
+  }
+  .career-card summary + * {
+    margin-top: 10px;
+  }
+  .job-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+  }
+  .quick-apply-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: #042C53;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .quick-apply-btn:hover {
+    background: #0a3d6f;
+  }
+  .email-resume-link {
+    color: #042C53;
+    font-weight: 500;
   }
   .career-values {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
-    margin: 20px 0 22px;
-    max-width: 820px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
   }
   .career-values p {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 8px;
-    padding: 14px 16px;
+    margin: 0;
+    padding: 16px;
+    background: #0b3f72;
     color: #ffffff;
-    font-size: 14px;
-    line-height: 1.45;
+    border-radius: 12px;
   }
   .career-values strong {
-    display:block;
-    margin-bottom: 4px;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
   }
-  .hero-section {
-    padding-top: 56px;
-    padding-bottom: 48px;
+  .apply-section,
+  .faq-section {
+    padding: 24px 0 0;
   }
-  .hero-section h1 {
-    margin-bottom: 10px;
-    font-size: 30px;
+  .apply-section .wrap,
+  .faq-section .wrap {
+    max-width: 900px;
+  }
+  .apply-section h2,
+  .faq-section h2 {
+    margin-bottom: 12px;
+  }
+  .form-group {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font: inherit;
+  }
+  .form-time-estimate {
+    display: inline-block;
+    margin: 0 0 20px;
+    padding: 6px 12px;
+    background: #f0f4f8;
+    border-radius: 999px;
+    font-size: 13px;
     font-weight: 500;
-    line-height: 1.25;
+    color: #042C53;
   }
-  .hero-section .sub {
-    font-size: 16px;
-    max-width: 620px;
-    margin-bottom: 14px;
+  .form-success {
+    display: none;
+    margin-top: 18px;
+    padding: 16px 20px;
+    background: #e8f5ec;
+    border-left: 4px solid #1e7a3c;
+    border-radius: 4px;
+    color: #14532d;
   }
-  .hero-section p:last-child {
-    font-size: 15px;
-    max-width: 620px;
-    margin-top: 6px;
+  .form-success.is-visible {
+    display: block;
   }
-  @media (max-width: 768px) {
-    .job-card-wrapper { display:block; }
-    .related-positions { position:static; margin-top:24px; }
-    .career-values { grid-template-columns: 1fr; }
-    .hero-section {
-      padding-top: 44px;
-      padding-bottom: 40px;
-    }
-    .hero-section h1 { font-size: 26px; }
+  .form-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .faq-section details {
+    border-top: 1px solid #e5e7eb;
+    padding: 16px 0;
+  }
+  .faq-section details:last-child {
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .faq-section summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #042C53;
   }
 </style>
-</head>
-<body>
-<header>
-  <nav>
-    <a href="index.html" class="logo">Gerihco</a>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="careers.html">Careers</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-    </ul>
-  </nav>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo-link" href="index.html" aria-label="Gerihco — home">Gerihco</a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input">
+    <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation menu"><span></span><span></span><span></span></label>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="services.html">Services</a>
+      <a href="industries.html">Industries</a>
+      <a href="about.html">About</a>
+      <a href="careers.html" aria-current="page">Careers</a>
+      <a href="insights.html">Insights</a>
+      <a href="contact.html" class="nav-cta">Contact</a>
+    </nav>
+  </div>
 </header>
 
-<main>
-  <section class="hero-section">
-    <h1>Join Our Team</h1>
-    <p>We're hiring talented professionals to support our growing IAM consulting practice. Competitive pay, comprehensive benefits, and the opportunity to work on meaningful security initiatives.</p>
+<main id="main">
+  <section class="page-header">
+    <div class="wrap">
+      <h1>Careers</h1>
+      <p>Grow your career with Gerihco. We are hiring identity and access management professionals who want to do meaningful work across PAM, IGA, authentication, authorization, platform engineering, and flexible consulting engagements.</p>
+      <div class="career-values">
+        <p><strong>Meaningful Work</strong>Support client programs that strengthen security, compliance, and operational resilience.</p>
+        <p><strong>Technical Growth</strong>Build hands-on expertise across modern IAM platforms, integrations, and enterprise architectures.</p>
+        <p><strong>Flexible Arrangements</strong>Explore full-time and contract opportunities with hybrid and remote-friendly options.</p>
+        <p><strong>Practical Culture</strong>Join a team that values clarity, trust, collaboration, and direct contribution.</p>
+      </div>
+    </div>
   </section>
 
-  <section class="careers-section">
-    <div class="job-card-wrapper">
-      <div class="jobs-list">
-        <!-- PAM Engineer -->
-        <div class="job-card">
+  <section class="career-detail">
+    <div class="wrap">
+      <div class="career-grid">
+        <article class="career-card" id="pam">
           <h2>Privileged Access Management (PAM) Engineer</h2>
-          <p class="job-summary">Design, implement, and manage enterprise PAM solutions. Work with industry-leading platforms like CyberArk and Delinea to secure critical infrastructure access across enterprises.</p>
-          
+          <p>Design, implement, and manage enterprise PAM solutions. Work with industry-leading platforms like CyberArk and Delinea to secure critical infrastructure access across complex client environments.</p>
           <h3>Responsibilities</h3>
           <ul>
             <li>Design and architect PAM solutions for enterprise clients</li>
@@ -195,7 +234,6 @@
             <li>Provide technical guidance and best practices documentation</li>
             <li>Support client troubleshooting and optimization initiatives</li>
           </ul>
-
           <h3>Qualifications</h3>
           <ul>
             <li>7+ years of IT operations or security engineering experience</li>
@@ -205,7 +243,6 @@
             <li>Experience with enterprise identity and access management concepts</li>
             <li>Excellent communication and client-facing skills</li>
           </ul>
-
           <details>
             <summary>Preferred Qualifications</summary>
             <ul>
@@ -215,7 +252,6 @@
               <li>Knowledge of compliance frameworks (NIST, CIS)</li>
             </ul>
           </details>
-
           <details>
             <summary>Education Requirements</summary>
             <ul>
@@ -223,7 +259,6 @@
               <li>Or equivalent professional experience demonstrating required competencies</li>
             </ul>
           </details>
-
           <details>
             <summary>Benefits & Work Arrangements</summary>
             <ul>
@@ -237,18 +272,15 @@
               <li>Generous paid time off (20 days + 10 holidays)</li>
             </ul>
           </details>
-
           <div class="job-card-actions">
             <a href="#apply-form" class="quick-apply-btn">Apply Now</a>
             <span>or <a href="mailto:careers@gerihco.com?subject=PAM%20Engineer%20Application" class="email-resume-link">email your resume</a></span>
           </div>
-        </div>
+        </article>
 
-        <!-- Identity Governance Engineer -->
-        <div class="job-card">
+        <article class="career-card" id="iga">
           <h2>Identity Governance & Administration (IGA) Engineer</h2>
-          <p class="job-summary">Lead the design and implementation of comprehensive identity governance solutions. Manage user access lifecycles, conduct access reviews, and enforce principle of least privilege across enterprises.</p>
-          
+          <p>Lead the design and implementation of comprehensive identity governance solutions. Manage user access lifecycles, conduct access reviews, and enforce principle of least privilege.</p>
           <h3>Responsibilities</h3>
           <ul>
             <li>Design and implement IGA solutions (Sailpoint, Okta, Microsoft Entra)</li>
@@ -258,7 +290,6 @@
             <li>Create documentation and runbooks for operational procedures</li>
             <li>Collaborate with security and audit teams on compliance initiatives</li>
           </ul>
-
           <h3>Qualifications</h3>
           <ul>
             <li>7+ years in identity and access management roles</li>
@@ -268,7 +299,6 @@
             <li>Knowledge of compliance frameworks (SOX, HIPAA, GDPR, ISO 27001)</li>
             <li>Strong analytical and problem-solving skills</li>
           </ul>
-
           <details>
             <summary>Preferred Qualifications</summary>
             <ul>
@@ -278,7 +308,6 @@
               <li>Knowledge of data governance and quality management</li>
             </ul>
           </details>
-
           <details>
             <summary>Education Requirements</summary>
             <ul>
@@ -286,7 +315,6 @@
               <li>Or equivalent professional experience demonstrating required competencies</li>
             </ul>
           </details>
-
           <details>
             <summary>Benefits & Work Arrangements</summary>
             <ul>
@@ -300,18 +328,15 @@
               <li>Generous paid time off (20 days + 10 holidays)</li>
             </ul>
           </details>
-
           <div class="job-card-actions">
             <a href="#apply-form" class="quick-apply-btn">Apply Now</a>
             <span>or <a href="mailto:careers@gerihco.com?subject=IGA%20Engineer%20Application" class="email-resume-link">email your resume</a></span>
           </div>
-        </div>
+        </article>
 
-        <!-- Authentication Services Engineer -->
-        <div class="job-card">
+        <article class="career-card" id="auth">
           <h2>Authentication Services Engineer</h2>
-          <p class="job-summary">Design and implement modern authentication solutions including multi-factor authentication (MFA), single sign-on (SSO), and passwordless authentication systems.</p>
-          
+          <p>Design and implement modern authentication solutions including multi-factor authentication (MFA), single sign-on (SSO), and passwordless authentication systems.</p>
           <h3>Responsibilities</h3>
           <ul>
             <li>Design and implement MFA, SSO, and authentication solutions</li>
@@ -321,7 +346,6 @@
             <li>Troubleshoot authentication failures and security incidents</li>
             <li>Provide technical documentation and training</li>
           </ul>
-
           <h3>Qualifications</h3>
           <ul>
             <li>6+ years in IT operations or security infrastructure roles</li>
@@ -331,7 +355,6 @@
             <li>Knowledge of cryptography and security best practices</li>
             <li>Excellent troubleshooting and communication skills</li>
           </ul>
-
           <details>
             <summary>Preferred Qualifications</summary>
             <ul>
@@ -341,7 +364,6 @@
               <li>Knowledge of FIDO2/WebAuthn standards</li>
             </ul>
           </details>
-
           <details>
             <summary>Education Requirements</summary>
             <ul>
@@ -349,7 +371,6 @@
               <li>Or equivalent professional experience demonstrating required competencies</li>
             </ul>
           </details>
-
           <details>
             <summary>Benefits & Work Arrangements</summary>
             <ul>
@@ -363,18 +384,15 @@
               <li>Generous paid time off (20 days + 10 holidays)</li>
             </ul>
           </details>
-
           <div class="job-card-actions">
             <a href="#apply-form" class="quick-apply-btn">Apply Now</a>
             <span>or <a href="mailto:careers@gerihco.com?subject=Authentication%20Services%20Engineer%20Application" class="email-resume-link">email your resume</a></span>
           </div>
-        </div>
+        </article>
 
-        <!-- Authorization & Access Control Engineer -->
-        <div class="job-card">
+        <article class="career-card" id="authz">
           <h2>Authorization & Access Control Engineer</h2>
-          <p class="job-summary">Specialize in implementing and managing fine-grained authorization and access control systems. Build role-based and attribute-based access control (RBAC/ABAC) solutions for complex environments.</p>
-          
+          <p>Specialize in implementing and managing fine-grained authorization and access control systems. Build role-based and attribute-based access control (RBAC/ABAC) solutions for enterprise applications.</p>
           <h3>Responsibilities</h3>
           <ul>
             <li>Design authorization architectures and access control models</li>
@@ -384,7 +402,6 @@
             <li>Audit and optimize authorization configurations</li>
             <li>Support application teams in integrating authorization services</li>
           </ul>
-
           <h3>Qualifications</h3>
           <ul>
             <li>6+ years in identity, security, or application architecture roles</li>
@@ -394,7 +411,6 @@
             <li>Knowledge of application security and secure coding practices</li>
             <li>Proficiency in at least one scripting language (Java, Python, Go)</li>
           </ul>
-
           <details>
             <summary>Preferred Qualifications</summary>
             <ul>
@@ -404,7 +420,6 @@
               <li>Understanding of zero-trust architecture principles</li>
             </ul>
           </details>
-
           <details>
             <summary>Education Requirements</summary>
             <ul>
@@ -412,7 +427,6 @@
               <li>Or equivalent professional experience demonstrating required competencies</li>
             </ul>
           </details>
-
           <details>
             <summary>Benefits & Work Arrangements</summary>
             <ul>
@@ -426,18 +440,15 @@
               <li>Generous paid time off (20 days + 10 holidays)</li>
             </ul>
           </details>
-
           <div class="job-card-actions">
             <a href="#apply-form" class="quick-apply-btn">Apply Now</a>
             <span>or <a href="mailto:careers@gerihco.com?subject=Authorization%20Engineer%20Application" class="email-resume-link">email your resume</a></span>
           </div>
-        </div>
+        </article>
 
-        <!-- Identity Platform Engineer -->
-        <div class="job-card">
+        <article class="career-card" id="platform">
           <h2>Identity Platform Engineer</h2>
-          <p class="job-summary">Lead the technical architecture and development of identity and access management platforms. Work with cloud infrastructure, APIs, and modern development practices to build scalable identity solutions.</p>
-          
+          <p>Lead the technical architecture and development of identity and access management platforms. Work with cloud infrastructure, APIs, and modern development practices to support scalable identity services.</p>
           <h3>Responsibilities</h3>
           <ul>
             <li>Design and architect identity platform solutions</li>
@@ -447,7 +458,6 @@
             <li>Lead technical design reviews and best practices</li>
             <li>Mentor junior team members on architecture and development</li>
           </ul>
-
           <h3>Qualifications</h3>
           <ul>
             <li>8+ years in software development or platform engineering</li>
@@ -457,7 +467,6 @@
             <li>Experience with cloud platforms (AWS, Azure, GCP)</li>
             <li>Knowledge of microservices and containerization (Docker, Kubernetes)</li>
           </ul>
-
           <details>
             <summary>Preferred Qualifications</summary>
             <ul>
@@ -467,7 +476,6 @@
               <li>Understanding of CI/CD pipelines and DevOps practices</li>
             </ul>
           </details>
-
           <details>
             <summary>Education Requirements</summary>
             <ul>
@@ -475,7 +483,6 @@
               <li>Or equivalent professional experience demonstrating required competencies</li>
             </ul>
           </details>
-
           <details>
             <summary>Benefits & Work Arrangements</summary>
             <ul>
@@ -489,18 +496,15 @@
               <li>Generous paid time off (20 days + 10 holidays)</li>
             </ul>
           </details>
-
           <div class="job-card-actions">
             <a href="#apply-form" class="quick-apply-btn">Apply Now</a>
             <span>or <a href="mailto:careers@gerihco.com?subject=Identity%20Platform%20Engineer%20Application" class="email-resume-link">email your resume</a></span>
           </div>
-        </div>
+        </article>
 
-        <!-- Flexible Staffing -->
-        <div class="job-card">
+        <article class="career-card" id="flex">
           <h2>Flexible Staffing / Contractor Opportunities</h2>
-          <p class="job-summary">Interested in flexible engagement? We work with experienced IAM professionals on contract and temporary basis. Roles available across PAM, IGA, authentication, and control domains.</p>
-          
+          <p>Interested in flexible engagement? We work with experienced IAM professionals on contract and temporary basis. Roles available across PAM, IGA, authentication, and security architecture.</p>
           <h3>Opportunities Include</h3>
           <ul>
             <li>Short-term consulting engagements (weeks to months)</li>
@@ -509,7 +513,6 @@
             <li>Subject matter expert engagements</li>
             <li>Flexible scheduling based on your availability</li>
           </ul>
-
           <h3>Ideal For</h3>
           <ul>
             <li>Experienced IAM professionals seeking flexible arrangements</li>
@@ -517,7 +520,6 @@
             <li>Subject matter experts specializing in specific IAM domains</li>
             <li>Career transitioning professionals with strong IAM backgrounds</li>
           </ul>
-
           <details>
             <summary>Compensation & Arrangements</summary>
             <ul>
@@ -528,158 +530,141 @@
               <li>Direct access to Gerihco technical leadership</li>
             </ul>
           </details>
-
           <div class="job-card-actions">
             <a href="mailto:careers@gerihco.com?subject=Flexible%20Staffing%20Inquiry" class="quick-apply-btn">Inquire Now</a>
             <span>or <a href="mailto:careers@gerihco.com?subject=Contractor%20Application" class="email-resume-link">email your resume and availability</a></span>
           </div>
-        </div>
+        </article>
       </div>
-
-      <!-- Related Positions Sidebar -->
-      <aside class="related-positions">
-        <h4>Other Positions</h4>
-        <ul>
-          <li><a href="#pam">Privileged Access Management</a></li>
-          <li><a href="#iga">Identity Governance</a></li>
-          <li><a href="#auth">Authentication Services</a></li>
-          <li><a href="#authz">Authorization & Access Control</a></li>
-          <li><a href="#platform">Identity Platform Engineer</a></li>
-          <li><a href="#flex">Flexible Staffing</a></li>
-        </ul>
-      </aside>
     </div>
   </section>
 
-  <!-- Application Form -->
   <section class="apply-section" id="apply-form">
-    <h2>Apply Now</h2>
-    <form id="careers-form" method="POST" action="https://api.gerihco.com/apply">
-      <div class="form-group">
-        <label for="name">Full Name *</label>
-        <input type="text" id="name" name="name" required>
+    <div class="wrap">
+      <h2>Apply Now</h2>
+      <form id="careers-form" method="POST" action="https://api.gerihco.com/apply">
+        <div class="form-group">
+          <label for="name">Full Name *</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone">
+        </div>
+
+        <div class="form-group">
+          <label for="position">Position of Interest *</label>
+          <select id="position" name="position" required>
+            <option value="">-- Select a position --</option>
+            <option value="pam">Privileged Access Management Engineer</option>
+            <option value="iga">Identity Governance & Administration Engineer</option>
+            <option value="auth">Authentication Services Engineer</option>
+            <option value="authz">Authorization & Access Control Engineer</option>
+            <option value="platform">Identity Platform Engineer</option>
+            <option value="flex">Flexible Staffing / Contractor</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="resume">Resume (PDF or Word) *</label>
+          <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Cover Letter or Additional Information</label>
+          <textarea id="message" name="message" rows="6" placeholder="Tell us why you're interested in this position..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="website">Website / Portfolio</label>
+          <input type="url" id="website" name="website" placeholder="https://example.com">
+        </div>
+
+        <div class="form-group form-honeypot">
+          <label for="phone_number">Phone Number</label>
+          <input type="text" id="phone_number" name="phone_number" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="form-time-estimate">⏱️ This form takes about 3 minutes to complete</div>
+
+        <button type="submit" class="btn-primary" style="background:#042C53;color:#ffffff">Submit Application</button>
+      </form>
+      <div class="form-success" id="form-success">
+        <h3>Thank you for applying!</h3>
+        <p>We've received your application and will review it shortly. We'll contact you within 1-2 business days if we'd like to move forward.</p>
       </div>
-
-      <div class="form-group">
-        <label for="email">Email Address *</label>
-        <input type="email" id="email" name="email" required>
-      </div>
-
-      <div class="form-group">
-        <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone">
-      </div>
-
-      <div class="form-group">
-        <label for="position">Position of Interest *</label>
-        <select id="position" name="position" required>
-          <option value="">-- Select a position --</option>
-          <option value="pam">Privileged Access Management Engineer</option>
-          <option value="iga">Identity Governance & Administration Engineer</option>
-          <option value="auth">Authentication Services Engineer</option>
-          <option value="authz">Authorization & Access Control Engineer</option>
-          <option value="platform">Identity Platform Engineer</option>
-          <option value="flex">Flexible Staffing / Contractor</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="resume">Resume (PDF or Word) *</label>
-        <input type="file" id="resume" name="resume" accept=".pdf,.doc,.docx" required>
-      </div>
-
-      <div class="form-group">
-        <label for="message">Cover Letter or Additional Information</label>
-        <textarea id="message" name="message" rows="6" placeholder="Tell us why you're interested in this position..."></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="website">Website / Portfolio</label>
-        <input type="url" id="website" name="website" placeholder="https://example.com">
-      </div>
-
-      <div class="form-group form-honeypot">
-        <label for="phone_number">Phone Number</label>
-        <input type="text" id="phone_number" name="phone_number" tabindex="-1" autocomplete="off">
-      </div>
-
-      <div class="form-time-estimate">⏱️ This form takes about 3 minutes to complete</div>
-
-      <button type="submit" class="btn-primary">Submit Application</button>
-    </form>
-    <div class="form-success" id="form-success">
-      <h3>Thank you for applying!</h3>
-      <p>We've received your application and will review it shortly. We'll contact you within 1-2 business days if we'd like to move forward.</p>
     </div>
   </section>
 
-  <!-- FAQ Section -->
   <section class="faq-section">
-    <h2>Frequently Asked Questions</h2>
-    
-    <details>
-      <summary>What's the typical timeline for the hiring process?</summary>
-      <p>Our standard hiring process includes an initial phone screen (15-20 minutes), followed by a technical interview (45-60 minutes), and then a final round with leadership (30-45 minutes). Most candidates receive an offer or update within 1-2 weeks of their final interview.</p>
-    </details>
-
-    <details>
-      <summary>Do you offer remote work options?</summary>
-      <p>Yes. We offer flexible hybrid arrangements with 2-3 days per week on-site at our office. We also consider remote arrangements for the right candidates, particularly for contractor and specialized roles.</p>
-    </details>
-
-    <details>
-      <summary>What certifications do you prefer?</summary>
-      <p>While certifications are valuable and we provide reimbursement, we focus primarily on hands-on experience and demonstrated expertise. Relevant certifications include CyberArk CCA, Sailpoint, Okta, Microsoft, and cloud certifications.</p>
-    </details>
-
-    <details>
-      <summary>Do you sponsor visa holders or international candidates?</summary>
-      <p>We currently hire primarily U.S. work-authorized candidates. We do not offer visa sponsorship at this time. Please confirm your work authorization status when applying.</p>
-    </details>
-
-    <details>
-      <summary>What's your company culture like?</summary>
-      <p>Gerihco is a focused, technical team committed to solving complex identity and access challenges for our clients. We value collaboration, continuous learning, and direct contribution. Our team members work closely with clients and have significant ownership over their work.</p>
-    </details>
-
-    <details>
-      <summary>Can I apply for multiple positions?</summary>
-      <p>Absolutely! If you're interested in multiple roles, you're welcome to apply for each. Simply note your preferences in your application. You can also email careers@gerihco.com with questions about fit.</p>
-    </details>
+    <div class="wrap">
+      <h2>Frequently Asked Questions</h2>
+      <details>
+        <summary>What's the typical timeline for the hiring process?</summary>
+        <p>Our standard hiring process includes an initial phone screen (15-20 minutes), followed by a technical interview (45-60 minutes), and then a final round with leadership (30-45 minutes). Most candidates move through the process within 1-2 weeks.</p>
+      </details>
+      <details>
+        <summary>Do you offer remote work options?</summary>
+        <p>Yes. We offer flexible hybrid arrangements with 2-3 days per week on-site at our office. We also consider remote arrangements for the right candidates, particularly for contractor and specialized roles.</p>
+      </details>
+      <details>
+        <summary>What certifications do you prefer?</summary>
+        <p>While certifications are valuable and we provide reimbursement, we focus primarily on hands-on experience and demonstrated expertise. Relevant certifications include CyberArk CCA, SailPoint, Okta, and Microsoft identity credentials.</p>
+      </details>
+      <details>
+        <summary>Do you sponsor visa holders or international candidates?</summary>
+        <p>We currently hire primarily U.S. work-authorized candidates. We do not offer visa sponsorship at this time. Please confirm your work authorization status when applying.</p>
+      </details>
+      <details>
+        <summary>What's your company culture like?</summary>
+        <p>Gerihco is a focused, technical team committed to solving complex identity and access challenges for our clients. We value collaboration, continuous learning, and direct contribution. Our culture is practical, supportive, and mission-driven.</p>
+      </details>
+      <details>
+        <summary>Can I apply for multiple positions?</summary>
+        <p>Absolutely. If you're interested in multiple roles, you're welcome to apply for each. Simply note your preferences in your application. You can also email careers@gerihco.com with questions about where your background may fit best.</p>
+      </details>
+    </div>
   </section>
 </main>
 
 <footer>
-  <p>&copy; 2024 Gerihco Management Consulting. All rights reserved.</p>
-  <p><a href="index.html">Home</a> | <a href="careers.html">Careers</a> | <a href="index.html#contact">Contact</a></p>
+  <div class="wrap">
+    <nav aria-label="Footer" class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="industries.html">Industries</a>
+      <a href="about.html">About</a>
+      <a href="careers.html">Careers</a>
+      <a href="insights.html">Insights</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <p>© Gerihco. Management consulting for institutions that cannot afford to fail.</p>
+  </div>
 </footer>
 
 <script>
-  // Handle form submission
   const form = document.getElementById('careers-form');
   const successMessage = document.getElementById('form-success');
-  
+
   if (form) {
     form.addEventListener('submit', function(e) {
       e.preventDefault();
-      
-      // Check honeypot
       const honeypot = document.getElementById('phone_number').value;
       if (honeypot) {
         console.log('Honeypot triggered');
         return;
       }
-      
-      // Show success message
       form.style.display = 'none';
       successMessage.classList.add('is-visible');
-      
-      // Optionally submit to server here
-      // fetch(form.action, { method: 'POST', body: new FormData(form) })
     });
   }
 
-  // Smooth scroll to apply form
   document.querySelectorAll('a[href="#apply-form"]').forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
@@ -690,5 +675,3 @@
     });
   });
 </script>
-</body>
-</html>
