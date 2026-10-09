@@ -75,6 +75,71 @@
   .career-card summary + * {
     margin-top: 10px;
   }
+  .career-search {
+    display: grid;
+    gap: 8px;
+    margin: 0 0 24px;
+    max-width: 560px;
+  }
+  .career-search label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #33363a;
+  }
+  .career-search input {
+    width: 100%;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font: inherit;
+    background: #ffffff;
+    color: inherit;
+  }
+  .career-search input::placeholder {
+    color: #64748b;
+  }
+  .search-hint {
+    font-size: 13px;
+    color: #64748b;
+    margin-top: -2px;
+  }
+  .search-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+  .clear-search {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    color: #042C53;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .clear-search:hover {
+    background: #f8fafc;
+  }
+  .no-results {
+    display: none;
+    margin-top: 16px;
+    padding: 16px 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #f8fafc;
+    color: #334155;
+  }
+  .no-results.is-visible {
+    display: block;
+  }
+  .career-card[hidden] {
+    display: none !important;
+  }
   .job-card-actions {
     display: flex;
     flex-wrap: wrap;
@@ -221,7 +286,15 @@
 
   <section class="career-detail">
     <div class="wrap">
-      <div class="career-grid">
+      <div class="career-search">
+        <label for="career-search">Search jobs</label>
+        <input id="career-search" type="search" placeholder="Search by title, skill, or keyword" aria-label="Search open positions">
+        <div class="search-controls">
+          <button type="button" class="clear-search" id="clear-career-search">Clear search</button>
+          <div class="search-hint" id="career-search-hint">Try terms like PAM, IGA, Azure, SSO, or contractor.</div>
+        </div>
+      </div>
+      <div class="career-grid" id="career-grid">
         <article class="career-card" id="pam">
           <h2>Privileged Access Management (PAM) Engineer</h2>
           <p>Design, implement, and manage enterprise PAM solutions. Work with industry-leading platforms like CyberArk and Delinea to secure critical infrastructure access across complex client environments.</p>
@@ -536,6 +609,7 @@
           </div>
         </article>
       </div>
+      <div class="no-results" id="career-search-empty">No jobs match that search. Try a different keyword or clear the search.</div>
     </div>
   </section>
 
@@ -651,6 +725,10 @@
 <script>
   const form = document.getElementById('careers-form');
   const successMessage = document.getElementById('form-success');
+  const searchInput = document.getElementById('career-search');
+  const clearSearchButton = document.getElementById('clear-career-search');
+  const cards = Array.from(document.querySelectorAll('.career-card'));
+  const emptyState = document.getElementById('career-search-empty');
 
   if (form) {
     form.addEventListener('submit', function(e) {
@@ -665,6 +743,34 @@
     });
   }
 
+  function filterJobs() {
+    const query = (searchInput?.value || '').trim().toLowerCase();
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const text = card.textContent.toLowerCase();
+      const match = !query || text.includes(query);
+      card.hidden = !match;
+      if (match) visibleCount += 1;
+    });
+
+    if (emptyState) {
+      emptyState.classList.toggle('is-visible', visibleCount === 0);
+    }
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', filterJobs);
+  }
+
+  if (clearSearchButton && searchInput) {
+    clearSearchButton.addEventListener('click', function() {
+      searchInput.value = '';
+      filterJobs();
+      searchInput.focus();
+    });
+  }
+
   document.querySelectorAll('a[href="#apply-form"]').forEach(link => {
     link.addEventListener('click', function(e) {
       e.preventDefault();
@@ -674,4 +780,6 @@
       }
     });
   });
+
+  filterJobs();
 </script>
