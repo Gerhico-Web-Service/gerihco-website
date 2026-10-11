@@ -207,6 +207,94 @@
   text-decoration: underline;
 }
 
+.careers-future-interest {
+  background-color: #f9f9f9;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 3rem 0;
+  margin: 3rem 0;
+}
+
+.careers-future-interest h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #042C53;
+  margin: 0 0 1rem 0;
+}
+
+.careers-future-interest p {
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  max-width: 600px;
+}
+
+.future-interest-form {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  max-width: 500px;
+}
+
+.future-interest-form .field {
+  margin: 0;
+  flex: 1;
+  min-width: 250px;
+}
+
+.future-interest-form label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 0.4rem;
+}
+
+.future-interest-form input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.future-interest-form input:focus {
+  outline: none;
+  border-color: #042C53;
+  box-shadow: 0 0 0 3px rgba(4, 44, 83, 0.1);
+}
+
+.future-interest-form button {
+  background: #042C53;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+
+.future-interest-form button:hover {
+  opacity: 0.9;
+}
+
+.future-interest-form button:focus {
+  outline: 2px solid #042C53;
+  outline-offset: 2px;
+}
+
+.future-interest-status {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 1rem;
+}
+
 @media (max-width: 768px) {
   .careers-openings-header {
     flex-direction: column;
@@ -228,6 +316,23 @@
 
   .job-toggle-btn {
     align-self: flex-start;
+  }
+
+  .careers-future-interest {
+    padding: 2rem 0;
+    margin: 2rem 0;
+  }
+
+  .future-interest-form {
+    flex-direction: column;
+  }
+
+  .future-interest-form .field {
+    min-width: 100%;
+  }
+
+  .future-interest-form button {
+    width: 100%;
   }
 }
 </style>
@@ -684,6 +789,22 @@
     </div>
   </div>
 </section>
+
+<section class="careers-future-interest">
+  <div class="wrap">
+    <h2>No open roles right now?</h2>
+    <p>Check back soon—Gerihco's team is growing. If your background aligns with our work in security, compliance, or identity management, we'd love to hear from you. Share your interest below and we'll keep you in mind for upcoming opportunities.</p>
+    <form class="future-interest-form" aria-label="Interest signup for future opportunities">
+      <div class="field">
+        <label for="future-interest-email">Email address</label>
+        <input type="email" id="future-interest-email" name="email" autocomplete="email" placeholder="your@email.com" required>
+      </div>
+      <button type="submit">Keep me informed</button>
+    </form>
+    <p class="future-interest-status">[Placeholder — this interest form is not yet connected to a submission backend. A static site cannot receive form data directly.]</p>
+  </div>
+</section>
+
 <section class="careers-apply" id="apply">
   <div class="wrap contact-layout">
     <form class="contact-form" aria-label="Job application form">
