@@ -37,6 +37,140 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 
+<style>
+.job-card {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.job-card:not(:first-child) {
+  border-top: 1px solid #e0e0e0;
+}
+
+.job-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.job-card-header:hover {
+  opacity: 0.8;
+}
+
+.job-card-title-section {
+  flex: 1;
+}
+
+.job-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.job-card-summary {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+.job-card-meta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
+.job-toggle-btn {
+  background: none;
+  border: none;
+  color: #042C53;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.job-toggle-btn.expanded {
+  transform: rotate(180deg);
+}
+
+.job-description {
+  display: none;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.job-description.expanded {
+  display: block;
+}
+
+.job-description h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: #042C53;
+}
+
+.job-description h4:first-child {
+  margin-top: 0;
+}
+
+.job-description p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+  color: #333;
+}
+
+.job-description ul {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin: 0 0 1rem 1.5rem;
+  padding: 0;
+  color: #333;
+}
+
+.job-description li {
+  margin-bottom: 0.5rem;
+}
+
+.apply-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #042C53;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.apply-link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .job-card-header {
+    flex-direction: column;
+  }
+
+  .job-toggle-btn {
+    align-self: flex-start;
+  }
+}
+</style>
+
 <a class="skip-link" href="#main">Skip to main content</a>
 <header class="nav">
   <div class="nav-inner">
@@ -65,12 +199,17 @@
   <div class="wrap">
     <h2>Open positions</h2>
     <article class="job-card" id="pam">
-      <h3>Privileged Access Management (PAM) — Contract Role</h3>
-      <div class="job-tags"><span class="job-tag">Contract</span></div>
-      <div class="job-description">
-        <h4>Role Summary</h4>
-        <p>Contract PAM specialists support privileged account onboarding, credential vaulting, secrets management, and session monitoring. They execute operational tasks and project deliverables within the enterprise PAM program.</p>
-        
+      <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="pam-details">
+        <div class="job-card-title-section">
+          <h3>Privileged Access Management (PAM) — Contract Role</h3>
+          <p class="job-card-summary">Contract PAM specialists support privileged account onboarding, credential vaulting, secrets management, and session monitoring. They execute operational tasks and project deliverables within the enterprise PAM program.</p>
+          <div class="job-card-meta">
+            <span class="job-tag">Contract</span>
+          </div>
+        </div>
+        <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+      </div>
+      <div class="job-description" id="pam-details">
         <h4>Contract Responsibilities</h4>
         <ul>
           <li>Onboard privileged accounts, service accounts, and application credentials into the PAM platform.</li>
@@ -92,12 +231,17 @@
     </article>
 
     <article class="job-card" id="iga">
-      <h3>Identity Governance & Administration (IGA) — Contract Role</h3>
-      <div class="job-tags"><span class="job-tag">Contract</span></div>
-      <div class="job-description">
-        <h4>Role Summary</h4>
-        <p>Contract IGA analysts support identity lifecycle operations, application onboarding, and access certification campaigns. They execute high volume governance tasks and integration work.</p>
-        
+      <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="iga-details">
+        <div class="job-card-title-section">
+          <h3>Identity Governance & Administration (IGA) — Contract Role</h3>
+          <p class="job-card-summary">Contract IGA analysts support identity lifecycle operations, application onboarding, and access certification campaigns. They execute high volume governance tasks and integration work.</p>
+          <div class="job-card-meta">
+            <span class="job-tag">Contract</span>
+          </div>
+        </div>
+        <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+      </div>
+      <div class="job-description" id="iga-details">
         <h4>Contract Responsibilities</h4>
         <ul>
           <li>Process joiner/mover/leaver events and provisioning/deprovisioning requests.</li>
@@ -119,12 +263,17 @@
     </article>
 
     <article class="job-card" id="authentication-services">
-      <h3>Authentication Services — Contract Role</h3>
-      <div class="job-tags"><span class="job-tag">Contract</span></div>
-      <div class="job-description">
-        <h4>Role Summary</h4>
-        <p>Contract authentication engineers support MFA, SSO, passwordless, conditional access, and identity provider policy implementation.</p>
-        
+      <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="authentication-details">
+        <div class="job-card-title-section">
+          <h3>Authentication Services — Contract Role</h3>
+          <p class="job-card-summary">Contract authentication engineers support MFA, SSO, passwordless, conditional access, and identity provider policy implementation.</p>
+          <div class="job-card-meta">
+            <span class="job-tag">Contract</span>
+          </div>
+        </div>
+        <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+      </div>
+      <div class="job-description" id="authentication-details">
         <h4>Contract Responsibilities</h4>
         <ul>
           <li>Configure and maintain MFA, SSO, passwordless, and conditional access policies.</li>
@@ -145,12 +294,17 @@
     </article>
 
     <article class="job-card" id="authorization-entitlement-governance">
-      <h3>Authorization & Entitlement Governance — Contract Role</h3>
-      <div class="job-tags"><span class="job-tag">Contract</span></div>
-      <div class="job-description">
-        <h4>Role Summary</h4>
-        <p>Contract authorization analysts support RBAC/ABAC modeling, entitlement cleanup, and policy based access implementation.</p>
-        
+      <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="authorization-details">
+        <div class="job-card-title-section">
+          <h3>Authorization & Entitlement Governance — Contract Role</h3>
+          <p class="job-card-summary">Contract authorization analysts support RBAC/ABAC modeling, entitlement cleanup, and policy based access implementation.</p>
+          <div class="job-card-meta">
+            <span class="job-tag">Contract</span>
+          </div>
+        </div>
+        <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+      </div>
+      <div class="job-description" id="authorization-details">
         <h4>Contract Responsibilities</h4>
         <ul>
           <li>Assist with role mining, entitlement rationalization, and SoD analysis.</li>
@@ -171,12 +325,17 @@
     </article>
 
     <article class="job-card" id="iam-engineering">
-      <h3>IAM Engineering — Contract Role</h3>
-      <div class="job-tags"><span class="job-tag">Contract</span></div>
-      <div class="job-description">
-        <h4>Role Summary</h4>
-        <p>Contract IAM engineers support platform engineering, architecture execution, and AI-driven automation initiatives across IAM systems.</p>
-        
+      <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="iam-eng-details">
+        <div class="job-card-title-section">
+          <h3>IAM Engineering — Contract Role</h3>
+          <p class="job-card-summary">Contract IAM engineers support platform engineering, architecture execution, and AI-driven automation initiatives across IAM systems.</p>
+          <div class="job-card-meta">
+            <span class="job-tag">Contract</span>
+          </div>
+        </div>
+        <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+      </div>
+      <div class="job-description" id="iam-eng-details">
         <h4>Contract Responsibilities</h4>
         <ul>
           <li>Implement IAM platform components, integrations, and standards.</li>
@@ -197,12 +356,17 @@
     </article>
 
     <article class="job-card" id="flex-staffing">
-      <h3>Flex Staffing — Contract Role</h3>
-      <div class="job-tags"><span class="job-tag">Contract</span></div>
-      <div class="job-description">
-        <h4>Role Summary</h4>
-        <p>Flex contractors provide adaptable support across PAM, IGA, AuthN/AuthZ, and IAM Engineering. They absorb peak workloads and fill temporary gaps.</p>
-        
+      <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="flex-details">
+        <div class="job-card-title-section">
+          <h3>Flex Staffing — Contract Role</h3>
+          <p class="job-card-summary">Flex contractors provide adaptable support across PAM, IGA, AuthN/AuthZ, and IAM Engineering. They absorb peak workloads and fill temporary gaps.</p>
+          <div class="job-card-meta">
+            <span class="job-tag">Contract</span>
+          </div>
+        </div>
+        <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+      </div>
+      <div class="job-description" id="flex-details">
         <h4>Contract Responsibilities</h4>
         <ul>
           <li>Support onboarding spikes, certification cycles, or platform upgrades.</li>
@@ -221,9 +385,17 @@
     </article>
 
     <article class="job-card" id="cgmp-compliance">
-      <h3>cGMP Compliance Consultant / Auditor</h3>
-      <div class="job-tags"><span class="job-tag">Contract</span></div>
-      <div class="job-description">
+      <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="cgmp-details">
+        <div class="job-card-title-section">
+          <h3>cGMP Compliance Consultant / Auditor</h3>
+          <p class="job-card-summary">Support a small non-manufacturing warehouse operation in FDA cGMP compliance through gap analysis, documentation, training, and third-party certification audit support.</p>
+          <div class="job-card-meta">
+            <span class="job-tag">Contract</span>
+          </div>
+        </div>
+        <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+      </div>
+      <div class="job-description" id="cgmp-details">
         <h4>Position Summary</h4>
         <p>The cGMP Compliance Consultant / Auditor will support a small non-manufacturing warehouse operation engaged in the storage, packaging, labeling, and distribution of dietary supplements and drug products. This role is responsible for assessing current compliance status, identifying practical remediation priorities, supporting gap closure, strengthening quality system documentation, and performing or supporting an independent third-party cGMP certification audit.</p>
         
@@ -261,44 +433,22 @@
           <li>Experience assessing facilities where manufacturing, blending, compounding, or laboratory testing are not performed onsite.</li>
           <li>Relevant quality, regulatory, auditing, or life sciences certifications are preferred.</li>
         </ul>
-        
-        <h4>Engagement Scope</h4>
-        <p>The consultant or auditor will support a three-phase engagement consisting of a cGMP gap analysis, consulting services for gap closure, and an independent third-party cGMP certification audit. The work will focus on a single warehouse location with a small workforce and operations limited to storage, packaging, labeling, and distribution. The role does not include manufacturing validation, laboratory testing, product release decisions, legal advice, regulatory submissions, or direct representation before the FDA or other regulatory agencies.</p>
-        
-        <h4>Expected Deliverables</h4>
-        <ul>
-          <li>Comprehensive cGMP Gap Analysis Report</li>
-          <li>Executive Summary with risk-ranked findings</li>
-          <li>Corrective Action Recommendations and Compliance Roadmap</li>
-          <li>CAPA Tracker and Action Item Log</li>
-          <li>Updated Quality System Documentation and SOP Package</li>
-          <li>Training Records and training support materials</li>
-          <li>Closure Verification Report</li>
-          <li>Certification Readiness Assessment</li>
-          <li>Third-Party Audit Report and Audit Findings Log</li>
-          <li>Certification Recommendation and cGMP Compliance Certificate, if applicable</li>
-        </ul>
-        
-        <h4>Success Measures</h4>
-        <ul>
-          <li>Critical findings are closed and documented.</li>
-          <li>Major findings are closed or supported by approved corrective action plans.</li>
-          <li>Quality system documentation is complete, controlled, and appropriate for the operation.</li>
-          <li>Personnel are trained and able to demonstrate competency in assigned responsibilities.</li>
-          <li>Warehouse, packaging, labeling, storage, distribution, traceability, complaint, return, supplier, and CAPA processes meet applicable cGMP expectations.</li>
-          <li>The operation is prepared for independent certification review and receives a favorable certification recommendation when requirements are met.</li>
-        </ul>
       </div>
       <a class="apply-link" href="#apply">Apply for this position →</a>
     </article>
 
     <article class="job-card" id="info-security-support">
-      <h3>Information Security Support Specialist</h3>
-      <div class="job-tags"><span class="job-tag">Full-Time</span></div>
-      <div class="job-description">
-        <h4>Job Summary</h4>
-        <p>The Information Security Support Specialist provides entry-level support for information security, cybersecurity, compliance, and audit initiatives. This position assists with documentation, training coordination, evidence collection, and administrative activities related to security governance and compliance programs.</p>
-        
+      <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="info-sec-details">
+        <div class="job-card-title-section">
+          <h3>Information Security Support Specialist</h3>
+          <p class="job-card-summary">Entry-level support for information security, cybersecurity, compliance, and audit initiatives, assisting with documentation, training coordination, and evidence collection.</p>
+          <div class="job-card-meta">
+            <span class="job-tag">Full-Time</span>
+          </div>
+        </div>
+        <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+      </div>
+      <div class="job-description" id="info-sec-details">
         <h4>Essential Duties</h4>
         <ul>
           <li>Assist with maintaining policies, procedures, records, and compliance documentation.</li>
@@ -328,12 +478,17 @@
     </article>
 
     <article class="job-card" id="internal-security-auditor">
-      <h3>Internal Security Auditor</h3>
-      <div class="job-tags"><span class="job-tag">Full-Time</span></div>
-      <div class="job-description">
-        <h4>Job Summary</h4>
-        <p>The Internal Security Auditor evaluates internal management system processes, controls, and documentation to determine conformity with organizational requirements, policies, procedures, and audit criteria. This role helps prepare the organization for external audits, compliance reviews, and continual improvement activities.</p>
-        
+      <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="internal-audit-details">
+        <div class="job-card-title-section">
+          <h3>Internal Security Auditor</h3>
+          <p class="job-card-summary">Evaluate internal management system processes, controls, and documentation to determine conformity with organizational requirements and prepare for external audits.</p>
+          <div class="job-card-meta">
+            <span class="job-tag">Full-Time</span>
+          </div>
+        </div>
+        <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+      </div>
+      <div class="job-description" id="internal-audit-details">
         <h4>Essential Duties</h4>
         <ul>
           <li>Plan and conduct internal audits.</li>
@@ -364,12 +519,17 @@
     </article>
 
     <article class="job-card" id="lead-security-auditor">
-      <h3>Lead Security Auditor</h3>
-      <div class="job-tags"><span class="job-tag">Full-Time</span></div>
-      <div class="job-description">
-        <h4>Job Summary</h4>
-        <p>The Lead Security Auditor plans, leads, and reports on formal audits of information security or cybersecurity management systems. This role manages audit activities, coordinates audit teams, communicates findings to stakeholders, and supports organizational readiness for certification, regulatory review, or third-party assessment.</p>
-        
+      <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="lead-audit-details">
+        <div class="job-card-title-section">
+          <h3>Lead Security Auditor</h3>
+          <p class="job-card-summary">Plan, lead, and report on formal audits of information security or cybersecurity management systems, managing audit activities and coordinating audit teams.</p>
+          <div class="job-card-meta">
+            <span class="job-tag">Full-Time</span>
+          </div>
+        </div>
+        <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+      </div>
+      <div class="job-description" id="lead-audit-details">
         <h4>Essential Duties</h4>
         <ul>
           <li>Develop audit plans, scopes, objectives, and schedules.</li>
@@ -401,12 +561,17 @@
     </article>
 
     <article class="job-card" id="security-program-implementer">
-      <h3>Security Program Implementer</h3>
-      <div class="job-tags"><span class="job-tag">Full-Time</span></div>
-      <div class="job-description">
-        <h4>Job Summary</h4>
-        <p>The Security Program Implementer designs, implements, maintains, and improves an information security or cybersecurity management program aligned with organizational requirements, business objectives, and recognized security practices. This role translates security objectives into practical governance structures, risk management processes, controls, documentation, and operational routines.</p>
-        
+      <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="program-impl-details">
+        <div class="job-card-title-section">
+          <h3>Security Program Implementer</h3>
+          <p class="job-card-summary">Design, implement, maintain, and improve an information security or cybersecurity management program aligned with organizational requirements and business objectives.</p>
+          <div class="job-card-meta">
+            <span class="job-tag">Full-Time</span>
+          </div>
+        </div>
+        <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+      </div>
+      <div class="job-description" id="program-impl-details">
         <h4>Essential Duties</h4>
         <ul>
           <li>Define implementation scope.</li>
@@ -436,12 +601,17 @@
     </article>
 
     <article class="job-card" id="lead-cybersecurity-manager">
-      <h3>Lead Cybersecurity Manager</h3>
-      <div class="job-tags"><span class="job-tag">Full-Time</span></div>
-      <div class="job-description">
-        <h4>Job Summary</h4>
-        <p>The Lead Cybersecurity Manager leads the development, operation, and continual improvement of an enterprise cybersecurity program aligned with organizational objectives, business risk priorities, and recognized cybersecurity frameworks. This role strengthens cyber resilience by coordinating governance, risk management, incident preparedness, stakeholder collaboration, and security performance monitoring.</p>
-        
+      <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="lead-cyber-details">
+        <div class="job-card-title-section">
+          <h3>Lead Cybersecurity Manager</h3>
+          <p class="job-card-summary">Lead the development, operation, and continual improvement of an enterprise cybersecurity program aligned with organizational objectives and recognized frameworks.</p>
+          <div class="job-card-meta">
+            <span class="job-tag">Full-Time</span>
+          </div>
+        </div>
+        <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+      </div>
+      <div class="job-description" id="lead-cyber-details">
         <h4>Essential Duties</h4>
         <ul>
           <li>Establish cybersecurity program objectives, governance practices, and performance indicators.</li>
@@ -516,6 +686,36 @@
   </div>
 </section>
 </main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const jobHeaders = document.querySelectorAll('.job-card-header');
+  
+  jobHeaders.forEach(header => {
+    header.addEventListener('click', function() {
+      toggleJobDetails(this);
+    });
+    
+    header.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleJobDetails(this);
+      }
+    });
+  });
+  
+  function toggleJobDetails(header) {
+    const isExpanded = header.getAttribute('aria-expanded') === 'true';
+    const detailsId = header.getAttribute('aria-controls');
+    const details = document.getElementById(detailsId);
+    const toggleBtn = header.querySelector('.job-toggle-btn');
+    
+    header.setAttribute('aria-expanded', !isExpanded);
+    details.classList.toggle('expanded');
+    toggleBtn.classList.toggle('expanded');
+  }
+});
+</script>
 
 <footer>
   <div class="wrap">
