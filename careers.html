@@ -68,6 +68,102 @@
   opacity: 0.9;
 }
 
+.job-search-filters {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.job-search-filters h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #042C53;
+  margin: 0 0 1rem 0;
+}
+
+.filter-group {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.filter-group:last-child {
+  margin-bottom: 0;
+}
+
+.filter-control {
+  flex: 1;
+  min-width: 200px;
+}
+
+.filter-control label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 0.4rem;
+}
+
+.filter-control input[type="text"],
+.filter-control select {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.filter-control input[type="text"]:focus,
+.filter-control select:focus {
+  outline: none;
+  border-color: #042C53;
+  box-shadow: 0 0 0 3px rgba(4, 44, 83, 0.1);
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.filter-buttons button {
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid #ccc;
+  background: white;
+  color: #333;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-buttons button:hover {
+  background: #f0f0f0;
+  border-color: #999;
+}
+
+.filter-buttons button:focus {
+  outline: 2px solid #042C53;
+  outline-offset: 2px;
+}
+
+.filter-buttons button.active {
+  background: #042C53;
+  color: white;
+  border-color: #042C53;
+}
+
+.filter-status {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 1rem;
+}
+
 .job-categories {
   margin-top: 2rem;
 }
@@ -85,6 +181,10 @@
   margin-bottom: 1.5rem;
 }
 
+.job-category.hidden {
+  display: none;
+}
+
 .job-card {
   border-top: 1px solid #e0e0e0;
   padding-top: 1.5rem;
@@ -93,6 +193,10 @@
 
 .job-card:not(:first-child) {
   border-top: 1px solid #e0e0e0;
+}
+
+.job-card.hidden {
+  display: none;
 }
 
 .job-card-header {
@@ -295,6 +399,15 @@
   margin-top: 1rem;
 }
 
+.no-results-message {
+  padding: 2rem;
+  text-align: center;
+  color: #666;
+  background: #f9f9f9;
+  border-radius: 4px;
+  margin: 2rem 0;
+}
+
 @media (max-width: 768px) {
   .careers-openings-header {
     flex-direction: column;
@@ -308,6 +421,19 @@
   .skip-to-jobs {
     width: 100%;
     text-align: center;
+  }
+
+  .job-search-filters {
+    padding: 1rem;
+  }
+
+  .filter-group {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .filter-control {
+    min-width: 100%;
   }
 
   .job-card-header {
@@ -368,12 +494,44 @@
       <a class="skip-to-jobs" href="#job-listings">View all roles ↓</a>
     </div>
     
+    <div class="job-search-filters">
+      <h3>Search and filter jobs</h3>
+      <div class="filter-group">
+        <div class="filter-control">
+          <label for="search-keyword">Search by keyword</label>
+          <input type="text" id="search-keyword" placeholder="e.g., Security, Auditor, Engineer...">
+        </div>
+        <div class="filter-control">
+          <label for="filter-category">Category</label>
+          <select id="filter-category">
+            <option value="">All categories</option>
+            <option value="Identity & Access Management">Identity & Access Management</option>
+            <option value="Quality & Regulatory Compliance">Quality & Regulatory Compliance</option>
+            <option value="Security & Governance">Security & Governance</option>
+          </select>
+        </div>
+      </div>
+      <div class="filter-group">
+        <div>
+          <label style="display: block; font-size: 0.85rem; font-weight: 500; color: #333; margin-bottom: 0.5rem;">Job type</label>
+          <div class="filter-buttons">
+            <button class="job-type-filter active" data-type="">All types</button>
+            <button class="job-type-filter" data-type="Contract">Contract</button>
+            <button class="job-type-filter" data-type="Full-Time">Full-Time</button>
+          </div>
+        </div>
+      </div>
+      <div class="filter-status">
+        Showing <span id="filtered-count">all</span> positions
+      </div>
+    </div>
+    
     <div class="job-categories" id="job-listings">
       <!-- IDENTITY & ACCESS MANAGEMENT -->
-      <div class="job-category">
+      <div class="job-category" data-category="Identity & Access Management">
         <h3 class="job-category-title">Identity & Access Management</h3>
         
-        <article class="job-card" id="pam">
+        <article class="job-card" id="pam" data-job-type="Contract" data-searchable="Privileged Access Management PAM Contract Role Secure privileged accounts credentials session monitoring enterprise systems CyberArk">
           <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="pam-details">
             <div class="job-card-title-section">
               <h4>Privileged Access Management (PAM) — Contract Role</h4>
@@ -405,7 +563,7 @@
           <a class="apply-link" href="#apply?position=pam">Apply for PAM Specialist →</a>
         </article>
 
-        <article class="job-card" id="iga">
+        <article class="job-card" id="iga" data-job-type="Contract" data-searchable="Identity Governance Administration IGA Contract Role Manage identity lifecycle operations application onboarding access certification campaigns SailPoint Saviynt">
           <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="iga-details">
             <div class="job-card-title-section">
               <h4>Identity Governance & Administration (IGA) — Contract Role</h4>
@@ -437,7 +595,7 @@
           <a class="apply-link" href="#apply?position=iga">Apply for IGA Analyst →</a>
         </article>
 
-        <article class="job-card" id="authentication-services">
+        <article class="job-card" id="authentication-services" data-job-type="Contract" data-searchable="Authentication Services Contract Role Implement MFA SSO passwordless authentication conditional access policies Azure AD Entra ID Okta Ping">
           <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="authentication-details">
             <div class="job-card-title-section">
               <h4>Authentication Services — Contract Role</h4>
@@ -468,7 +626,7 @@
           <a class="apply-link" href="#apply?position=auth">Apply for Authentication Engineer →</a>
         </article>
 
-        <article class="job-card" id="authorization-entitlement-governance">
+        <article class="job-card" id="authorization-entitlement-governance" data-job-type="Contract" data-searchable="Authorization Entitlement Governance Contract Role Build RBAC ABAC models manage role-based access control frameworks role mining">
           <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="authorization-details">
             <div class="job-card-title-section">
               <h4>Authorization & Entitlement Governance — Contract Role</h4>
@@ -499,7 +657,7 @@
           <a class="apply-link" href="#apply?position=authz">Apply for Authorization Analyst →</a>
         </article>
 
-        <article class="job-card" id="iam-engineering">
+        <article class="job-card" id="iam-engineering" data-job-type="Contract" data-searchable="IAM Engineering Contract Role Design platform integrations implement AI-driven automation lead architecture execution engineer">
           <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="iam-eng-details">
             <div class="job-card-title-section">
               <h4>IAM Engineering — Contract Role</h4>
@@ -530,7 +688,7 @@
           <a class="apply-link" href="#apply?position=iam-eng">Apply for IAM Engineer →</a>
         </article>
 
-        <article class="job-card" id="flex-staffing">
+        <article class="job-card" id="flex-staffing" data-job-type="Contract" data-searchable="Flex Staffing Contract Role Provide adaptable support PAM IGA authentication authorization teams flexible">
           <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="flex-details">
             <div class="job-card-title-section">
               <h4>Flex Staffing — Contract Role</h4>
@@ -561,10 +719,10 @@
       </div>
 
       <!-- QUALITY & REGULATORY COMPLIANCE -->
-      <div class="job-category">
+      <div class="job-category" data-category="Quality & Regulatory Compliance">
         <h3 class="job-category-title">Quality & Regulatory Compliance</h3>
         
-        <article class="job-card" id="cgmp-compliance">
+        <article class="job-card" id="cgmp-compliance" data-job-type="Contract" data-searchable="cGMP Compliance Consultant Auditor FDA compliance pharma supplement warehouse operations gap analysis audit">
           <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="cgmp-details">
             <div class="job-card-title-section">
               <h4>cGMP Compliance Consultant / Auditor</h4>
@@ -603,10 +761,10 @@
       </div>
 
       <!-- SECURITY & GOVERNANCE -->
-      <div class="job-category">
+      <div class="job-category" data-category="Security & Governance">
         <h3 class="job-category-title">Security & Governance</h3>
         
-        <article class="job-card" id="info-security-support">
+        <article class="job-card" id="info-security-support" data-job-type="Full-Time" data-searchable="Information Security Support Specialist Full-Time support information security compliance initiatives documentation training">
           <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="info-sec-details">
             <div class="job-card-title-section">
               <h4>Information Security Support Specialist</h4>
@@ -642,7 +800,7 @@
           <a class="apply-link" href="#apply?position=info-sec">Apply for Security Support Specialist →</a>
         </article>
 
-        <article class="job-card" id="internal-security-auditor">
+        <article class="job-card" id="internal-security-auditor" data-job-type="Full-Time" data-searchable="Internal Security Auditor Full-Time Evaluate management systems controls conformity organizational requirements external audits">
           <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="internal-audit-details">
             <div class="job-card-title-section">
               <h4>Internal Security Auditor</h4>
@@ -679,7 +837,7 @@
           <a class="apply-link" href="#apply?position=auditor">Apply for Internal Auditor →</a>
         </article>
 
-        <article class="job-card" id="lead-security-auditor">
+        <article class="job-card" id="lead-security-auditor" data-job-type="Full-Time" data-searchable="Lead Security Auditor Full-Time Plan lead formal audits security management systems managing teams communicating findings stakeholders">
           <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="lead-audit-details">
             <div class="job-card-title-section">
               <h4>Lead Security Auditor</h4>
@@ -715,7 +873,7 @@
           <a class="apply-link" href="#apply?position=lead-auditor">Apply for Lead Auditor →</a>
         </article>
 
-        <article class="job-card" id="security-program-implementer">
+        <article class="job-card" id="security-program-implementer" data-job-type="Full-Time" data-searchable="Security Program Implementer Full-Time Design implement information security programs aligned organizational objectives frameworks">
           <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="program-impl-details">
             <div class="job-card-title-section">
               <h4>Security Program Implementer</h4>
@@ -751,7 +909,7 @@
           <a class="apply-link" href="#apply?position=impl">Apply for Program Implementer →</a>
         </article>
 
-        <article class="job-card" id="lead-cybersecurity-manager">
+        <article class="job-card" id="lead-cybersecurity-manager" data-job-type="Full-Time" data-searchable="Lead Cybersecurity Manager Full-Time Lead enterprise cybersecurity program development governance incident response initiatives cybersecurity">
           <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="lead-cyber-details">
             <div class="job-card-title-section">
               <h4>Lead Cybersecurity Manager</h4>
@@ -887,6 +1045,69 @@ document.addEventListener('DOMContentLoaded', function() {
     details.classList.toggle('expanded');
     toggleBtn.classList.toggle('expanded');
   }
+
+  // Job search and filter functionality
+  const searchInput = document.getElementById('search-keyword');
+  const categoryFilter = document.getElementById('filter-category');
+  const jobTypeButtons = document.querySelectorAll('.job-type-filter');
+  const jobCards = document.querySelectorAll('.job-card');
+  const jobCategories = document.querySelectorAll('.job-category');
+  const filteredCountSpan = document.getElementById('filtered-count');
+
+  let activeJobType = '';
+
+  function filterJobs() {
+    const keyword = searchInput.value.toLowerCase();
+    const category = categoryFilter.value;
+    let visibleCount = 0;
+
+    jobCards.forEach(card => {
+      const matchesKeyword = card.getAttribute('data-searchable').toLowerCase().includes(keyword);
+      const jobCategory = card.closest('.job-category').getAttribute('data-category');
+      const matchesCategory = !category || jobCategory === category;
+      const matchesType = !activeJobType || card.getAttribute('data-job-type') === activeJobType;
+
+      const isVisible = matchesKeyword && matchesCategory && matchesType;
+      card.classList.toggle('hidden', !isVisible);
+      if (isVisible) visibleCount++;
+    });
+
+    // Hide categories with no visible jobs
+    jobCategories.forEach(cat => {
+      const visibleCards = cat.querySelectorAll('.job-card:not(.hidden)').length;
+      cat.classList.toggle('hidden', visibleCards === 0);
+    });
+
+    // Update count
+    filteredCountSpan.textContent = visibleCount === jobCards.length ? 'all' : visibleCount;
+
+    // Show no results message if needed
+    const jobListings = document.getElementById('job-listings');
+    let noResultsMsg = jobListings.querySelector('.no-results-message');
+    
+    if (visibleCount === 0) {
+      if (!noResultsMsg) {
+        noResultsMsg = document.createElement('div');
+        noResultsMsg.className = 'no-results-message';
+        noResultsMsg.textContent = 'No positions match your search. Try adjusting your filters or check back soon for new opportunities.';
+        jobListings.appendChild(noResultsMsg);
+      }
+    } else if (noResultsMsg) {
+      noResultsMsg.remove();
+    }
+  }
+
+  searchInput.addEventListener('input', filterJobs);
+  categoryFilter.addEventListener('change', filterJobs);
+
+  jobTypeButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      jobTypeButtons.forEach(btn => btn.classList.remove('active'));
+      this.classList.add('active');
+      activeJobType = this.getAttribute('data-type');
+      filterJobs();
+    });
+  });
 
   // Handle URL parameter for form pre-selection
   const urlParams = new URLSearchParams(window.location.hash.split('?')[1]);
