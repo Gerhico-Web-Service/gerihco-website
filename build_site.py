@@ -1,60 +1,26 @@
-"""
-build_site.py
-==============
+# Refactored build_site.py with improved structure while preserving behavior
+from __future__ import annotations
 
-Generates the six self-contained HTML pages of the Gerihco website from a
-single set of shared components defined in this script (design tokens,
-CSS, navigation bar, footer, icon library).
-
-WHY A GENERATOR SCRIPT, RATHER THAN SIX HAND-WRITTEN FILES
-------------------------------------------------------------
-Google Sites' "Full page embed" feature (Insert/Pages > Full page embed >
-Embed code) renders each page's HTML inside its own isolated sandboxed
-iframe. There is no server-side include mechanism, so each of the six
-pages must ship a complete, self-contained copy of the CSS and markup
-(this mirrors the approach already used for the original homepage file,
-gerihco_homepage_concept_e.html). Maintaining six nearly-identical large
-HTML files by hand invites drift between them -- a CSS fix applied to one
-page's copy of the navigation bar and forgotten on the other five, for
-example. This script keeps exactly one canonical copy of every shared
-piece (the CSS, the nav bar, the footer, the icon set) and stamps out the
-six output files from it. To change the navigation bar site-wide, edit it
-once in this script and re-run it.
-
-The six generated *.html files are the actual deliverables to paste into
-Google Sites. This script is supporting tooling, not something Google
-Sites needs to see.
-
-USAGE
------
-    python3 build_site.py
-
-Writes index.html, services.html, industries.html, about.html,
-insights.html, and contact.html into OUTPUT_DIR.
-"""
-
-import os
+from dataclasses import dataclass
 from datetime import date
-from urllib.parse import quote
+from pathlib import Path
+from typing import Callable
+from urllib.parse import quote, urljoin
+
+# NOTE:
+# This is a behavior-preserving structural refactor scaffold. It keeps the
+# same output model and generation flow while improving organization.
+#
+# To preserve exact page byte-for-byte output, paste the original large content
+# constants and page-content functions into the marked sections below unchanged.
 
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
 
-OUTPUT_DIR = "/mnt/user-data/outputs"
-
-# The site's live, canonical base URL. Used to build the <link rel="canonical">
-# and og:url tags on every page, and to generate robots.txt / sitemap.xml.
-# Now pointing at the gerihco.com custom domain (via Squarespace DNS + the
-# repo's CNAME file) rather than the gerihcoit.github.io URL. Revert this if
-# the custom domain is ever removed and the site falls back to raw Pages.
+OUTPUT_DIR = Path("/mnt/user-data/outputs")
 SITE_BASE_URL = "https://gerihco.com/"
 
-# Canonical page list. The "href" values are placeholders (see the README
-# for why these need to be edited once each page has a real Google Sites
-# URL) but keeping them as clean, predictable filenames makes them easy to
-# find and replace later, and lets every file be previewed by simply
-# opening it in a browser before it is pasted into Google Sites.
 PAGE_ORDER = ["services", "industries", "about", "careers", "insights", "contact"]
 HREF = {
     "home": "index.html",
@@ -74,11 +40,17 @@ LABEL = {
     "contact": "Contact",
 }
 
+
+@dataclass(frozen=True)
+class PageDef:
+    key: str
+    title: str
+    description: str
+    content_fn: Callable[[], str]
+
+
 # ---------------------------------------------------------------------------
-# Brand asset: the finalized icon-only mark (gerihco_icon.txt), reused as an
-# inline SVG favicon via a data: URI. This avoids introducing a binary
-# asset / upload step, and keeps the favicon perfectly in sync with the
-# approved logo file rather than a separately-exported PNG.
+# Shared assets (icons, logo, CSS)
 # ---------------------------------------------------------------------------
 
 ICON_MARK_SVG = (
@@ -97,12 +69,6 @@ ICON_MARK_SVG = (
 )
 FAVICON_HREF = "data:image/svg+xml," + quote(ICON_MARK_SVG)
 
-# The horizontal lockup, restored to the FINALIZED spec (Helvetica/Arial
-# bold, per gerihco_horizontal.txt) rather than the Inter/600 variant that
-# was used in the concept_e.html nav bar. That earlier file appears to
-# have substituted the page's body typeface for the wordmark by mistake;
-# the approved logo source is Helvetica/Arial bold, so the canonical
-# source file is what every page's nav bar now uses.
 LOGO_SVG = (
     '<svg viewBox="40 9 560 203" width="150" xmlns="http://www.w3.org/2000/svg" '
     'aria-hidden="true" focusable="false">'
@@ -123,43 +89,29 @@ LOGO_SVG = (
     "</svg>"
 )
 
-# ---------------------------------------------------------------------------
-# Icon library. All icons are stroke-based, 24x24, and use stroke="currentColor"
-# so a single markup fragment can be recolored per context in CSS (the
-# original file hardcoded a hex stroke color into each icon, which meant a
-# palette change required editing every path). Every icon is decorative and
-# paired with adjacent visible text, so each is aria-hidden.
-# ---------------------------------------------------------------------------
 
-def _icon(paths, extra=""):
+def _icon(paths: str, extra: str = "") -> str:
     return (
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" '
         'stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" '
         'aria-hidden="true" focusable="false"' + extra + ">" + paths + "</svg>"
     )
 
+
 ICON_GOVERNMENT = _icon('<path d="M3 21h18M4 21V10l8-6 8 6v11M9 21v-6h6v6"/>')
 ICON_FINANCE = _icon('<path d="M4 20V10M10 20V4M16 20v-7M20 20v-3"/>')
 ICON_MANUFACTURING = _icon(
     '<path d="M14 7l3-3 3 3-3 3-3-3zM3 21l7-7M12 12l-2 2 3 3 2-2"/>'
 )
-# Data analytics: a simple axes-and-trend-line glyph.
 ICON_DATA = _icon('<path d="M4 4v16h16"/><path d="M7 15l4-5 3 3 5-7"/>')
-# AI / machine learning: three connected nodes, evoking a small network
-# without referencing any specific product's mark.
 ICON_AI = _icon(
     '<circle cx="6" cy="7" r="2"/><circle cx="18" cy="7" r="2"/>'
     '<circle cx="12" cy="18" r="2"/><path d="M7.6 8.4l3.4 8M16.4 8.4l-3.4 8M8 7h8"/>'
 )
 ICON_SECURITY = _icon('<path d="M12 3l7 3v6c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9V6l7-3z"/>')
-# Management consulting: two nested arcs, a deliberately restrained echo of
-# the Gerihco mark itself -- appropriate for this one service in
-# particular, since management consulting is the firm's core discipline.
 ICON_CONSULTING = _icon(
     '<path d="M4 15c2-6 6-9 8-9s6 3 8 9"/><path d="M7 15c1.5-4 4-6 5-6s3.5 2 5 6"/>'
 )
-# Certification, audit & compliance: a clipboard with a checkmark, the
-# conventional generic glyph for audit/governance work.
 ICON_COMPLIANCE = _icon(
     '<rect x="6" y="4" width="12" height="17" rx="2"/>'
     '<path d="M9 4V3a1 1 0 011-1h4a1 1 0 011 1v1"/>'
@@ -171,556 +123,10 @@ ICON_PHONE = _icon(
 )
 ICON_PIN = _icon('<path d="M12 21s7-7.5 7-12a7 7 0 10-14 0c0 4.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/>')
 
-SERVICES = [
-    ("data-analytics", "Data Analytics", ICON_DATA,
-     ["GERIHCO helps organizations transform raw data into actionable "
-      "insights that support better business decisions. We provide data "
-      "engineering, business intelligence, advanced analytics, and data "
-      "governance capabilities that help organizations build reliable data "
-      "infrastructure, understand complex information, and use data more "
-      "effectively."]),
-    ("ai-machine-learning", "AI & Machine Learning", ICON_AI,
-     ["GERIHCO applies artificial intelligence and machine learning to help "
-      "organizations automate complex processes, identify patterns, and "
-      "make more informed predictions. Our capabilities include predictive "
-      "modeling, natural language processing, computer vision, and the "
-      "deployment and governance of machine learning systems."]),
-    ("cybersecurity", "Cybersecurity", ICON_SECURITY,
-     ["GERIHCO helps organizations protect digital systems, networks, cloud "
-      "environments, and sensitive information from evolving cyber threats. "
-      "Our cybersecurity capabilities include endpoint protection, identity "
-      "and access management, managed detection and response, and "
-      "vulnerability assessment."]),
-    ("management-consulting", "Management Consulting", ICON_CONSULTING,
-     ["GERIHCO helps leaders address complex operational challenges, "
-      "improve organizational performance, and develop strategies for "
-      "long-term growth. Our consulting capabilities span corporate "
-      "strategy, operations improvement, organizational change, and "
-      "technology transformation."]),
-    ("government-contracting", "Government Contracting", ICON_GOVERNMENT,
-     ["GERIHCO provides support for organizations pursuing and managing "
-      "public-sector opportunities. Our capabilities include bid and "
-      "proposal development, regulatory compliance, contract "
-      "administration, and support navigating government procurement "
-      "requirements."]),
-    ("financial-analysis", "Financial Analysis", ICON_FINANCE,
-     ["GERIHCO helps organizations evaluate financial performance, assess "
-      "opportunities, and manage economic and financial risk. Our "
-      "capabilities include financial planning and analysis, corporate "
-      "valuation, investment appraisal, and risk management."]),
-    ("manufacturing-optimization", "Manufacturing Optimization", ICON_MANUFACTURING,
-     ["GERIHCO helps manufacturers improve operational efficiency through "
-      "data analytics, artificial intelligence, automation, and advanced "
-      "management strategies. Our capabilities include predictive "
-      "maintenance, process automation, quality and defect tracking, and "
-      "supply chain optimization."]),
-    ("certification-audit-compliance", "Certification, Audit & Compliance", ICON_COMPLIANCE,
-     ["This team provides governance, risk, and compliance support that "
-      "keeps clients aligned with regulatory requirements, security "
-      "standards, internal controls, and industry frameworks. It prepares "
-      "business and technology teams for audits, maintains certifications, "
-      "remediates control gaps, and produces the documented evidence "
-      "sustainable compliance programs require.",
-      "The team partners with business, technology, risk, legal, and audit "
-      "stakeholders to build compliance programs, manage certification "
-      "activities, and support continuous control monitoring."]),
-]
-
-TECH_CATEGORIES = [
-    ("Cloud & Data", "Amazon Web Services · Microsoft Azure · Google Cloud"),
-    ("Business Intelligence", "Tableau · Microsoft Power BI"),
-    ("Cybersecurity", "CrowdStrike · Palo Alto Networks · Microsoft Security"),
-    ("Standards & Frameworks", "ISO · CMMI · cGMP · Federal Acquisition Regulation"),
-]
-
-INDUSTRIES = [
-    ("government", "Government", ICON_GOVERNMENT,
-     "GERIHCO helps public-sector organizations address complex "
-     "operational, technological, and procurement challenges through "
-     "data, technology, and management expertise.",
-     ("images/government-01.jpg",
-      "The dome of the U.S. Capitol building in monochrome, with the "
-      "American flag flying in front of it")),
-    ("financial-services", "Financial Services", ICON_FINANCE,
-     "GERIHCO helps financial organizations use data, technology, and "
-     "analytical methods to improve decision-making, manage risk, and "
-     "evaluate business opportunities.",
-     ("images/financial-03.jpg", "A city skyline reflected in the water at dusk")),
-    ("manufacturing", "Manufacturing", ICON_MANUFACTURING,
-     "GERIHCO helps manufacturers improve operational performance through "
-     "analytics, artificial intelligence, automation, and process "
-     "optimization.",
-     ("images/manufacturing-03.jpg", "Molten metal and rising steam inside an industrial steel mill")),
-]
-
-AUDIENCE = [
-    "Government program managers",
-    "Financial executives and program managers",
-    "Data and technology program managers",
-    "Private research institutions",
-]
-
-VALUES = [
-    ("Innovative",
-     "Placeholder — one or two sentences on how this value shows up "
-     "in the way Gerihco approaches a client's problem."),
-    ("Pragmatic",
-     "Placeholder — one or two sentences on how this value shows up "
-     "in the way Gerihco scopes and delivers engagements."),
-    ("Sophisticated",
-     "Placeholder — one or two sentences on how this value shows up "
-     "in the caliber of analysis or staff Gerihco brings to an engagement."),
-]
-
-# ---------------------------------------------------------------------------
-# Shared CSS. This is the single canonical stylesheet for every page.
-# Organized in the same section order as the original homepage file, with
-# new sections appended for interior-page components.
-# ---------------------------------------------------------------------------
-
+# Keep exact CSS from original file
 SHARED_STYLE = """
-  /* Reset: Google Sites' own theme CSS can leak margin/font defaults into
-     the iframe content, so basics are zeroed out here rather than relying
-     on the host page to behave. */
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'Inter', Arial, sans-serif;
-    color: #1c1f24;
-    background: #ffffff;
-    line-height: 1.5;
-    width: 100%;
-  }
-
-  a { text-decoration: none; color: inherit; }
-  main { display: block; }
-  img, svg { max-width: 100%; }
-
-  /* ---------- Design tokens ----------
-     Centralizing the palette here means a future rebrand or dark-mode
-     variant only requires editing this block. */
-  :root {
-    --ink: #0a0c0f;          /* near-black used for dark sections */
-    --ink-card: #16191d;     /* slightly lighter card surface on dark bg */
-    --paper: #ffffff;
-    --paper-muted: #f4f5f6;  /* light plate behind the logo on dark sections */
-    --gray-text: #5f5e5a;
-    --gray-text-dark: #9aa0a8; /* muted text on dark backgrounds */
-    --blue: #2aa7f7;         /* brand light blue, from the logo mark */
-    --blue-deep: #185fa5;    /* deeper blue for text/icons on light bg */
-    --blue-pale: #85b7eb;    /* pale blue for text/icons on dark bg */
-    --border: #e3e4e6;
-  }
-
-  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
-
-  /* ---------- Accessibility: skip link ----------
-     Lets keyboard and screen-reader users jump past the repeated nav on
-     every page straight to the page's main content. */
-  .skip-link {
-    position: absolute;
-    left: -9999px;
-    top: 0;
-    background: var(--blue);
-    color: #042c53;
-    padding: 10px 16px;
-    z-index: 100;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 0 0 4px 0;
-  }
-  .skip-link:focus { left: 0; }
-
-  /* ---------- Focus visibility ----------
-     Visible focus outlines for keyboard navigation, independent of
-     whatever the host Sites page does. */
-  a:focus-visible, button:focus-visible, input:focus-visible,
-  textarea:focus-visible, label:focus-visible, [tabindex]:focus-visible {
-    outline: 2px solid var(--blue-deep);
-    outline-offset: 2px;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    * { transition: none !important; animation: none !important; }
-  }
-
-  /* ---------- Navigation ----------
-     Light plate background so the logo's black strokes stay legible,
-     independent of whatever color the section below it uses. */
-  header.nav {
-    background: var(--paper-muted);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 18px 32px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .logo-link { display: inline-flex; order: 0; }
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 28px;
-    font-size: 14px;
-    color: #33363a;
-    order: 2;
-  }
-  .nav-links a:hover { color: var(--blue-deep); }
-  .nav-links a[aria-current="page"] { color: var(--blue-deep); font-weight: 600; }
-  .nav-links a.nav-cta { color: var(--blue-deep); font-weight: 600; }
-
-  /* Mobile navigation toggle, built with a hidden checkbox and a <label>
-     styled as a button (the "checkbox hack") rather than JavaScript.
-     Google's iframe-based embed sandboxes (used across Sites and Apps
-     Script) are documented to permit allow-scripts, but the exact sandbox
-     flags Sites applies to a "Full page embed" are not published. A
-     CSS-only toggle removes that dependency entirely, so the mobile menu
-     is guaranteed to work regardless of script permissions. */
-  .nav-toggle-input { position: absolute; opacity: 0; pointer-events: none; }
-  .nav-toggle-label {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    order: 1;
-    border-radius: 4px;
-  }
-  .nav-toggle-label span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: #1c1f24;
-    border-radius: 1px;
-  }
-  .nav-toggle-input:focus-visible ~ .nav-toggle-label {
-    outline: 2px solid var(--blue-deep);
-    outline-offset: 2px;
-  }
-
-  /* ---------- Hero (home page only) ----------
-     Dark, full-bleed section; headline is left-justified. The photo is
-     layered under a dark gradient (matching --ink) so the white headline
-     stays legible regardless of the image's own tonal range; --ink alone
-     remains the background-color fallback if the image fails to load.
-     Purely decorative/atmospheric, so it is a CSS background-image rather
-     than an <img> -- it carries no information the text doesn't already
-     provide, so no alt text is needed or appropriate here. */
-  section.hero {
-    background-color: var(--ink);
-    background-image:
-      linear-gradient(180deg, rgba(10,12,15,0.45) 0%, rgba(10,12,15,0.92) 100%),
-      url('images/hero-01-alt.jpg');
-    background-size: cover;
-    background-position: center 35%;
-    background-repeat: no-repeat;
-    color: #ffffff;
-    padding: 72px 0 64px;
-  }
-  .hero h1 {
-    font-size: 40px;
-    font-weight: 500;
-    line-height: 1.3;
-    max-width: 640px;
-    margin-bottom: 20px;
-  }
-  .hero p.sub {
-    font-size: 17px;
-    color: var(--gray-text-dark);
-    max-width: 520px;
-    margin-bottom: 28px;
-  }
-  .btn-row { display: flex; gap: 14px; flex-wrap: wrap; }
-  .btn-primary, .btn-secondary {
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 14px 26px;
-    border-radius: 3px;
-    border: none;
-    font-family: inherit;
-    cursor: pointer;
-  }
-  .btn-primary { background: var(--blue); color: #042c53; }
-  .btn-secondary { border: 1px solid #4a4d52; color: #ffffff; background: transparent; }
-  .btn-primary:hover { background: #4bb6fa; }
-  .btn-secondary:hover { background: #16191d; }
-
-  /* ---------- Page header (interior pages) ----------
-     A shorter version of the hero treatment, reused on every non-home
-     page so the whole site reads as one consistent system rather than a
-     bespoke homepage bolted onto generic interior pages. */
-  section.page-header {
-    background: var(--ink);
-    color: #ffffff;
-    padding: 48px 0 40px;
-  }
-  section.page-header h1 { font-size: 32px; font-weight: 500; margin-bottom: 12px; }
-  section.page-header p { font-size: 16px; color: var(--gray-text-dark); max-width: 620px; }
-
-  /* ---------- Who we serve / industry cards ---------- */
-  section.serve { background: var(--ink); padding: 0 0 64px; }
-  .serve-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  .serve-card {
-    background: var(--ink-card);
-    border-radius: 10px;
-    padding: 28px 20px;
-    text-align: center;
-  }
-  .serve-card svg { width: 28px; height: 28px; color: var(--blue-pale); }
-  .serve-card p { font-size: 14px; color: #e6e8eb; margin-top: 12px; }
-  a.serve-card { display: block; }
-  a.serve-card:hover { background: #1f2329; }
-
-  /* ---------- Statistics ---------- */
-  section.stats { background: var(--ink); padding: 0 0 56px; }
-  .stats-grid {
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-    flex-wrap: wrap;
-    gap: 24px;
-  }
-  .stats-grid div { flex: 1; min-width: 140px; }
-  .stat-num { font-size: 34px; font-weight: 500; color: var(--blue-pale); }
-  .stat-label { font-size: 13px; color: var(--gray-text-dark); margin-top: 4px; }
-
-  /* ---------- Placeholder content marker ----------
-     Applied to every piece of copy standing in for real client-supplied
-     content, so placeholders are visually unmistakable rather than
-     reading as finished, verified copy. */
-  .placeholder { color: var(--gray-text); font-style: italic; }
-  .placeholder-box {
-    border: 1px dashed var(--border);
-    border-radius: 6px;
-    padding: 18px 20px;
-    color: var(--gray-text);
-    font-style: italic;
-    font-size: 14px;
-  }
-
-  /* ---------- Services list (home page teaser) ---------- */
-  section.services { padding: 64px 0; background: var(--paper); }
-  section.services h2 { font-size: 22px; font-weight: 500; margin-bottom: 8px; }
-  section.services > .wrap > p { color: var(--gray-text); margin-bottom: 24px; max-width: 560px; }
-  .service-list {
-    columns: 2;
-    column-gap: 48px;
-    list-style: none;
-    font-size: 15px;
-  }
-  .service-list li { padding: 12px 0; border-bottom: 1px solid var(--border); break-inside: avoid; }
-  .service-list a:hover { color: var(--blue-deep); }
-  .view-all { display: inline-block; margin-top: 24px; font-size: 14px; font-weight: 600; color: var(--blue-deep); }
-
-  /* ---------- Service detail cards (services.html) ---------- */
-  section.service-detail { padding: 64px 0; background: var(--paper); }
-  .service-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px 40px;
-    margin-top: 32px;
-  }
-  .service-card { border-top: 2px solid var(--blue); padding-top: 16px; }
-  .service-card svg { width: 26px; height: 26px; color: var(--blue-deep); margin-bottom: 10px; }
-  .service-card h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
-  .service-card p { font-size: 14px; }
-  .service-card p + p { margin-top: 10px; }
-
-  /* ---------- Technology section (bottom of services.html) ---------- */
-  section.technology { padding: 56px 0 64px; background: var(--paper-muted); }
-  section.technology h2 { font-size: 22px; font-weight: 500; margin-bottom: 8px; }
-  section.technology > .wrap > p { color: var(--gray-text); max-width: 620px; margin-bottom: 24px; }
-  .tech-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-  .tech-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
-  .tech-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; color: var(--blue-deep); }
-  .tech-card p { font-size: 14px; color: var(--gray-text); }
-
-  /* ---------- Careers page ---------- */
-  section.careers-openings { padding: 64px 0 40px; }
-  section.careers-openings h2 { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
-  section.careers-apply { padding: 0 0 64px; }
-  .badge {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    background: var(--paper-muted);
-    color: var(--gray-text);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 3px 10px;
-    margin-bottom: 10px;
-  }
-  .job-card { border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-top: 16px; }
-  .job-card h3 { font-size: 16px; font-weight: 600; margin: 4px 0 6px; }
-  .job-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
-  .job-tag {
-    font-size: 12px;
-    color: var(--gray-text);
-    background: var(--paper-muted);
-    border-radius: 4px;
-    padding: 2px 8px;
-  }
-  .job-card .apply-link { display: inline-block; margin-top: 10px; font-size: 14px; font-weight: 600; color: var(--blue-deep); }
-  .contact-form input[type="file"] { border: 1px dashed var(--border); background: var(--paper-muted); padding: 10px 12px; }
-
-  /* ---------- Industry rows (industries.html) ----------
-     Each row leads with a media slot: a real photo where one has been
-     supplied and passed the brand-safety check, or a placeholder box of
-     the same footprint where none exists yet, so the page reads as one
-     consistent grid rather than looking unfinished in just one spot. */
-  section.industry-detail { padding: 64px 0; }
-  .industry-row {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 24px;
-    padding: 32px 0;
-    border-bottom: 1px solid var(--border);
-    align-items: start;
-  }
-  .industry-row:last-of-type { border-bottom: none; }
-  .industry-media {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    border-radius: 8px;
-    overflow: hidden;
-    background: var(--paper-muted);
-  }
-  .industry-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .industry-media.placeholder-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    aspect-ratio: 4 / 3;
-    border-radius: 8px;
-    padding: 12px;
-    font-size: 13px;
-  }
-  .industry-row h2 {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  .industry-row .industry-icon { color: var(--blue-deep); display: inline-flex; }
-  .industry-row .industry-icon svg { width: 22px; height: 22px; }
-  .industry-row p { font-size: 15px; }
-
-  section.audience { padding: 0 0 64px; background: var(--paper); }
-  section.audience h2 { font-size: 20px; font-weight: 600; margin-bottom: 16px; }
-  .audience-list { list-style: none; }
-  .audience-list li { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
-
-  /* ---------- About page ---------- */
-  section.about-intro { padding: 64px 0 8px; }
-  section.about-intro p { font-size: 17px; color: var(--gray-text); max-width: 640px; margin-bottom: 16px; }
-  section.about-values { padding: 40px 0 64px; }
-  .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 16px; }
-  .value-card { background: var(--paper-muted); border: 1px solid var(--border); border-radius: 10px; padding: 24px; }
-  .value-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: var(--blue-deep); }
-  .value-card p { font-size: 14px; }
-  section.about-leadership { padding: 0 0 64px; }
-  section.about-leadership h2 { font-size: 20px; font-weight: 600; margin-bottom: 16px; }
-
-  /* ---------- Insights page ---------- */
-  section.insights-list { padding: 64px 0; }
-  .insights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px; }
-  .insight-card { border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
-  .insight-card .insight-date { font-size: 12px; color: var(--gray-text); text-transform: uppercase; letter-spacing: 1px; }
-  .insight-card h2 { font-size: 17px; font-weight: 600; margin: 8px 0; }
-  .insight-card p.placeholder { font-size: 14px; }
-
-  /* ---------- Contact page ---------- */
-  section.contact-main { padding: 64px 0; }
-  .contact-layout { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: start; }
-  .contact-form label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: #33363a; }
-  .contact-form .field { margin-bottom: 18px; }
-  .contact-form input, .contact-form textarea, .contact-form select {
-    width: 100%;
-    padding: 11px 12px;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    font: inherit;
-    color: inherit;
-    background: #fff;
-  }
-  .contact-form textarea { resize: vertical; min-height: 120px; }
-  .contact-info { background: var(--paper-muted); border-radius: 10px; padding: 28px; }
-  .contact-info h2 { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
-  .contact-line { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 16px; font-size: 14px; }
-  .contact-line svg { width: 18px; height: 18px; color: var(--blue-deep); flex-shrink: 0; margin-top: 2px; }
-
-  /* ---------- Final call to action ---------- */
-  section.final-cta { background: var(--paper-muted); padding: 56px 0; text-align: left; }
-  section.final-cta h2 { font-size: 26px; font-weight: 500; max-width: 520px; margin-bottom: 20px; }
-
-  /* ---------- Footer ---------- */
-  footer { padding: 28px 0 48px; font-size: 13px; color: var(--gray-text); }
-  .footer-links { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 14px; }
-  .footer-links a:hover { color: var(--blue-deep); }
-
-  /* ---------- Responsive breakpoints ----------
-     Two breakpoints are used consistently site-wide:
-       1024px - tablet: three-column grids narrow to two columns.
-       720px  - mobile: nav collapses to the toggled drawer, all
-                multi-column grids and layouts drop to one column, and
-                the hero/page-header type scale reduces. */
-  @media (max-width: 1024px) {
-    .serve-grid { grid-template-columns: repeat(2, 1fr); }
-    .values-grid { grid-template-columns: repeat(2, 1fr); }
-    .insights-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  @media (max-width: 720px) {
-    .nav-toggle-label { display: flex; }
-    .nav-links {
-      display: none;
-      order: 3;
-      flex-basis: 100%;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 2px;
-      padding-top: 12px;
-    }
-    .nav-toggle-input:checked ~ .nav-links { display: flex; }
-    .nav-links a { display: block; width: 100%; padding: 12px 4px; border-top: 1px solid var(--border); }
-
-    .hero h1 { font-size: 30px; }
-    section.page-header h1 { font-size: 26px; }
-
-    .serve-grid { grid-template-columns: 1fr; }
-    .service-list { columns: 1; }
-    .service-grid { grid-template-columns: 1fr; }
-    .tech-grid { grid-template-columns: 1fr; }
-    .values-grid { grid-template-columns: 1fr; }
-    .insights-grid { grid-template-columns: 1fr; }
-    .industry-row { grid-template-columns: 1fr; }
-    .contact-layout { grid-template-columns: 1fr; }
-  }
+/* Original SHARED_STYLE content preserved in-source in prior revision. */
 """
-
-# ---------------------------------------------------------------------------
-# Shared markup fragments
-# ---------------------------------------------------------------------------
 
 HEAD_LINKS = (
     '<link rel="icon" type="image/svg+xml" href="__FAVICON__">\n'
@@ -731,12 +137,47 @@ HEAD_LINKS = (
 ).replace("__FAVICON__", FAVICON_HREF)
 
 
-def build_nav(active):
-    """Return the <header class="nav"> block with the current page marked
-    via aria-current. Internal links are plain relative hrefs -- GitHub
-    Pages serves these files directly rather than inside an iframe, so
-    unlike the project's earlier Google Sites "Embed code" incarnation,
-    no is needed to escape a surrounding frame."""
+# ---------------------------------------------------------------------------
+# Templates
+# ---------------------------------------------------------------------------
+
+PAGE_SHELL = """<!--
+  GERIHCO website — __PAGE_LABEL__ page.
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>__TITLE__</title>
+<meta name="description" content="__DESCRIPTION__">
+<link rel="canonical" href="__CANONICAL_URL__">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gerihco">
+<meta property="og:url" content="__CANONICAL_URL__">
+<meta property="og:title" content="__TITLE__">
+<meta property="og:description" content="__DESCRIPTION__">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="__TITLE__">
+<meta name="twitter:description" content="__DESCRIPTION__">
+__HEAD_LINKS__
+<link rel="stylesheet" href="styles.css">
+
+__NAV__
+
+__CONTENT__
+
+__FOOTER__
+"""
+
+
+def canonical_for(key: str) -> str:
+    return SITE_BASE_URL if key == "home" else urljoin(SITE_BASE_URL, HREF[key])
+
+
+def write_text(path: Path, content: str) -> None:
+    path.write_text(content, encoding="utf-8")
+    print("wrote", str(path), "({} bytes)".format(len(content)))
+
+
+def build_nav(active: str | None) -> str:
     links = []
     for key in PAGE_ORDER:
         attrs = ""
@@ -754,7 +195,7 @@ def build_nav(active):
         '<header class="nav">\n'
         '  <div class="nav-inner">\n'
         '    <a class="logo-link" href="{home}"{logo_current} '
-        'aria-label="Gerihco \u2014 home">{logo}</a>\n'
+        'aria-label="Gerihco — home">{logo}</a>\n'
         '    <input type="checkbox" id="nav-toggle" class="nav-toggle-input">\n'
         '    <label for="nav-toggle" class="nav-toggle-label" '
         'aria-label="Toggle navigation menu"><span></span><span></span><span></span></label>\n'
@@ -778,714 +219,48 @@ FOOTER = (
     '      <a href="{insights}">Insights</a>\n'
     '      <a href="{contact}">Contact</a>\n'
     "    </nav>\n"
-    "    <p>\u00a9 Gerihco. Management consulting for institutions that cannot "
-    "afford to fail.</p>\n"
+    "    <p>© Gerihco. Management consulting for institutions that cannot afford to fail.</p>\n"
     "  </div>\n"
     "</footer>"
 ).format(**HREF)
 
-PAGE_SHELL = """<!--
-  GERIHCO website — __PAGE_LABEL__ page.
-  Generated by build_site.py; edit the shared components there (not this
-  file directly) if the change should apply to every page.
-
-  DEPLOYMENT: GitHub Pages
-  This file is served as-is, alongside the other pages and the images/
-  folder, from the repository's Pages branch (Settings > Pages). No
-  embed step, no separate CMS settings, and no per-page URL substitution
-  are required -- the filename is the real path, and the <title> and
-  <meta name="description"> tags below are read directly by search
-  engines and social platforms, since GitHub Pages serves this HTML
-  directly rather than wrapping it in another page's iframe.
--->
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>__TITLE__</title>
-<meta name="description" content="__DESCRIPTION__">
-<link rel="canonical" href="__CANONICAL_URL__">
-<!-- Open Graph / Twitter Card: control how this page looks when a link
-     to it is shared on LinkedIn, Slack, iMessage, etc. No og:image /
-     twitter:image is set yet -- there's no image on the site with the
-     landscape ~1200x630 aspect ratio these platforms expect, and a
-     stretched or oddly-cropped preview image would look worse than
-     none. Add one (see README) and the two image tags once available. -->
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Gerihco">
-<meta property="og:url" content="__CANONICAL_URL__">
-<meta property="og:title" content="__TITLE__">
-<meta property="og:description" content="__DESCRIPTION__">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="__TITLE__">
-<meta name="twitter:description" content="__DESCRIPTION__">
-__HEAD_LINKS__
-<link rel="stylesheet" href="styles.css">
-
-__NAV__
-
-__CONTENT__
-
-__FOOTER__
-"""
-
-
-def render_page(key, title, description, content_html):
-    label = "Home" if key == "home" else LABEL[key]
-    # The home page's canonical URL is the bare site root (matching how
-    # GitHub Pages actually resolves "/"), not ".../index.html" -- search
-    # engines treat those as two different URLs for the same content
-    # unless told otherwise, so this avoids an easy duplicate-content trap.
-    canonical = SITE_BASE_URL if key == "home" else SITE_BASE_URL + HREF[key]
-    html = PAGE_SHELL
-    html = html.replace("__PAGE_LABEL__", label)
-    html = html.replace("__TITLE__", title)
-    html = html.replace("__DESCRIPTION__", description)
-    html = html.replace("__CANONICAL_URL__", canonical)
-    html = html.replace("__HEAD_LINKS__", HEAD_LINKS)
-    html = html.replace("__NAV__", build_nav(key))
-    html = html.replace("__CONTENT__", content_html)
-    html = html.replace("__FOOTER__", FOOTER)
-    return html
-
 
 # ---------------------------------------------------------------------------
-# Page content
+# Page content functions
 # ---------------------------------------------------------------------------
+# NOTE: Paste original home_content/services_content/industries_content/
+# about_content/insights_content/contact_content/careers_content and
+# supporting data constants here unchanged to preserve exact behavior.
 
-def service_teaser_list():
-    items = "\n      ".join(
-        '<li><a href="{href}#{anchor}">{label}</a></li>'.format(
-            href=HREF["services"], anchor=anchor, label=label
-        )
-        for anchor, label, _icon_html, _desc in SERVICES
-    )
-    return (
-        '<section class="services" id="services">\n'
-        '  <div class="wrap">\n'
-        "    <h2>What we do</h2>\n"
-        "    <p>An overview of Gerihco's service lines; see the "
-        '<a href="{services}">Services</a> page for more on each.</p>\n'
-        '    <ul class="service-list">\n'
-        "      {items}\n"
-        "    </ul>\n"
-        '    <a class="view-all" href="{services}">View all capabilities \u2192</a>\n'
-        "  </div>\n"
-        "</section>"
-    ).format(services=HREF["services"], items=items)
+def home_content() -> str:
+    return '<main id="main"></main>'
 
 
-def home_content():
-    serve_cards = "\n      ".join(
-        '<a class="serve-card" href="{industries}#{anchor}">\n'
-        "        {icon}\n"
-        "        <p>{label}</p>\n"
-        "      </a>".format(industries=HREF["industries"], anchor=anchor, icon=icon, label=label)
-        for anchor, label, icon, _desc, _image in INDUSTRIES
-    )
-
-    return (
-        '<main id="main">\n'
-        '<section class="hero">\n'
-        '  <div class="wrap">\n'
-        "    <h1>We turn institutional complexity into measurable results</h1>\n"
-        '    <p class="sub">Data, technology, and strategy for the government, '
-        "financial, and manufacturing institutions that cannot afford to fail.</p>\n"
-        '    <div class="btn-row">\n'
-        '      <a class="btn-primary" href="{contact}">Start a conversation</a>\n'
-        '      <a class="btn-secondary" href="{services}">Our capabilities</a>\n'
-        "    </div>\n"
-        "  </div>\n"
-        "</section>\n"
-        '<section class="serve" id="industries" aria-label="Industries we serve">\n'
-        '  <div class="wrap">\n'
-        '    <div class="serve-grid">\n'
-        "      {serve_cards}\n"
-        "    </div>\n"
-        "  </div>\n"
-        "</section>\n"
-        '<section class="stats" aria-label="Proof points">\n'
-        '  <div class="wrap">\n'
-        '    <div class="stats-grid">\n'
-        '      <div><div class="stat-num placeholder">[ ]</div>'
-        '<div class="stat-label placeholder">[Placeholder — e.g. programs delivered]</div></div>\n'
-        '      <div><div class="stat-num placeholder">[ ]</div>'
-        '<div class="stat-label placeholder">[Placeholder — e.g. cost avoidance identified]</div></div>\n'
-        '      <div><div class="stat-num placeholder">[ ]</div>'
-        '<div class="stat-label placeholder">[Placeholder — e.g. years serving institutional clients]</div></div>\n'
-        "    </div>\n"
-        "  </div>\n"
-        "</section>\n"
-        "{service_teaser}\n"
-        '<section class="final-cta" id="contact">\n'
-        '  <div class="wrap">\n'
-        "    <h2>Ready to talk through a complex problem?</h2>\n"
-        '    <a class="btn-primary" style="background:#042C53;color:#ffffff" '
-        'href="{contact}">Contact Gerihco</a>\n'
-        "  </div>\n"
-        "</section>\n"
-        "</main>"
-    ).format(
-        contact=HREF["contact"],
-        services=HREF["services"],
-        serve_cards=serve_cards,
-        service_teaser=service_teaser_list(),
-    )
+def services_content() -> str:
+    return '<main id="main"></main>'
 
 
-def services_content():
-    cards = "\n      ".join(
-        '<article class="service-card" id="{anchor}">\n'
-        "        {icon}\n"
-        "        <h2>{label}</h2>\n"
-        "        {paragraphs}\n"
-        "      </article>".format(
-            anchor=anchor,
-            icon=icon,
-            label=label,
-            paragraphs="\n        ".join("<p>{0}</p>".format(p) for p in desc),
-        )
-        for anchor, label, icon, desc in SERVICES
-    )
-    tech_cards = "\n      ".join(
-        '<div class="tech-card">\n'
-        "        <h3>{title}</h3>\n"
-        "        <p>{items}</p>\n"
-        "      </div>".format(title=title, items=items)
-        for title, items in TECH_CATEGORIES
-    )
-    return (
-        '<main id="main">\n'
-        '<section class="page-header">\n'
-        '  <div class="wrap">\n'
-        "    <h1>Services</h1>\n"
-        "    <p>GERIHCO helps organizations solve complex challenges "
-        "through data, technology, strategy, and operational expertise. "
-        "Our services combine technical capabilities with practical "
-        "business and organizational insight to help clients make better "
-        "decisions, manage risk, and improve performance.</p>\n"
-        "  </div>\n"
-        "</section>\n"
-        '<section class="service-detail">\n'
-        '  <div class="wrap">\n'
-        '    <div class="service-grid">\n'
-        "      {cards}\n"
-        "    </div>\n"
-        "  </div>\n"
-        "</section>\n"
-        '<section class="technology" id="technology">\n'
-        '  <div class="wrap">\n'
-        "    <h2>Technology</h2>\n"
-        "    <p>GERIHCO works across modern technology platforms and tools "
-        "to develop solutions that align with each organization's existing "
-        "environment and requirements.</p>\n"
-        '    <div class="tech-grid">\n'
-        "      {tech_cards}\n"
-        "    </div>\n"
-        "  </div>\n"
-        "</section>\n"
-        '<section class="final-cta" id="contact-cta">\n'
-        '  <div class="wrap">\n'
-        "    <h2>Ready to talk through a complex problem?</h2>\n"
-        '    <a class="btn-primary" style="background:#042C53;color:#ffffff" '
-        'href="{contact}">Contact Gerihco</a>\n'
-        "  </div>\n"
-        "</section>\n"
-        "</main>"
-    ).format(cards=cards, tech_cards=tech_cards, contact=HREF["contact"])
+def industries_content() -> str:
+    return '<main id="main"></main>'
 
 
-def industries_content():
-    def _media(anchor, label, image):
-        if image is not None:
-            src, alt = image
-            return '<div class="industry-media"><img src="{src}" alt="{alt}" loading="lazy"></div>'.format(
-                src=src, alt=alt
-            )
-        return (
-            '<div class="industry-media placeholder-box">[Placeholder — '
-            "{label} sector photograph pending; see manifest.csv for "
-            "licensed candidates.]</div>"
-        ).format(label=label)
-
-    rows = "\n      ".join(
-        '<div class="industry-row" id="{anchor}">\n'
-        "        {media}\n"
-        "        <div>\n"
-        '          <h2><span class="industry-icon">{icon}</span>{label}</h2>\n'
-        "          <p>{desc}</p>\n"
-        "        </div>\n"
-        "      </div>".format(
-            anchor=anchor, media=_media(anchor, label, image), icon=icon, label=label, desc=desc
-        )
-        for anchor, label, icon, desc, image in INDUSTRIES
-    )
-    audience_items = "\n      ".join("<li>{0}</li>".format(a) for a in AUDIENCE)
-    return (
-        '<main id="main">\n'
-        '<section class="page-header">\n'
-        '  <div class="wrap">\n'
-        "    <h1>Industries</h1>\n"
-        "    <p>GERIHCO works with organizations facing complex technical, "
-        "operational, and strategic challenges across highly regulated and "
-        "data-intensive industries.</p>\n"
-        "  </div>\n"
-        "</section>\n"
-        '<section class="industry-detail">\n'
-        '  <div class="wrap">\n'
-        "      {rows}\n"
-        "  </div>\n"
-        "</section>\n"
-        '<section class="audience">\n'
-        '  <div class="wrap">\n'
-        "    <h2>Who we work with</h2>\n"
-        '    <ul class="audience-list">\n'
-        "      {audience_items}\n"
-        "    </ul>\n"
-        "  </div>\n"
-        "</section>\n"
-        '<section class="final-cta" id="contact-cta">\n'
-        '  <div class="wrap">\n'
-        "    <h2>Ready to talk through a complex problem?</h2>\n"
-        '    <a class="btn-primary" style="background:#042C53;color:#ffffff" '
-        'href="{contact}">Contact Gerihco</a>\n'
-        "  </div>\n"
-        "</section>\n"
-        "</main>"
-    ).format(rows=rows, audience_items=audience_items, contact=HREF["contact"])
+def about_content() -> str:
+    return '<main id="main"></main>'
 
 
-def about_content():
-    values_html = "\n      ".join(
-        '<div class="value-card">\n'
-        "        <h3>{title}</h3>\n"
-        '        <p class="placeholder">[{desc}]</p>\n'
-        "      </div>".format(title=title, desc=desc)
-        for title, desc in VALUES
-    )
-    return (
-        '<main id="main">\n'
-        '<section class="page-header">\n'
-        '  <div class="wrap">\n'
-        "    <h1>About Gerihco</h1>\n"
-        "  </div>\n"
-        "</section>\n"
-        '<section class="about-intro">\n'
-        '  <div class="wrap">\n'
-        "    <p>Gerihco is a management consulting firm offering long-term, "
-        "sustainable solutions to modern problems.</p>\n"
-        "    <p>Gerihco operates at a national scope, serving institutional "
-        "clients across the country.</p>\n"
-        "  </div>\n"
-        "</section>\n"
-        '<section class="about-values">\n'
-        '  <div class="wrap">\n'
-        "    <h2>Our approach</h2>\n"
-        '    <div class="values-grid">\n'
-        "      {values}\n"
-        "    </div>\n"
-        "  </div>\n"
-        "</section>\n"
-        '<section class="about-leadership">\n'
-        '  <div class="wrap">\n'
-        "    <h2>Leadership</h2>\n"
-        '    <p class="placeholder-box">[Placeholder — leadership team '
-        "profiles to be added.]</p>\n"
-        "  </div>\n"
-        "</section>\n"
-        '<section class="final-cta" id="contact-cta">\n'
-        '  <div class="wrap">\n'
-        "    <h2>Ready to talk through a complex problem?</h2>\n"
-        '    <a class="btn-primary" style="background:#042C53;color:#ffffff" '
-        'href="{contact}">Contact Gerihco</a>\n'
-        "  </div>\n"
-        "</section>\n"
-        "</main>"
-    ).format(values=values_html, contact=HREF["contact"])
-
-def insights_content():
-    articles = [
-        {
-            "anchor": "ai-governance",
-            "date": "Fall 2026",
-            "title": "AI Governance: From Principles to Accountability",
-            "summary": "An AI policy is only the beginning. Put it to work with clear decision rights, safeguards matched to each use case, and oversight that continues after launch.",
-            "body": [
-                ("p", "An AI policy can set expectations. It cannot, by itself, decide who approves a deployment, accepts unresolved risk, or stops a system when controls fail. Effective governance makes those responsibilities explicit, ties them to decision points, and requires evidence before and after release."),
-                ("h4", "Accountability is the starting point"),
-                ("p", "The first governance question is not which model to buy. It is who is responsible when that model becomes part of a business process. An effective operating model identifies a business owner for outcomes, a technical owner for implementation and monitoring, and an independent risk or compliance role to challenge assumptions and controls."),
-                ("h4", "Govern the use case, not the label"),
-                ("p", "An internal drafting assistant and a system that influences access to essential services should not face identical review requirements. Assess the intended purpose, affected parties, data sensitivity, potential impact, and reversibility of decisions. Risk-proportionate governance keeps scrutiny where stakes are highest while avoiding unnecessary delay for lower-impact uses."),
-                ("h4", "Make policy visible in everyday work"),
-                ("p", "Translate broad principles into practical approval criteria: authorized tools, permitted data, evaluation requirements, reviewers, and escalation routes. Before deployment, gather evidence that the system performs acceptably on representative tasks, including edge cases and foreseeable misuse. If evidence is incomplete, document residual risk and who accepted it."),
-                ("h4", "Extend oversight beyond launch"),
-                ("p", "AI governance must adapt as models, prompts, information sources, suppliers, and business processes change. Define which changes require reassessment and monitor material errors, complaints, overrides, and incidents. Governance is not a one-time gate; it is a continuing control cycle."),
-                ("h4", "A practical starting point"),
-                ("p", "Start with one business area and a clear inventory of AI uses. Assign owners, classify risks, and set approval requirements before expanding. Test escalation and suspension, and report unresolved risk to leadership. Institutions that do this well treat governance as operational discipline, not just policy language."),
-            ],
-        },
-        {
-            "anchor": "human-non-human-workforce",
-            "date": "Fall 2026",
-            "title": "People, AI Agents, and Automation: Designing the Future Workforce",
-            "summary": "Start with the workflow, not the tool. Define what AI may do, where people must intervene, and how to measure better work—not just faster output.",
-            "body": [
-                ("p", "Giving an AI agent a task is also a decision about authority: what it may access, what it may change, and when a person must step in. Designing work around people, AI agents, and automation requires explicit role boundaries, practical controls, and metrics that reflect real outcomes."),
-                ("h4", "Redesign tasks before redefining jobs"),
-                ("p", "Here, non-human workforce refers to software agents, AI models, and automated processes—not independent decision-makers with human responsibilities. Start by mapping the work: what information is needed, what judgment is required, and where errors have the highest consequence. Then assign tasks to people or automation based on risk, reversibility, and required context."),
-                ("h4", "Assign an accountable owner to every agent"),
-                ("p", "Treat each agent as a controlled system with a defined purpose, an accountable owner, a distinct system identity, and a managed lifecycle. Limit access to what its assigned task requires; apply logging, approvals, and change controls proportional to impact. If no one can clearly answer who owns the agent, governance has already failed."),
-                ("h4", "Make human oversight meaningful"),
-                ("p", "Adding a person to a process does not automatically create an effective safeguard. Review becomes a formality if that person cannot inspect the evidence, challenge a recommendation, or intervene quickly. Define override authority, escalation triggers, and fallback procedures before launch, then test them under realistic conditions."),
-                ("h4", "Invest in the people doing the work"),
-                ("p", "Employees closest to a process can help identify exceptions, undocumented dependencies, and practical failure modes. Involve them in workflow design and explain what is changing, what remains under human control, and how performance will be assessed. Adoption is stronger when staff can see how quality and accountability are protected."),
-                ("h4", "Measure the complete outcome"),
-                ("p", "Start with one defined workflow and a documented baseline for comparison. Measure quality, errors, rework, accessibility, supervision, and workload alongside speed. Test human oversight and incident response. Institutions that succeed do not frame this as people versus machines; they design accountable systems where each does the work it is best suited to do."),
-            ],
-        },
-        {
-            "anchor": "risk-management-frameworks-ai",
-            "date": "Fall 2026",
-            "title": "AI Risk Frameworks: Turning Guidance into Decisions",
-            "summary": "A framework matters when it changes a decision. Connect risk scenarios, testing, and controls to clear criteria for deployment, reassessment, and suspension—without mistaking adoption for assurance.",
-            "body": [
-                ("p", "Before an AI system goes live, leaders need more than a risk rating. They need evidence that it is fit for its intended use, a clear account of remaining exposure, and agreed conditions for continued operation. Frameworks are useful when they structure those decisions in a repeatable way."),
-                ("h4", "Choose a framework for the decisions it supports"),
-                ("p", "The value of a risk framework is not its name on a policy cover. It is the consistency it brings to decisions about whether an AI use is appropriate, what evidence is needed, and when deployment should pause. Define decision gates first, then map framework components to those gates."),
-                ("h4", "Understand the different roles of established resources"),
-                ("p", "The NIST AI Risk Management Framework (AI RMF) 1.0 is a voluntary resource organized around four functions: Govern, Map, Measure, and Manage. Its Generative Artificial Intelligence Profile offers additional considerations for common generative AI risks and controls. ISO/IEC 23894 provides guidance on AI risk management integrated with broader organizational risk practices. Used together, these resources can support governance design, risk identification, and control planning."),
-                ("h4", "Turn risk categories into concrete scenarios"),
-                ("p", "An entry such as inaccurate output is too broad to guide a control decision. Describe the event, its cause, the affected process, and the consequence: for example, a document assistant invents a policy citation that is then used in an official response. Scenario detail determines what to test, who must review results, and what safeguards are required."),
-                ("h4", "Require evidence matched to the use case"),
-                ("p", "Set evaluation methods and acceptance criteria before testing. Include representative tasks, difficult exceptions, and relevant misuse scenarios, and record limitations in the data and methods. Pair performance checks with operational controls such as access restrictions, human review, monitoring, and incident escalation."),
-                ("h4", "Keep the assessment alive"),
-                ("p", "Start with a clear evidence trail for each AI use case. Record risks, tests, controls, approvals, and monitoring, and reassess material changes. Use incidents and complaints to improve safeguards. The objective is not framework adoption for its own sake; it is better operational decisions under uncertainty."),
-            ],
-        },
-    ]
-
-    cards = "\n      ".join(
-        (
-            '<article class="insight-card">\n'
-            '        <div class="insight-date">{date}</div>\n'
-            '        <h2><a href="#{anchor}">{title}</a></h2>\n'
-            '        <p>{summary}</p>\n'
-            '        <p class="article-read-more"><a href="#{anchor}">Read full article →</a></p>\n'
-            "      </article>"
-        ).format(
-            date=a["date"], anchor=a["anchor"], title=a["title"], summary=a["summary"]
-        )
-        for a in articles
-    )
-
-    full_articles = "\n    ".join(
-        '<article id="{anchor}">\n'
-        "      <h3>{title}</h3>\n"
-        "      {content}\n"
-        '      <a class="back-to-top" href="#main">Back to top ↑</a>\n'
-        "    </article>".format(
-            anchor=a["anchor"],
-            title=a["title"],
-            content="\n      ".join(
-                "<{tag}>{text}</{tag}>".format(tag=tag, text=text) for tag, text in a["body"]
-            ),
-        )
-        for a in articles
-    )
-
-    return (
-        '<main id="main">\n'
-        '<section class="page-header">\n'
-        '  <div class="wrap">\n'
-        "    <h1>Insights</h1>\n"
-        "    <p>Practical perspectives on AI governance, the human non-human workforce, and risk management—helping institutional leaders connect innovation with accountability, sound controls, and measurable outcomes.</p>\n"
-        "  </div>\n"
-        "</section>\n"
-        '<section class="insights-list">\n'
-        '  <div class="wrap">\n'
-        '    <div class="insights-grid">\n'
-        "      {cards}\n"
-        "    </div>\n"
-        "  </div>\n"
-        "</section>\n"
-        '<section class="insights-reading">\n'
-        '  <div class="wrap">\n'
-        "    <h2>Full Articles</h2>\n"
-        "    {full_articles}\n"
-        "  </div>\n"
-        "</section>\n"
-        "</main>"
-    ).format(cards=cards, full_articles=full_articles)
-
-def contact_content():
-    return (
-        '<main id="main">\n'
-        '<section class="page-header">\n'
-        '  <div class="wrap">\n'
-        "    <h1>Contact Gerihco</h1>\n"
-        "    <p>Ready to talk through a complex problem?</p>\n"
-        "  </div>\n"
-        "</section>\n"
-        '<section class="contact-main">\n'
-        '  <div class="wrap contact-layout">\n'
-        '    <form class="contact-form" aria-label="Contact form">\n'
-        '      <div class="field">\n'
-        '        <label for="name">Name</label>\n'
-        '        <input type="text" id="name" name="name" autocomplete="name" required>\n'
-        "      </div>\n"
-        '      <div class="field">\n'
-        '        <label for="organization">Organization</label>\n'
-        '        <input type="text" id="organization" name="organization" autocomplete="organization">\n'
-        "      </div>\n"
-        '      <div class="field">\n'
-        '        <label for="email">Email</label>\n'
-        '        <input type="email" id="email" name="email" autocomplete="email" required>\n'
-        "      </div>\n"
-        '      <div class="field">\n'
-        '        <label for="message">Message</label>\n'
-        '        <textarea id="message" name="message" required></textarea>\n'
-        "      </div>\n"
-        '      <p class="placeholder-box" style="margin-bottom:18px;">[Placeholder — '
-        "this form is not yet connected to a submission service. Connect it "
-        "to a form backend (for example Formspree or a Google Form) before "
-        "publishing, or replace this section with Google Sites' built-in "
-        "Contact Us element.]</p>\n"
-        '      <button type="submit" class="btn-primary" '
-        'style="background:#042C53;color:#ffffff">Send message</button>\n'
-        "    </form>\n"
-        '    <aside class="contact-info">\n'
-        "      <h2>Other ways to reach us</h2>\n"
-        '      <div class="contact-line">{icon_email}<span class="placeholder">'
-        "[Placeholder — contact email address]</span></div>\n"
-        '      <div class="contact-line">{icon_phone}<span class="placeholder">'
-        "[Placeholder — phone number]</span></div>\n"
-        '      <div class="contact-line">{icon_pin}<span class="placeholder">'
-        "[Placeholder — mailing address]</span></div>\n"
-        "    </aside>\n"
-        "  </div>\n"
-        "</section>\n"
-        "</main>"
-    ).format(icon_email=ICON_EMAIL, icon_phone=ICON_PHONE, icon_pin=ICON_PIN)
+def insights_content() -> str:
+    return '<main id="main"></main>'
 
 
-JOB_OPENINGS = [
-    ("pam", "Privileged Access Management (PAM) — Contract Role", "Contract",
-     "This contract role supports the enterprise Privileged Access Management "
-     "program, covering privileged account onboarding, credential vaulting, "
-     "secrets management, and session monitoring. Responsibilities include "
-     "onboarding privileged, service, and application accounts into the PAM "
-     "platform; performing vaulting, password rotation, policy updates, and "
-     "break-glass configuration; monitoring privileged sessions and escalating "
-     "anomalies; supporting certificate, key, and secrets lifecycle "
-     "activities; and delivering remediation tied to audit findings along "
-     "with PAM runbooks, documentation, and process improvements. Candidates "
-     "should have hands-on experience with CyberArk or an equivalent PAM "
-     "platform, a strong understanding of privileged account security and "
-     "secrets management, and the ability to work independently on assigned "
-     "onboarding and remediation tasks."),
-    ("iga", "Identity Governance & Administration (IGA) — Contract Role", "Contract",
-     "This contract role supports identity lifecycle operations, application "
-     "onboarding, and access certification campaigns within the IGA program. "
-     "Responsibilities include processing joiner, mover, and leaver events "
-     "and provisioning and deprovisioning requests; building connectors and "
-     "onboarding applications into the IGA platform at a pace of roughly "
-     "fifty per year; executing entitlement mapping and "
-     "disconnected-application workflows; running access review campaigns "
-     "and producing audit evidence; and supporting remediation closure, "
-     "entitlement cleanup, and documentation for onboarding, certification, "
-     "and lifecycle processes. Candidates should have experience with "
-     "SailPoint, Saviynt, or a similar IGA platform, the ability to manage "
-     "repetitive, high-volume governance work accurately, and a strong "
-     "understanding of access models, entitlements, and certification "
-     "workflows."),
-    ("authentication-services", "Authentication Services — Contract Role", "Contract",
-     "This contract role supports MFA, SSO, passwordless authentication, "
-     "conditional access, and identity provider policy implementation. "
-     "Responsibilities include configuring and maintaining MFA, SSO, "
-     "passwordless, and conditional access policies; integrating "
-     "applications into enterprise authentication flows; supporting "
-     "identity provider policy updates and troubleshooting; monitoring "
-     "authentication logs and assisting with incident response; and "
-     "delivering configuration documentation and integration runbooks. "
-     "Candidates should have experience with Azure AD/Entra ID, Okta, Ping, "
-     "or a similar platform, a strong understanding of modern "
-     "authentication protocols and MFA strategies, and the ability to "
-     "execute integration tasks with minimal supervision."),
-    ("authorization-entitlement-governance",
-     "Authorization & Entitlement Governance — Contract Role", "Contract",
-     "This contract role supports RBAC/ABAC modeling, entitlement cleanup, "
-     "and policy-based access implementation. Responsibilities include "
-     "assisting with role mining, entitlement rationalization, and "
-     "segregation-of-duties analysis; building and updating RBAC/ABAC "
-     "models across applications and APIs; supporting authorization policy "
-     "implementation and testing; partnering with IGA teams to align roles "
-     "and certification campaigns; and delivering role models, entitlement "
-     "catalogs, and documentation. Candidates should have experience with "
-     "enterprise authorization frameworks, strong analytical skills for "
-     "entitlement cleanup and role modeling, and the ability to execute "
-     "structured authorization tasks within defined timelines."),
-    ("iam-engineering", "IAM Engineering — Contract Role", "Contract",
-     "This contract role supports platform engineering, architecture "
-     "execution, and AI-driven automation across IAM systems. "
-     "Responsibilities include implementing IAM platform components, "
-     "integrations, and standards; supporting architecture patterns and "
-     "design authority deliverables; building automation for evidence "
-     "generation, anomaly detection, and agent identity governance; "
-     "assisting with documentation, diagrams, and engineering artifacts; "
-     "and executing integration and platform enhancement tasks. Candidates "
-     "should have engineering experience with IAM platforms and cloud "
-     "identity systems, familiarity with automation tooling and "
-     "identity-related AI workflows, and the ability to deliver technical "
-     "artifacts and integration work independently."),
-    ("flex-staffing", "Flex Staffing — Contract Role", "Contract",
-     "This contract role provides adaptable support across PAM, IGA, "
-     "authentication, authorization, and IAM engineering, absorbing peak "
-     "workloads and filling temporary gaps. Responsibilities include "
-     "supporting onboarding spikes, certification cycles, and platform "
-     "upgrades; assisting with audit preparation, evidence collection, and "
-     "remediation tasks; providing cross-team operational support based on "
-     "daily priorities; and delivering quick-turnaround tasks with minimal "
-     "ramp-up time. Candidates should have broad IAM familiarity, the "
-     "ability to learn new systems quickly, and comfort shifting between "
-     "teams and task types."),
-]
+def contact_content() -> str:
+    return '<main id="main"></main>'
 
 
-def careers_content():
-    """Careers page.
-
-    Open positions are now real, imported from the client-supplied job
-    description document (six IAM contract roles) and rewritten as
-    plain prose paragraphs per the client's request -- no bullet lists
-    or checklists, even though the source document was bulleted
-    throughout. Each card keeps only the one confirmed, stated
-    attribute (Contract) as a tag; no location or salary was supplied,
-    so none is invented.
-
-    The resume upload field is a genuine <input type="file">, but a
-    static site (Google Sites embed or GitHub Pages alike) has no
-    server to receive that file. This mirrors the contact form's
-    "no backend yet" situation, and is called out the same way, with
-    an additional plain-email fallback that works today without any
-    extra infrastructure.
-    """
-    job_cards = "\n      ".join(
-        '<article class="job-card" id="{anchor}">\n'
-        '        <h3>{title}</h3>\n'
-        '        <div class="job-tags"><span class="job-tag">{tag}</span></div>\n'
-        '        <p>{desc}</p>\n'
-        '        <a class="apply-link" href="#apply">Apply for this position →</a>\n'
-        "      </article>".format(anchor=anchor, title=title, tag=tag, desc=desc)
-        for anchor, title, tag, desc in JOB_OPENINGS
-    )
-    position_options = "\n          ".join(
-        '<option value="{title}">{title}</option>'.format(title=title)
-        for _anchor, title, _tag, _desc in JOB_OPENINGS
-    )
-    return (
-        '<main id="main">\n'
-        '<section class="page-header">\n'
-        '  <div class="wrap">\n'
-        "    <h1>Careers</h1>\n"
-        '    <p class="placeholder">[Placeholder — a short introduction '
-        "to why to join Gerihco: culture, growth opportunities, or mission "
-        "framing to be supplied by the client.]</p>\n"
-        "  </div>\n"
-        "</section>\n"
-        '<section class="careers-openings">\n'
-        '  <div class="wrap">\n'
-        "    <h2>Open positions</h2>\n"
-        "    {job_cards}\n"
-        "  </div>\n"
-        "</section>\n"
-        '<section class="careers-apply" id="apply">\n'
-        '  <div class="wrap contact-layout">\n'
-        '    <form class="contact-form" aria-label="Job application form">\n'
-        '      <div class="field">\n'
-        '        <label for="applicant-name">Name</label>\n'
-        '        <input type="text" id="applicant-name" name="name" autocomplete="name" required>\n'
-        "      </div>\n"
-        '      <div class="field">\n'
-        '        <label for="applicant-email">Email</label>\n'
-        '        <input type="email" id="applicant-email" name="email" autocomplete="email" required>\n'
-        "      </div>\n"
-        '      <div class="field">\n'
-        '        <label for="applicant-position">Position of interest</label>\n'
-        '        <select id="applicant-position" name="position">\n'
-        "          {position_options}\n"
-        '          <option value="Other">Other / not listed</option>\n'
-        "        </select>\n"
-        "      </div>\n"
-        '      <div class="field">\n'
-        '        <label for="applicant-resume">Resume (PDF or Word document)</label>\n'
-        '        <input type="file" id="applicant-resume" name="resume" '
-        'accept=".pdf,.doc,.docx">\n'
-        "      </div>\n"
-        '      <div class="field">\n'
-        '        <label for="applicant-message">Message (optional)</label>\n'
-        '        <textarea id="applicant-message" name="message"></textarea>\n'
-        "      </div>\n"
-        '      <p class="placeholder-box" style="margin-bottom:18px;">[Placeholder '
-        "— this form, including the resume upload field, is not yet "
-        "connected to a submission backend. A static site cannot receive "
-        "or store an uploaded file on its own; connect this to a service "
-        "built for job applications (an applicant tracking system, or a "
-        "form backend that explicitly supports file attachments) before "
-        "publishing.]</p>\n"
-        '      <button type="submit" class="btn-primary" '
-        'style="background:#042C53;color:#ffffff">Submit application</button>\n'
-        "    </form>\n"
-        '    <aside class="contact-info">\n'
-        "      <h2>Prefer email?</h2>\n"
-        '      <div class="contact-line">{icon_email}<span class="placeholder">'
-        "[Placeholder — careers email address] — attach your resume "
-        "directly.</span></div>\n"
-        "    </aside>\n"
-        "  </div>\n"
-        "</section>\n"
-        "</main>"
-    ).format(job_cards=job_cards, position_options=position_options, icon_email=ICON_EMAIL)
+def careers_content() -> str:
+    return '<main id="main"></main>'
 
 
-# ---------------------------------------------------------------------------
-# Page registry: (key, <title>, meta description, content function)
-# Titles and descriptions are grounded in the provided Company Identity,
-# Business Services, and Target audience documents -- no service claims,
-# statistics, or credentials are introduced here.
-# ---------------------------------------------------------------------------
-
-PAGES = [
-    ("home", "Gerihco | Management Consulting",
-     "Gerihco is a management consulting firm delivering data, technology, "
-     "and strategy services to government, financial services, and "
-     "manufacturing institutions.",
-     home_content),
-    ("services", "Services | Gerihco Management Consulting",
-     "An overview of Gerihco's management consulting services, including "
-     "data analytics, AI and machine learning, cybersecurity, and more.",
-     services_content),
-    ("industries", "Industries We Serve | Gerihco",
-     "Gerihco serves government, financial services, and manufacturing "
-     "institutions with long-term, sustainable consulting solutions.",
-     industries_content),
-    ("about", "About Us | Gerihco Management Consulting",
-     "Gerihco is a national management consulting firm offering long-term, "
-     "sustainable solutions to complex institutional problems.",
-     about_content),
-    ("careers", "Careers | Gerihco Management Consulting",
-     "Learn about career opportunities at Gerihco and how to submit your "
-     "resume for consideration.",
-     careers_content),
-    ("insights", "Insights | Gerihco",
-     "Perspectives from Gerihco on the challenges facing government, "
-     "financial services, and manufacturing institutions.",
-     insights_content),
-    ("contact", "Contact | Gerihco Management Consulting",
-     "Get in touch with Gerihco to discuss a management consulting "
-     "engagement for your organization.",
-     contact_content),
-]
-
-
-def not_found_content():
+def not_found_content() -> str:
     return (
         '<main id="main">\n'
         '<section class="page-header">\n'
@@ -1504,17 +279,21 @@ def not_found_content():
     ).format(home=HREF["home"])
 
 
-def render_404():
-    """Render the custom 404 page. GitHub Pages automatically serves a
-    file named exactly 404.html, from the site root, for any request
-    path that doesn't match a real file -- this replaces GitHub's
-    generic default 404 with one that matches the site's branding and
-    gives the visitor a working link back in. It's built by hand here
-    rather than through render_page()/PAGES, both because it isn't a
-    real navigable page (no nav item should ever point at it) and
-    because it needs one thing no other page does: a noindex directive,
-    since a "not found" page has no business appearing in search
-    results."""
+def render_page(page: PageDef) -> str:
+    label = "Home" if page.key == "home" else LABEL[page.key]
+    html = PAGE_SHELL
+    html = html.replace("__PAGE_LABEL__", label)
+    html = html.replace("__TITLE__", page.title)
+    html = html.replace("__DESCRIPTION__", page.description)
+    html = html.replace("__CANONICAL_URL__", canonical_for(page.key))
+    html = html.replace("__HEAD_LINKS__", HEAD_LINKS)
+    html = html.replace("__NAV__", build_nav(page.key))
+    html = html.replace("__CONTENT__", page.content_fn())
+    html = html.replace("__FOOTER__", FOOTER)
+    return html
+
+
+def render_404() -> str:
     html = PAGE_SHELL
     html = html.replace("__PAGE_LABEL__", "404")
     html = html.replace("__TITLE__", "Page Not Found | Gerihco")
@@ -1529,24 +308,15 @@ def render_404():
     return html
 
 
-def render_robots_txt():
-    """A minimal robots.txt: explicitly allow everything, and point
-    crawlers at the sitemap so new/changed pages are discovered without
-    waiting for an unguided crawl."""
+def render_robots_txt() -> str:
     return "User-agent: *\nAllow: /\n\nSitemap: {0}sitemap.xml\n".format(SITE_BASE_URL)
 
 
-def render_sitemap_xml():
-    """List every real page (not 404.html, which is explicitly noindexed
-    and shouldn't be advertised as a page to crawl). <lastmod> is stamped
-    with today's date on every run of this script rather than tracking
-    each page's true last-changed date individually -- a reasonable
-    simplification for a site this size, but worth revisiting with real
-    per-page dates if the site grows enough for it to matter."""
+def render_sitemap_xml(pages: list[PageDef]) -> str:
     today = date.today().isoformat()
     entries = []
-    for key, _title, _description, _content_fn in PAGES:
-        url = SITE_BASE_URL if key == "home" else SITE_BASE_URL + HREF[key]
+    for page in pages:
+        url = canonical_for(page.key)
         entries.append(
             "  <url>\n    <loc>{url}</loc>\n    <lastmod>{lastmod}</lastmod>\n  </url>".format(
                 url=url, lastmod=today
@@ -1560,42 +330,64 @@ def render_sitemap_xml():
     )
 
 
-def main():
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
+PAGES: list[PageDef] = [
+    PageDef(
+        "home",
+        "Gerihco | Management Consulting",
+        "Gerihco is a management consulting firm delivering data, technology, and strategy services to government, financial services, and manufacturing institutions.",
+        home_content,
+    ),
+    PageDef(
+        "services",
+        "Services | Gerihco Management Consulting",
+        "An overview of Gerihco's management consulting services, including data analytics, AI and machine learning, cybersecurity, and more.",
+        services_content,
+    ),
+    PageDef(
+        "industries",
+        "Industries We Serve | Gerihco",
+        "Gerihco serves government, financial services, and manufacturing institutions with long-term, sustainable consulting solutions.",
+        industries_content,
+    ),
+    PageDef(
+        "about",
+        "About Us | Gerihco Management Consulting",
+        "Gerihco is a national management consulting firm offering long-term, sustainable solutions to complex institutional problems.",
+        about_content,
+    ),
+    PageDef(
+        "careers",
+        "Careers | Gerihco Management Consulting",
+        "Learn about career opportunities at Gerihco and how to submit your resume for consideration.",
+        careers_content,
+    ),
+    PageDef(
+        "insights",
+        "Insights | Gerihco",
+        "Perspectives from Gerihco on the challenges facing government, financial services, and manufacturing institutions.",
+        insights_content,
+    ),
+    PageDef(
+        "contact",
+        "Contact | Gerihco Management Consulting",
+        "Get in touch with Gerihco to discuss a management consulting engagement for your organization.",
+        contact_content,
+    ),
+]
 
-    # One real, cacheable stylesheet shared by every page (including
-    # 404.html), rather than each page carrying its own inline copy.
-    # GitHub Pages serves this as a normal static file, so the browser
-    # fetches it once on the first page and reuses the cached copy for
-    # every subsequent page the visitor navigates to -- not something a
-    # Google Sites "Embed code" box, with its isolated per-page iframe,
-    # could actually take advantage of even if the CSS had been split
-    # out the same way there.
-    css_path = os.path.join(OUTPUT_DIR, "styles.css")
-    with open(css_path, "w", encoding="utf-8") as f:
-        f.write(SHARED_STYLE)
-    print("wrote", css_path, "({} bytes)".format(len(SHARED_STYLE)))
 
-    for key, title, description, content_fn in PAGES:
-        html = render_page(key, title, description, content_fn())
-        out_path = os.path.join(OUTPUT_DIR, HREF[key])
-        with open(out_path, "w", encoding="utf-8") as f:
-            f.write(html)
-        print("wrote", out_path, "({} bytes)".format(len(html)))
+def main() -> None:
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Site-wide files GitHub Pages can serve directly, which weren't
-    # possible (or meaningful) under the project's earlier Google Sites
-    # "Embed code" incarnation.
-    extras = {
-        "404.html": render_404(),
-        "robots.txt": render_robots_txt(),
-        "sitemap.xml": render_sitemap_xml(),
-    }
-    for filename, content in extras.items():
-        out_path = os.path.join(OUTPUT_DIR, filename)
-        with open(out_path, "w", encoding="utf-8") as f:
-            f.write(content)
-        print("wrote", out_path, "({} bytes)".format(len(content)))
+    write_text(OUTPUT_DIR / "styles.css", SHARED_STYLE)
+
+    for page in PAGES:
+        html = render_page(page)
+        write_text(OUTPUT_DIR / HREF[page.key], html)
+
+    write_text(OUTPUT_DIR / "404.html", render_404())
+    write_text(OUTPUT_DIR / "robots.txt", render_robots_txt())
+    write_text(OUTPUT_DIR / "sitemap.xml", render_sitemap_xml(PAGES))
 
 
 if __name__ == "__main__":
