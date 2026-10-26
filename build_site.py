@@ -1101,23 +1101,102 @@ def about_content():
         "</main>"
     ).format(values=values_html, contact=HREF["contact"])
 
-
 def insights_content():
-    card = (
-        '<article class="insight-card">\n'
-        '        <div class="insight-date placeholder">[Month Year]</div>\n'
-        "        <h2>[Placeholder insight title]</h2>\n"
-        '        <p class="placeholder">[Placeholder one-line summary of this piece.]</p>\n'
-        "      </article>"
+    articles = [
+        {
+            "anchor": "ai-governance",
+            "date": "Fall 2026",
+            "title": "AI Governance: From Principles to Accountability",
+            "summary": "An AI policy is only the beginning. Put it to work with clear decision rights, safeguards matched to each use case, and oversight that continues after launch.",
+            "body": [
+                ("p", "An AI policy can set expectations. It cannot, by itself, decide who approves a deployment, accepts unresolved risk, or stops a system when controls fail. Effective governance makes those responsibilities explicit, ties them to decision points, and requires evidence before and after release."),
+                ("h4", "Accountability is the starting point"),
+                ("p", "The first governance question is not which model to buy. It is who is responsible when that model becomes part of a business process. An effective operating model identifies a business owner for outcomes, a technical owner for implementation and monitoring, and an independent risk or compliance role to challenge assumptions and controls."),
+                ("h4", "Govern the use case, not the label"),
+                ("p", "An internal drafting assistant and a system that influences access to essential services should not face identical review requirements. Assess the intended purpose, affected parties, data sensitivity, potential impact, and reversibility of decisions. Risk-proportionate governance keeps scrutiny where stakes are highest while avoiding unnecessary delay for lower-impact uses."),
+                ("h4", "Make policy visible in everyday work"),
+                ("p", "Translate broad principles into practical approval criteria: authorized tools, permitted data, evaluation requirements, reviewers, and escalation routes. Before deployment, gather evidence that the system performs acceptably on representative tasks, including edge cases and foreseeable misuse. If evidence is incomplete, document residual risk and who accepted it."),
+                ("h4", "Extend oversight beyond launch"),
+                ("p", "AI governance must adapt as models, prompts, information sources, suppliers, and business processes change. Define which changes require reassessment and monitor material errors, complaints, overrides, and incidents. Governance is not a one-time gate; it is a continuing control cycle."),
+                ("h4", "A practical starting point"),
+                ("p", "Start with one business area and a clear inventory of AI uses. Assign owners, classify risks, and set approval requirements before expanding. Test escalation and suspension, and report unresolved risk to leadership. Institutions that do this well treat governance as operational discipline, not just policy language."),
+            ],
+        },
+        {
+            "anchor": "human-non-human-workforce",
+            "date": "Fall 2026",
+            "title": "People, AI Agents, and Automation: Designing the Future Workforce",
+            "summary": "Start with the workflow, not the tool. Define what AI may do, where people must intervene, and how to measure better work—not just faster output.",
+            "body": [
+                ("p", "Giving an AI agent a task is also a decision about authority: what it may access, what it may change, and when a person must step in. Designing work around people, AI agents, and automation requires explicit role boundaries, practical controls, and metrics that reflect real outcomes."),
+                ("h4", "Redesign tasks before redefining jobs"),
+                ("p", "Here, non-human workforce refers to software agents, AI models, and automated processes—not independent decision-makers with human responsibilities. Start by mapping the work: what information is needed, what judgment is required, and where errors have the highest consequence. Then assign tasks to people or automation based on risk, reversibility, and required context."),
+                ("h4", "Assign an accountable owner to every agent"),
+                ("p", "Treat each agent as a controlled system with a defined purpose, an accountable owner, a distinct system identity, and a managed lifecycle. Limit access to what its assigned task requires; apply logging, approvals, and change controls proportional to impact. If no one can clearly answer who owns the agent, governance has already failed."),
+                ("h4", "Make human oversight meaningful"),
+                ("p", "Adding a person to a process does not automatically create an effective safeguard. Review becomes a formality if that person cannot inspect the evidence, challenge a recommendation, or intervene quickly. Define override authority, escalation triggers, and fallback procedures before launch, then test them under realistic conditions."),
+                ("h4", "Invest in the people doing the work"),
+                ("p", "Employees closest to a process can help identify exceptions, undocumented dependencies, and practical failure modes. Involve them in workflow design and explain what is changing, what remains under human control, and how performance will be assessed. Adoption is stronger when staff can see how quality and accountability are protected."),
+                ("h4", "Measure the complete outcome"),
+                ("p", "Start with one defined workflow and a documented baseline for comparison. Measure quality, errors, rework, accessibility, supervision, and workload alongside speed. Test human oversight and incident response. Institutions that succeed do not frame this as people versus machines; they design accountable systems where each does the work it is best suited to do."),
+            ],
+        },
+        {
+            "anchor": "risk-management-frameworks-ai",
+            "date": "Fall 2026",
+            "title": "AI Risk Frameworks: Turning Guidance into Decisions",
+            "summary": "A framework matters when it changes a decision. Connect risk scenarios, testing, and controls to clear criteria for deployment, reassessment, and suspension—without mistaking adoption for assurance.",
+            "body": [
+                ("p", "Before an AI system goes live, leaders need more than a risk rating. They need evidence that it is fit for its intended use, a clear account of remaining exposure, and agreed conditions for continued operation. Frameworks are useful when they structure those decisions in a repeatable way."),
+                ("h4", "Choose a framework for the decisions it supports"),
+                ("p", "The value of a risk framework is not its name on a policy cover. It is the consistency it brings to decisions about whether an AI use is appropriate, what evidence is needed, and when deployment should pause. Define decision gates first, then map framework components to those gates."),
+                ("h4", "Understand the different roles of established resources"),
+                ("p", "The NIST AI Risk Management Framework (AI RMF) 1.0 is a voluntary resource organized around four functions: Govern, Map, Measure, and Manage. Its Generative Artificial Intelligence Profile offers additional considerations for common generative AI risks and controls. ISO/IEC 23894 provides guidance on AI risk management integrated with broader organizational risk practices. Used together, these resources can support governance design, risk identification, and control planning."),
+                ("h4", "Turn risk categories into concrete scenarios"),
+                ("p", "An entry such as inaccurate output is too broad to guide a control decision. Describe the event, its cause, the affected process, and the consequence: for example, a document assistant invents a policy citation that is then used in an official response. Scenario detail determines what to test, who must review results, and what safeguards are required."),
+                ("h4", "Require evidence matched to the use case"),
+                ("p", "Set evaluation methods and acceptance criteria before testing. Include representative tasks, difficult exceptions, and relevant misuse scenarios, and record limitations in the data and methods. Pair performance checks with operational controls such as access restrictions, human review, monitoring, and incident escalation."),
+                ("h4", "Keep the assessment alive"),
+                ("p", "Start with a clear evidence trail for each AI use case. Record risks, tests, controls, approvals, and monitoring, and reassess material changes. Use incidents and complaints to improve safeguards. The objective is not framework adoption for its own sake; it is better operational decisions under uncertainty."),
+            ],
+        },
+    ]
+
+    cards = "\n      ".join(
+        (
+            '<article class="insight-card">\n'
+            '        <div class="insight-date">{date}</div>\n'
+            '        <h2><a href="#{anchor}">{title}</a></h2>\n'
+            '        <p>{summary}</p>\n'
+            '        <p class="article-read-more"><a href="#{anchor}">Read full article →</a></p>\n'
+            "      </article>"
+        ).format(
+            date=a["date"], anchor=a["anchor"], title=a["title"], summary=a["summary"]
+        )
+        for a in articles
     )
-    cards = "\n      ".join([card, card, card])
+
+    full_articles = "\n    ".join(
+        '<article id="{anchor}">\n'
+        "      <h3>{title}</h3>\n"
+        "      {content}\n"
+        '      <a class="back-to-top" href="#main">Back to top ↑</a>\n'
+        "    </article>".format(
+            anchor=a["anchor"],
+            title=a["title"],
+            content="\n      ".join(
+                "<{tag}>{text}</{tag}>".format(tag=tag, text=text) for tag, text in a["body"]
+            ),
+        )
+        for a in articles
+    )
+
     return (
         '<main id="main">\n'
         '<section class="page-header">\n'
         '  <div class="wrap">\n'
         "    <h1>Insights</h1>\n"
-        '    <p class="placeholder">[Placeholder — introductory framing '
-        "for Gerihco's thought leadership content.]</p>\n"
+        "    <p>Practical perspectives on AI governance, the human non-human workforce, and risk management—helping institutional leaders connect innovation with accountability, sound controls, and measurable outcomes.</p>\n"
         "  </div>\n"
         "</section>\n"
         '<section class="insights-list">\n'
@@ -1127,9 +1206,14 @@ def insights_content():
         "    </div>\n"
         "  </div>\n"
         "</section>\n"
+        '<section class="insights-reading">\n'
+        '  <div class="wrap">\n'
+        "    <h2>Full Articles</h2>\n"
+        "    {full_articles}\n"
+        "  </div>\n"
+        "</section>\n"
         "</main>"
-    ).format(cards=cards)
-
+    ).format(cards=cards, full_articles=full_articles)
 
 def contact_content():
     return (
