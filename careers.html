@@ -209,7 +209,7 @@
 }
 
 .job-card-header:hover {
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .job-card-title-section {
@@ -237,22 +237,22 @@
 }
 
 .job-toggle-btn {
-  background: none;
-  border: none;
+  background: transparent;
+  border: 1px solid #042C53;
   color: #042C53;
-  font-size: 1.5rem;
+  font-size: 0.95rem;
   cursor: pointer;
-  padding: 0;
-  width: 2rem;
-  height: 2rem;
+  padding: 0.625rem 0.9rem;
+  width: auto;
+  min-height: 2.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: transform 0.2s ease;
+  gap: 0.5rem; border-radius: 4px; font-weight: 500; font-family: inherit; box-shadow: none; transition: background-color 160ms ease, border-color 160ms ease;
 }
 
-.job-toggle-btn.expanded {
+.job-toggle-btn.expanded .job-toggle-icon {
   transform: rotate(180deg);
 }
 
@@ -441,7 +441,7 @@
   }
 
   .job-toggle-btn {
-    align-self: flex-start;
+    align-self: stretch; width: 100%;
   }
 
   .careers-future-interest {
@@ -461,6 +461,14 @@
     width: 100%;
   }
 }
+.job-toggle-icon { display: inline-block; font-size: 1.25rem; font-weight: 500; line-height: 1; transition: transform 200ms ease; }
+.job-toggle-btn:hover { background: #f2f6fa; border-color: #042C53; box-shadow: none; }
+.job-toggle-btn:active { background: #e7eef5; box-shadow: none; }
+.job-toggle-btn:focus-visible { outline: 3px solid #042C53; outline-offset: 3px; }
+.job-card-summary { display: block; max-height: none; overflow: visible; white-space: normal; -webkit-line-clamp: unset; line-clamp: unset; }
+.job-description.expanded { animation: job-details-reveal 200ms ease-out; }
+@keyframes job-details-reveal { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .job-description.expanded { animation: none; } .job-toggle-btn, .job-toggle-icon { transition: none; } }
 </style>
 
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -532,15 +540,15 @@
         <h3 class="job-category-title">Identity & Access Management</h3>
         
         <article class="job-card" id="pam" data-job-type="Contract" data-searchable="Privileged Access Management PAM Contract Role Secure privileged accounts credentials session monitoring enterprise systems CyberArk">
-          <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="pam-details">
+          <div class="job-card-header">
             <div class="job-card-title-section">
               <h4>Privileged Access Management (PAM) Specialist — Contract</h4>
-              <p class="job-card-summary">Secure privileged accounts, credentials, and session monitoring across enterprise systems.</p>
+              <p class="job-card-summary">Secure privileged accounts, credentials, and session monitoring across enterprise systems. Support account onboarding, password rotation, secrets lifecycle activities, and audit remediation while maintaining operational runbooks.</p>
               <div class="job-card-meta">
                 <span class="job-tag">Contract</span>
               </div>
             </div>
-            <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+            <button type="button" class="job-toggle-btn" aria-expanded="false" aria-controls="pam-details" aria-label="Expand job details: Privileged Access Management (PAM) Specialist — Contract"><span class="job-toggle-label">View full details</span><span class="job-toggle-icon" aria-hidden="true">⌄</span></button>
           </div>
           <div class="job-description" id="pam-details">
             <h5>Contract Responsibilities</h5>
@@ -563,15 +571,15 @@
         </article>
 
         <article class="job-card" id="iga" data-job-type="Contract" data-searchable="Identity Governance Administration IGA Contract Role Manage identity lifecycle operations application onboarding access certification campaigns SailPoint Saviynt">
-          <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="iga-details">
+          <div class="job-card-header">
             <div class="job-card-title-section">
               <h4>Identity Governance & Administration (IGA) Analyst — Contract</h4>
-              <p class="job-card-summary">Manage identity lifecycle operations, application onboarding, and access certification campaigns.</p>
+              <p class="job-card-summary">Manage identity lifecycle operations, application onboarding, and access certification campaigns. Process joiner, mover, and leaver requests, map entitlements, support remediation, and produce audit evidence and lifecycle documentation.</p>
               <div class="job-card-meta">
                 <span class="job-tag">Contract</span>
               </div>
             </div>
-            <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+            <button type="button" class="job-toggle-btn" aria-expanded="false" aria-controls="iga-details" aria-label="Expand job details: Identity Governance & Administration (IGA) Analyst — Contract"><span class="job-toggle-label">View full details</span><span class="job-toggle-icon" aria-hidden="true">⌄</span></button>
           </div>
           <div class="job-description" id="iga-details">
             <h5>Contract Responsibilities</h5>
@@ -594,15 +602,15 @@
         </article>
 
         <article class="job-card" id="authentication-services" data-job-type="Contract" data-searchable="Authentication Services Contract Role Implement MFA SSO passwordless authentication conditional access policies Azure AD Entra ID Okta Ping">
-          <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="authentication-details">
+          <div class="job-card-header">
             <div class="job-card-title-section">
               <h4>Authentication Engineer — Contract</h4>
-              <p class="job-card-summary">Implement MFA, SSO, passwordless authentication, and conditional access policies.</p>
+              <p class="job-card-summary">Implement MFA, SSO, passwordless authentication, and conditional access policies. Integrate enterprise applications, troubleshoot identity provider policies, review authentication logs, and maintain configuration documentation and runbooks.</p>
               <div class="job-card-meta">
                 <span class="job-tag">Contract</span>
               </div>
             </div>
-            <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+            <button type="button" class="job-toggle-btn" aria-expanded="false" aria-controls="authentication-details" aria-label="Expand job details: Authentication Engineer — Contract"><span class="job-toggle-label">View full details</span><span class="job-toggle-icon" aria-hidden="true">⌄</span></button>
           </div>
           <div class="job-description" id="authentication-details">
             <h5>Contract Responsibilities</h5>
@@ -624,15 +632,15 @@
         </article>
 
         <article class="job-card" id="authorization-entitlement-governance" data-job-type="Contract" data-searchable="Authorization Entitlement Governance Contract Role Build RBAC ABAC models manage role-based access control frameworks role mining">
-          <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="authorization-details">
+          <div class="job-card-header">
             <div class="job-card-title-section">
               <h4>Authorization & Entitlement Governance Analyst — Contract</h4>
-              <p class="job-card-summary">Build RBAC/ABAC models and manage role-based access control frameworks.</p>
+              <p class="job-card-summary">Build RBAC/ABAC models and manage role-based access control frameworks. Support role mining, entitlement cleanup, segregation-of-duties analysis, and policy testing, with documented role models and entitlement catalogs.</p>
               <div class="job-card-meta">
                 <span class="job-tag">Contract</span>
               </div>
             </div>
-            <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+            <button type="button" class="job-toggle-btn" aria-expanded="false" aria-controls="authorization-details" aria-label="Expand job details: Authorization & Entitlement Governance Analyst — Contract"><span class="job-toggle-label">View full details</span><span class="job-toggle-icon" aria-hidden="true">⌄</span></button>
           </div>
           <div class="job-description" id="authorization-details">
             <h5>Contract Responsibilities</h5>
@@ -654,15 +662,15 @@
         </article>
 
         <article class="job-card" id="iam-engineering" data-job-type="Contract" data-searchable="IAM Engineering Contract Role Design platform integrations implement AI-driven automation lead architecture execution engineer">
-          <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="iam-eng-details">
+          <div class="job-card-header">
             <div class="job-card-title-section">
               <h4>IAM Engineer — Contract</h4>
-              <p class="job-card-summary">Implement IAM integrations and automation, support architecture deliverables, and document platform enhancements.</p>
+              <p class="job-card-summary">Implement IAM integrations and automation, support architecture deliverables, and document platform enhancements. Build evidence-generation and anomaly-detection workflows, support cloud identity systems, and deliver engineering artifacts for platform improvements.</p>
               <div class="job-card-meta">
                 <span class="job-tag">Contract</span>
               </div>
             </div>
-            <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+            <button type="button" class="job-toggle-btn" aria-expanded="false" aria-controls="iam-eng-details" aria-label="Expand job details: IAM Engineer — Contract"><span class="job-toggle-label">View full details</span><span class="job-toggle-icon" aria-hidden="true">⌄</span></button>
           </div>
           <div class="job-description" id="iam-eng-details">
             <h5>Contract Responsibilities</h5>
@@ -684,15 +692,15 @@
         </article>
 
         <article class="job-card" id="flex-staffing" data-job-type="Contract" data-searchable="Flex Staffing Contract Role Provide adaptable support PAM IGA authentication authorization teams flexible">
-          <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="flex-details">
+          <div class="job-card-header">
             <div class="job-card-title-section">
               <h4>IAM Flex Contractor</h4>
-              <p class="job-card-summary">Provide adaptable support across PAM, IGA, authentication, and authorization teams.</p>
+              <p class="job-card-summary">Provide adaptable support across PAM, IGA, authentication, and authorization teams. Help manage onboarding spikes, certification cycles, platform upgrades, audit evidence collection, and time-sensitive remediation as priorities shift.</p>
               <div class="job-card-meta">
                 <span class="job-tag">Contract</span>
               </div>
             </div>
-            <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+            <button type="button" class="job-toggle-btn" aria-expanded="false" aria-controls="flex-details" aria-label="Expand job details: IAM Flex Contractor"><span class="job-toggle-label">View full details</span><span class="job-toggle-icon" aria-hidden="true">⌄</span></button>
           </div>
           <div class="job-description" id="flex-details">
             <h5>Contract Responsibilities</h5>
@@ -717,7 +725,7 @@
         <h3 class="job-category-title">Quality & Regulatory Compliance</h3>
         
         <article class="job-card" id="cgmp-compliance" data-job-type="Contract" data-searchable="cGMP Compliance Consultant Auditor FDA compliance pharma supplement warehouse operations gap analysis audit">
-          <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="cgmp-details">
+          <div class="job-card-header">
             <div class="job-card-title-section">
               <h4>cGMP Compliance Consultant / Auditor</h4>
               <p class="job-card-summary">Assess cGMP gaps in pharmaceutical and dietary supplement warehouse operations and support remediation and audit readiness.</p>
@@ -725,7 +733,7 @@
                 <span class="job-tag">Contract</span>
               </div>
             </div>
-            <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+            <button type="button" class="job-toggle-btn" aria-expanded="false" aria-controls="cgmp-details" aria-label="Expand job details: cGMP Compliance Consultant / Auditor"><span class="job-toggle-label">View full details</span><span class="job-toggle-icon" aria-hidden="true">⌄</span></button>
           </div>
           <div class="job-description" id="cgmp-details">
             <h5>Position Summary</h5>
@@ -758,7 +766,7 @@
         <h3 class="job-category-title">Security & Governance</h3>
         
         <article class="job-card" id="info-security-support" data-job-type="Full-Time" data-searchable="Information Security Support Specialist Full-Time support information security compliance initiatives documentation training">
-          <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="info-sec-details">
+          <div class="job-card-header">
             <div class="job-card-title-section">
               <h4>Information Security Support Specialist</h4>
               <p class="job-card-summary">Support information security and compliance initiatives through documentation, training coordination, and evidence collection.</p>
@@ -766,7 +774,7 @@
                 <span class="job-tag">Full-Time</span>
               </div>
             </div>
-            <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+            <button type="button" class="job-toggle-btn" aria-expanded="false" aria-controls="info-sec-details" aria-label="Expand job details: Information Security Support Specialist"><span class="job-toggle-label">View full details</span><span class="job-toggle-icon" aria-hidden="true">⌄</span></button>
           </div>
           <div class="job-description" id="info-sec-details">
             <h5>Essential Duties</h5>
@@ -793,7 +801,7 @@
         </article>
 
         <article class="job-card" id="internal-security-auditor" data-job-type="Full-Time" data-searchable="Internal Security Auditor Full-Time Evaluate management systems controls conformity organizational requirements external audits">
-          <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="internal-audit-details">
+          <div class="job-card-header">
             <div class="job-card-title-section">
               <h4>Internal Security Auditor</h4>
               <p class="job-card-summary">Independently assess management systems and controls, document nonconformities, and track corrective actions ahead of external audits.</p>
@@ -801,7 +809,7 @@
                 <span class="job-tag">Full-Time</span>
               </div>
             </div>
-            <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+            <button type="button" class="job-toggle-btn" aria-expanded="false" aria-controls="internal-audit-details" aria-label="Expand job details: Internal Security Auditor"><span class="job-toggle-label">View full details</span><span class="job-toggle-icon" aria-hidden="true">⌄</span></button>
           </div>
           <div class="job-description" id="internal-audit-details">
             <h5>Essential Duties</h5>
@@ -829,15 +837,15 @@
         </article>
 
         <article class="job-card" id="lead-security-auditor" data-job-type="Full-Time" data-searchable="Lead Security Auditor Full-Time Plan lead formal audits security management systems managing teams communicating findings stakeholders">
-          <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="lead-audit-details">
+          <div class="job-card-header">
             <div class="job-card-title-section">
               <h4>Lead Security Auditor</h4>
-              <p class="job-card-summary">Plan and lead formal audits of security management systems, managing teams and communicating findings to stakeholders.</p>
+              <p class="job-card-summary">Plan and lead formal audits of security management systems, managing teams and communicating findings to stakeholders. Define scope and schedules, lead interviews and audit meetings, evaluate evidence, classify findings, and prepare reports with corrective action recommendations.</p>
               <div class="job-card-meta">
                 <span class="job-tag">Full-Time</span>
               </div>
             </div>
-            <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+            <button type="button" class="job-toggle-btn" aria-expanded="false" aria-controls="lead-audit-details" aria-label="Expand job details: Lead Security Auditor"><span class="job-toggle-label">View full details</span><span class="job-toggle-icon" aria-hidden="true">⌄</span></button>
           </div>
           <div class="job-description" id="lead-audit-details">
             <h5>Essential Duties</h5>
@@ -864,15 +872,15 @@
         </article>
 
         <article class="job-card" id="security-program-implementer" data-job-type="Full-Time" data-searchable="Security Program Implementer Full-Time Design implement information security programs aligned organizational objectives frameworks">
-          <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="program-impl-details">
+          <div class="job-card-header">
             <div class="job-card-title-section">
               <h4>Security Program Implementer</h4>
-              <p class="job-card-summary">Design and implement information security programs aligned with organizational objectives and recognized frameworks.</p>
+              <p class="job-card-summary">Design and implement information security programs aligned with organizational objectives and recognized frameworks. Define scope, assess gaps and risks, coordinate treatment plans, and develop policies, control documentation, and measures for management review and continual improvement.</p>
               <div class="job-card-meta">
                 <span class="job-tag">Full-Time</span>
               </div>
             </div>
-            <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+            <button type="button" class="job-toggle-btn" aria-expanded="false" aria-controls="program-impl-details" aria-label="Expand job details: Security Program Implementer"><span class="job-toggle-label">View full details</span><span class="job-toggle-icon" aria-hidden="true">⌄</span></button>
           </div>
           <div class="job-description" id="program-impl-details">
             <h5>Essential Duties</h5>
@@ -899,15 +907,15 @@
         </article>
 
         <article class="job-card" id="lead-cybersecurity-manager" data-job-type="Full-Time" data-searchable="Lead Cybersecurity Manager Full-Time Lead enterprise cybersecurity program development governance incident response initiatives cybersecurity">
-          <div class="job-card-header" role="button" tabindex="0" aria-expanded="false" aria-controls="lead-cyber-details">
+          <div class="job-card-header">
             <div class="job-card-title-section">
               <h4>Lead Cybersecurity Manager</h4>
-              <p class="job-card-summary">Lead enterprise cybersecurity program development, governance, and incident response initiatives.</p>
+              <p class="job-card-summary">Lead enterprise cybersecurity program development, governance, and incident response initiatives. Set program objectives and performance indicators, coordinate controls across security functions, and oversee incident readiness, reporting, awareness, and continual improvement.</p>
               <div class="job-card-meta">
                 <span class="job-tag">Full-Time</span>
               </div>
             </div>
-            <button class="job-toggle-btn" aria-label="Toggle job details"></button>
+            <button type="button" class="job-toggle-btn" aria-expanded="false" aria-controls="lead-cyber-details" aria-label="Expand job details: Lead Cybersecurity Manager"><span class="job-toggle-label">View full details</span><span class="job-toggle-icon" aria-hidden="true">⌄</span></button>
           </div>
           <div class="job-description" id="lead-cyber-details">
             <h5>Essential Duties</h5>
@@ -947,23 +955,19 @@ document.addEventListener('DOMContentLoaded', function() {
       toggleJobDetails(this);
     });
     
-    header.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggleJobDetails(this);
-      }
-    });
   });
   
   function toggleJobDetails(header) {
-    const isExpanded = header.getAttribute('aria-expanded') === 'true';
-    const detailsId = header.getAttribute('aria-controls');
-    const details = document.getElementById(detailsId);
     const toggleBtn = header.querySelector('.job-toggle-btn');
+    const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+    const details = document.getElementById(toggleBtn.getAttribute('aria-controls'));
+    const title = header.querySelector('h4').textContent;
     
-    header.setAttribute('aria-expanded', !isExpanded);
-    details.classList.toggle('expanded');
-    toggleBtn.classList.toggle('expanded');
+    toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
+    details.classList.toggle('expanded', !isExpanded);
+    toggleBtn.classList.toggle('expanded', !isExpanded);
+    toggleBtn.querySelector('.job-toggle-label').textContent = isExpanded ? 'View full details' : 'Hide details';
+    toggleBtn.setAttribute('aria-label', (isExpanded ? 'Expand job details: ' : 'Collapse job details: ') + title);
   }
 
   // Job search and filter functionality
