@@ -154,8 +154,7 @@
     padding: 64px 0 40px;
   }
   section.page-header h1 { font-size: 32px; font-weight: 500; margin-bottom: 12px; }
-  section.page-header p { font-size: 16px; color: var(--gray-text-dark); max-width: 620px; }
-  section.page-header:has(+ section.careers-openings) p:first-of-type { max-width: none; }
+  section.page-header p { font-size: 16px; color: var(--gray-text-dark); }
   section.page-header a { color: var(--blue-pale); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
 
   section.serve { background: var(--ink); padding: 0 0 64px; }
