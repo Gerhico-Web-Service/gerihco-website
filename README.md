@@ -1,6 +1,6 @@
 # Gerihco website — deployment notes
 
-This package contains a seven-page site expanded from the original
+This package contains a ten-page site expanded from the original
 `gerihco_homepage_concept_e.html`. It's deployed as a static site on
 **GitHub Pages**, serving the repository's files directly — an earlier
 version of this project targeted Google Sites' "Embed code" feature
@@ -18,10 +18,13 @@ brings both fully in line with a plain GitHub Pages deployment.
 | `about.html`       | About        |
 | `careers.html`     | Careers      |
 | `insights.html`    | Insights     |
+| `ai-governance.html` | AI governance article |
+| `human-non-human-workforce.html` | Workforce article |
+| `risk-management-frameworks-ai.html` | AI risk frameworks article |
 | `contact.html`     | Contact      |
 | `404.html`         | Custom not-found page; GitHub Pages serves this automatically for any unmatched URL |
 | `robots.txt`        | Tells search engine crawlers everything is crawlable, and points them at the sitemap |
-| `sitemap.xml`      | Lists all seven real pages, for search engines |
+| `sitemap.xml`      | Lists all ten real pages, for search engines |
 | `images/`          | Photography used by the pages above |
 | `build_site.py`    | Generator script that produced every file above (see "Maintaining this site" below) |
 
@@ -59,6 +62,6 @@ unless the content of a page changes enough that its title or description
 should change too (edit the `PAGES` list in `build_site.py` and re-run
 it).
 
-`sitemap.xml` lists all seven real pages (not `404.html`, which is
+`sitemap.xml` lists all ten real pages (not `404.html`, which is
 deliberately excluded and marked `noindex`, since a not-found page has no
 business in search results). `robots.txt` points crawlers at it.

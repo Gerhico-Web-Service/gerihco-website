@@ -37,24 +37,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <style>
-.back-to-top { display: inline-block; margin-top: 1rem; padding: 0.25rem 0; font-size: 0.875rem; color: #475569; text-decoration: underline; text-underline-offset: 0.2em; }
-.back-to-top:hover { color: #0f4761; }
-.back-to-top:focus-visible { outline: 2px solid #0f4761; outline-offset: 4px; }
 .insights-list .insights-grid { gap: 2rem; }
 .insights-list .insight-card { background: #fff; color: #243244; border: 0; border-top: 1px solid #dce3e8; border-radius: 0; box-shadow: none; padding: 1.5rem 0; }
 .insights-list .insight-card h2 { font-size: 1.35rem; line-height: 1.35; margin: 0.5rem 0 0.75rem; }
-.insights-list .insight-card h2 a { color: #0f4761; }
+.insights-list .insight-card h2 { color: #0f4761; }
 .insights-list .insight-card p { font-size: 1.0625rem; line-height: 1.7; margin: 0; }
 .insights-list .insight-date { color: #475569; font-size: 0.875rem; }
-.insights-reading { background: #fff; color: #243244; padding: 3rem 0; }
-.insights-reading > .wrap { box-sizing: border-box; width: 100%; max-width: 72ch; margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 2rem); }
-.insights-reading article { background: transparent; border: 0; border-radius: 0; box-shadow: none; padding: 0; margin: 0; font-size: 1.125rem; line-height: 1.75; overflow-wrap: break-word; }
-.insights-reading article + article { border-top: 1px solid #dce3e8; margin-top: 3.5rem; padding-top: 3.5rem; }
-.insights-reading h2 { color: #475569; font-size: 1rem; line-height: 1.5; margin: 0 0 2rem; }
-.insights-reading h3 { color: #0f4761; font-size: clamp(1.75rem, 4vw, 2.25rem); line-height: 1.25; margin: 0 0 1.25rem; }
-.insights-reading h4 { color: #0f4761; font-size: 1.25rem; line-height: 1.4; margin: 2.25rem 0 0.75rem; }
-.insights-reading article p { color: #243244; font-size: 1.125rem; line-height: 1.75; margin: 0 0 1.25rem; }
-.insights-reading .back-to-top { margin-top: 1.5rem; }
 .insights-list .insight-card .article-read-more { margin-top: 0.875rem; font-size: 0.9375rem; }
 .insights-list .article-read-more a { display: inline-block; padding: 0.25rem 0; color: #0f4761; text-decoration: underline; text-underline-offset: 0.2em; }
 .insights-list .article-read-more a:hover { color: #243244; }
@@ -90,73 +78,23 @@
     <div class="insights-grid">
       <article class="insight-card">
         <div class="insight-date">Fall 2026</div>
-        <h2><a href="#ai-governance">AI Governance: From Principles to Accountability</a></h2>
+        <h2>AI Governance: From Principles to Accountability</h2>
         <p>An AI policy is only the beginning. Put it to work with clear decision rights, safeguards matched to each use case, and oversight that continues after launch.</p>
-        <p class="article-read-more"><a href="#ai-governance">Read full article →</a></p>
+        <p class="article-read-more"><a href="ai-governance.html">Read article →</a></p>
       </article>
       <article class="insight-card">
         <div class="insight-date">Fall 2026</div>
-        <h2><a href="#human-non-human-workforce">People, AI Agents, and Automation: Designing the Future Workforce</a></h2>
+        <h2>People, AI Agents, and Automation: Designing the Future Workforce</h2>
         <p>Start with the workflow, not the tool. Define what AI may do, where people must intervene, and how to measure better work—not just faster output.</p>
-        <p class="article-read-more"><a href="#human-non-human-workforce">Read full article →</a></p>
+        <p class="article-read-more"><a href="human-non-human-workforce.html">Read article →</a></p>
       </article>
       <article class="insight-card">
         <div class="insight-date">Fall 2026</div>
-        <h2><a href="#risk-management-frameworks-ai">AI Risk Frameworks: Turning Guidance into Decisions</a></h2>
+        <h2>AI Risk Frameworks: Turning Guidance into Decisions</h2>
         <p>A framework matters when it changes a decision. Connect risk scenarios, testing, and controls to clear criteria for deployment, reassessment, and suspension—without mistaking adoption for proof of safety or compliance.</p>
-        <p class="article-read-more"><a href="#risk-management-frameworks-ai">Read full article →</a></p>
+        <p class="article-read-more"><a href="risk-management-frameworks-ai.html">Read article →</a></p>
       </article>
     </div>
-  </div>
-</section>
-<section class="insights-reading">
-  <div class="wrap">
-    <h2>Full Articles</h2>
-    <article>
-      <h3>AI Governance: From Principles to Accountability</h3>
-        <p>An AI policy can set expectations. It cannot, by itself, decide who approves a deployment, accepts unresolved risk, or stops a system when controls fail. Effective governance makes those responsibilities explicit and connects them to everyday decisions. For institutional leaders, the task is to turn principles into operating discipline: define ownership, match safeguards to the use case, and maintain oversight as systems change.</p>
-        <h4>Accountability is the starting point</h4>
-        <p>The first governance question is not which model to buy. It is who is responsible when that model becomes part of a business process. An effective operating model identifies a business owner, a technical owner, and appropriate risk reviewers. Clear decision rights distinguish permission to experiment from approval to deploy, expand access, or accept remaining risk. A committee can coordinate oversight, but it should not obscure individual accountability.</p>
-        <h4>Govern the use case, not the label</h4>
-        <p>An internal drafting assistant and a system that influences access to essential services should not face identical review requirements. Assess the intended purpose, affected parties, data sensitivity, degree of autonomy, reversibility of errors, and potential consequences. Maintain an inventory that includes AI embedded in purchased software—not only internally developed models. Record approved uses and explicit boundaries so that a low-risk pilot does not quietly become a consequential decision tool.</p>
-        <h4>Make policy visible in everyday work</h4>
-        <p>Translate broad principles into practical approval criteria: authorized tools, permitted data, evaluation requirements, reviewers, and escalation routes. Before deployment, gather evidence that the system is suitable for its intended use. Document limitations and unresolved issues; a successful demonstration is not validation. Reviewers need relevant expertise, sufficient time, supporting information, and authority to reject an output or stop a process.</p>
-        <h4>Extend oversight beyond launch</h4>
-        <p>AI governance must adapt as models, prompts, information sources, suppliers, and business processes change. Define which changes require reassessment and monitor material errors, complaints, privacy incidents, and control failures. Supplier arrangements should address permitted data use, retention, access, incident notification, and service changes. A supplier’s assurances can inform review, but they do not replace an assessment of the organization’s own deployment.</p>
-        <h4>A practical starting point</h4>
-        <p>Start with one business area and a clear inventory of AI uses. Assign owners, classify risks, and set approval requirements before expanding. Test escalation and suspension, and report unresolved risks alongside benefits. The goal is defensible decisions with clear accountability—not another policy document.</p>
-      <a class="back-to-top" href="#main">Back to top ↑</a>
-    </article>
-    <article>
-      <h3>People, AI Agents, and Automation: Designing the Future Workforce</h3>
-        <p>Giving an AI agent a task is also a decision about authority: what it may access, what it may change, and when a person must step in. Designing work around people, AI agents, and automation starts with those boundaries—not with the technology alone. A practical operating model pairs defined tasks and controlled permissions with employee involvement, meaningful review, and a workable fallback. The aim is better service and work quality, with responsibility remaining with people.</p>
-        <h4>Redesign tasks before redefining jobs</h4>
-        <p>Here, non-human workforce refers to software agents, AI models, and automated processes—not independent decision-makers with human responsibilities. Start by mapping the work: what information enters, what judgment is required, what actions follow, and who is accountable for mistakes. Distinguish assistance from recommendation and execution. Permission to summarize a document should not automatically confer authority to update a record, contact a customer, or commit organizational resources.</p>
-        <h4>Assign an accountable owner to every agent</h4>
-        <p>Treat each agent as a controlled system with a defined purpose, an accountable owner, a distinct system identity, and a managed lifecycle. Limit access to what its assigned task requires; avoid shared credentials and unrestricted tools. For agents that take action, define approval boundaries, appropriate transaction limits, and activity records. When an agent is retired or reassigned, revoke unneeded access and apply approved data-retention requirements.</p>
-        <h4>Make human oversight meaningful</h4>
-        <p>Adding a person to a process does not automatically create an effective safeguard. Review becomes a formality if that person cannot inspect the evidence, challenge a recommendation, or interrupt execution. Specify when review occurs, what must be checked, and which conditions require escalation. Test a workable manual fallback. For higher-consequence workflows, use checks sufficiently independent of the system being reviewed; another agent may reproduce the same errors.</p>
-        <h4>Invest in the people doing the work</h4>
-        <p>Employees closest to a process can help identify exceptions, undocumented dependencies, and practical failure modes. Involve them in workflow design and explain what is changing, what remains their responsibility, and how concerns can be raised. Training should cover data handling, verification, limitations, and incident reporting—not only effective prompting. Preserve opportunities to practice essential skills so that the organization retains the expertise needed to challenge automation and operate when it is unavailable.</p>
-        <h4>Measure the complete outcome</h4>
-        <p>Start with one defined workflow and a documented baseline for comparison. Measure quality, errors, rework, accessibility, supervision, and workload alongside speed. Test human oversight and fallback arrangements, and expand only when evidence supports it. The goal is better work with clear accountability—not simply more automation.</p>
-      <a class="back-to-top" href="#main">Back to top ↑</a>
-    </article>
-    <article>
-      <h3>AI Risk Frameworks: Turning Guidance into Decisions</h3>
-        <p>Before an AI system goes live, leaders need more than a risk rating. They need evidence that it is fit for its intended use, a clear account of remaining exposure, and agreed conditions for restricting or stopping it. A risk framework helps structure those decisions by connecting potential impacts, technical testing, and operational controls. Its value lies in the action it informs—not the label it provides. Adopting a framework does not, by itself, establish compliance or guarantee safety.</p>
-        <h4>Choose a framework for the decisions it supports</h4>
-        <p>The value of a risk framework is not its name on a policy cover. It is the consistency it brings to decisions about whether an AI use is appropriate, what evidence is needed, and when deployment should be restricted or stopped. Begin with organizational objectives and applicable obligations. Then connect AI assessments to existing enterprise risk, information security, privacy, procurement, change management, and incident response processes rather than creating a disconnected compliance exercise.</p>
-        <h4>Understand the different roles of established resources</h4>
-        <p>The NIST AI Risk Management Framework (AI RMF) 1.0 is a voluntary resource organized around four functions: Govern, Map, Measure, and Manage. Its Generative Artificial Intelligence Profile (NIST AI 600-1) addresses risks associated with generative AI. ISO/IEC 42001:2023 specifies requirements for an AI management system; ISO/IEC 23894:2023 provides guidance on AI-related risk management. These resources serve complementary purposes, but using them does not by itself establish legal or contractual compliance. Frameworks evolve, so confirm the applicable versions when setting policy or approving a deployment.</p>
-        <h4>Turn risk categories into concrete scenarios</h4>
-        <p>An entry such as inaccurate output is too broad to guide a control decision. Describe the event, its cause, the affected process, and the consequence: for example, a document assistant invents a requirement that a reviewer mistakenly includes in an operating procedure. Consider data leakage, biased outcomes, malicious instructions embedded in retrieved material, unreliable sources, supplier changes, and excessive agent permissions. Evaluate how failures could combine, including cases where a persuasive explanation causes a reviewer to miss an error.</p>
-        <h4>Require evidence matched to the use case</h4>
-        <p>Set evaluation methods and acceptance criteria before testing. Include representative tasks, difficult exceptions, and relevant misuse scenarios, and record limitations in the data and methods. Assess output quality alongside access controls, data handling, human review, and recovery arrangements. Document the risk before controls, the controls applied, the remaining exposure, and the person authorized to accept it. A rating without evidence or an owner responsible for addressing the risk is a label—not a management decision.</p>
-        <h4>Keep the assessment alive</h4>
-        <p>Start with a clear evidence trail for each AI use case. Record risks, tests, controls, approvals, and monitoring, and reassess material changes. Use incidents and complaints to improve safeguards, with clear escalation, rollback, and suspension criteria. The goal is informed decisions throughout the lifecycle—not a one-time approval.</p>
-      <a class="back-to-top" href="#main">Back to top ↑</a>
-    </article>
   </div>
 </section>
 </main>
