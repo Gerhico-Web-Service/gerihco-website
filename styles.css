@@ -129,7 +129,6 @@
   .hero p.sub {
     font-size: 17px;
     color: var(--gray-text-dark);
-    max-width: 520px;
     margin-bottom: 28px;
   }
   .btn-row { display: flex; gap: 14px; flex-wrap: wrap; }
