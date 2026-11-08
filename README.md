@@ -25,12 +25,16 @@ brings both fully in line with a plain GitHub Pages deployment.
 | `404.html`         | Custom not-found page; GitHub Pages serves this automatically for any unmatched URL |
 | `robots.txt`        | Tells search engine crawlers everything is crawlable, and points them at the sitemap |
 | `sitemap.xml`      | Lists all ten real pages, for search engines |
-| `images/`          | Photography used by the pages above |
+| `images/`          | Photography and SVG illustrations used by the pages above |
 | `build_site.py`    | Generator script that produced every file above (see "Maintaining this site" below) |
 
 Each `.html` file is a complete, self-contained document (fonts, CSS, and
 markup all inline except for images) and can be opened directly in a
 browser to preview it.
+
+Each full Insights article reuses its listing thumbnail below the title.
+The shared `.article-image` styles in `styles.css` keep these illustrations
+centered and responsive.
 
 ## Publishing to GitHub Pages
 
