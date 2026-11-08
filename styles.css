@@ -320,16 +320,6 @@
   .insight-card h2 { font-size: 17px; font-weight: 600; margin: 8px 0; }
   .insight-card p.placeholder { font-size: 14px; }
 
-  .insight-article .article-image { max-width: 32rem; margin: 0 auto 1.5rem; }
-  .insight-article .article-image img { display: block; width: 100%; height: auto; }
-  .insight-article .article-image figcaption {
-    color: var(--gray-text);
-    font-family: "Courier New", monospace;
-    font-size: 0.75rem;
-    line-height: 1.5;
-    margin-top: 0.4rem;
-  }
-
   section.contact-main { padding: 64px 0; }
   .contact-layout { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: start; }
   .contact-form label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 6px; color: #33363a; }
