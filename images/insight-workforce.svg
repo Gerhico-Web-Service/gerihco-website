@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img">
+  <rect width="800" height="600" fill="#f4f1e9"/>
+  <path d="M0 465h800" stroke="#ded8ca" stroke-width="3"/>
+  <text x="400" y="93" fill="#233f52" font-family="Arial, sans-serif" font-size="26" font-weight="700" letter-spacing="3" text-anchor="middle">A TEAM BY DESIGN</text>
+  <path d="M211 277h161M428 277h161" fill="none" stroke="#7ea7a4" stroke-width="8" stroke-linecap="round"/>
+  <path d="m355 261 20 16-20 16M571 261l20 16-20 16" fill="none" stroke="#7ea7a4" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="145" cy="229" r="38" fill="#e8b779"/>
+  <path d="M78 374c5-61 31-91 67-91s62 30 67 91v15H78z" fill="#39768a"/>
+  <path d="M110 296l35 33 35-33" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="342" y="193" width="116" height="116" rx="22" fill="#dcecf2" stroke="#39768a" stroke-width="7"/>
+  <path d="M377 193v-17m46 17v-17m-46 149v-17m46 17v-17m35-81h17m-17 46h17m-149-46h17m-17 46h17" stroke="#39768a" stroke-width="7" stroke-linecap="round"/>
+  <text x="400" y="264" fill="#23536a" font-family="Arial, sans-serif" font-size="27" font-weight="700" text-anchor="middle">AI</text>
+  <circle cx="400" cy="286" r="5" fill="#e88a72"/>
+  <path d="M617 247h37v-47h45v47h24v99h-24v34h-45v-34h-37z" fill="#f5ddaa" stroke="#ad7c35" stroke-width="7" stroke-linejoin="round"/>
+  <circle cx="676" cy="278" r="16" fill="#fff" stroke="#ad7c35" stroke-width="6"/>
+  <path d="m658 345-24 34m82-34 25 34m-67-98h4m-4 18h4" stroke="#ad7c35" stroke-width="7" stroke-linecap="round"/>
+  <path d="M122 439h556" stroke="#d5cdbd" stroke-width="2"/>
+  <text x="145" y="433" fill="#435960" font-family="Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle">PEOPLE</text>
+  <text x="400" y="433" fill="#435960" font-family="Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle">AI AGENT</text>
+  <text x="676" y="433" fill="#435960" font-family="Arial, sans-serif" font-size="18" font-weight="700" text-anchor="middle">AUTOMATION</text>
+</svg>

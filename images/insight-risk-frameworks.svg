@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img">
+  <rect width="800" height="600" fill="#eef1f4"/>
+  <text x="400" y="82" fill="#183c52" font-family="Arial, sans-serif" font-size="25" font-weight="700" letter-spacing="3" text-anchor="middle">AI + IT RISK MANAGEMENT</text>
+  <rect x="102" y="129" width="282" height="145" rx="12" fill="#fff" stroke="#ccd6dc" stroke-width="3"/>
+  <rect x="416" y="129" width="282" height="145" rx="12" fill="#fff" stroke="#ccd6dc" stroke-width="3"/>
+  <rect x="102" y="296" width="282" height="145" rx="12" fill="#fff" stroke="#ccd6dc" stroke-width="3"/>
+  <rect x="416" y="296" width="282" height="145" rx="12" fill="#fff" stroke="#ccd6dc" stroke-width="3"/>
+  <path d="M173 163l31 12v28c0 22-13 39-31 48-18-9-31-26-31-48v-28z" fill="#e7f2ef" stroke="#317b76" stroke-width="5" stroke-linejoin="round"/>
+  <path d="m160 201 10 10 18-21" fill="none" stroke="#317b76" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="268" y="216" fill="#183c52" font-family="Arial, sans-serif" font-size="29" font-weight="700" text-anchor="middle">NIST</text>
+  <circle cx="486" cy="197" r="33" fill="none" stroke="#477f9b" stroke-width="6"/>
+  <path d="M470 197h32m-16-16v32" stroke="#477f9b" stroke-width="6" stroke-linecap="round"/>
+  <text x="584" y="207" fill="#183c52" font-family="Arial, sans-serif" font-size="29" font-weight="700" text-anchor="middle">ISO</text>
+  <path d="M147 330h51v62h-51zM157 344h31m-31 14h31m-31 14h22" fill="#f5eee0" stroke="#ad7c35" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="268" y="377" fill="#183c52" font-family="Arial, sans-serif" font-size="29" font-weight="700" text-anchor="middle">CRI</text>
+  <path d="M462 338h52l9 12v46h-61z" fill="#f8ece8" stroke="#a95e4e" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M475 357h27m-27 13h27m-27 13h18" stroke="#a95e4e" stroke-width="4" stroke-linecap="round"/>
+  <text x="584" y="379" fill="#183c52" font-family="Arial, sans-serif" font-size="29" font-weight="700" text-anchor="middle">SOX</text>
+  <path d="M215 495h370" stroke="#b7c5cc" stroke-width="3"/>
+  <circle cx="400" cy="495" r="10" fill="#317b76"/>
+  <text x="400" y="542" fill="#536771" font-family="Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="3" text-anchor="middle">FRAMEWORKS  ·  CONTROLS  ·  ASSURANCE</text>
+</svg>
